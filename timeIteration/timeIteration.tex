@@ -1,0 +1,42 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{algorithmic}
+\newcommand{\su}{\delta u}
+\newcommand{\sv}{\delta v}
+\newcommand{\sw}{\delta w}
+
+\begin{document}
+
+\noindent Essentially, we need to:
+\begin{itemize}
+    \item Calculate the time derivative of the vector of disturbance variables 
+    \item Calculate new vector of disturbances from old
+    \item Calculate magnitudes of disturbances
+    \item use a plot of the log of this magnitude against time to find the growth rate, $\lambda$ 
+\end{itemize}
+
+I am thinking that I will use variables which still contain the time dependence:
+
+\begin{equation}
+ (v_{x}, v_{y}, v_{z}) = (U,V,W) + (\su(t), \sv(t), \sw(t))e^{ikx}
+\end{equation}
+\begin{equation}
+    T_{ij} = C_{ij} + \delta c_{ij}(t) e^{ikx} 
+\end{equation}
+ 
+
+The main problem is working out how to deal with the equations and boundary conditions which do not contain a time derivative.
+
+I remember you told me something about this but I have forgotten what it was! I can't see how to solve them separately from the other equations because there are more unknowns than equations, and I cannot solve them with the other equations because they set the time derivatives of u,v,w,p to zero.
+
+%\begin{algorithmic}
+%    \STATE{Make $A$}
+%    \STATE{Make $x$}
+%    \FOR{t=0 to 1000}
+%	\STATE {set $b = Ax$} 
+%	\STATE {set $x = x+b\delta t$} 
+%	\STATE {set $mags[t] = \|x[]\|$}
+%    \ENDFOR
+%    \STATE{save $mags$ to a file}
+%\end{algorithmic}
+
+\end{document}

@@ -1,0 +1,101 @@
+\documentclass[12,a4paper]{article}
+
+%packages
+\usepackage{amsmath}
+
+%my macros
+\newcommand{\dy}[1]{\frac{\partial #1}{\partial y}}
+\newcommand{\dz}[1]{\frac{\partial #1}{\partial z}}
+\newcommand{\scxx}{\delta c_{xx}}
+\newcommand{\scyy}{\delta c_{yy}}
+\newcommand{\sczz}{\delta c_{zz}}
+\newcommand{\scxy}{\delta c_{xy}}
+\newcommand{\scxz}{\delta c_{xz}}
+\newcommand{\scyz}{\delta c_{yz}}
+\newcommand{\su}{\delta u}
+\newcommand{\sv}{\delta v}
+\newcommand{\sw}{\delta w}
+\newcommand{\spr}{\delta p}
+\newcommand{\Wi}{\frac{1}{W_{i}}}
+\newcommand{\first}[2]{\Wi \delta c_{#1 #2} + \lambda \delta c_{#1 #2} + \left[ ikU
++ V\frac{\partial}{\partial y} + W\frac{\partial}{\partial z} \right] \delta c_{#1 #2} 
++ \left[ \sv\frac{\partial }{\partial y} + \sw\frac{\partial }{\partial z} \right] C_{#1 #2}}
+\newcommand{\laplacian}{\left[-k^{2} + \frac{\partial^{2}}{\partial y^{2}} + \frac{\partial^{2}}{\partial z^{2}}\right]}
+
+\begin{document}
+\title{Linear stability equations}
+\maketitle
+
+\begin{equation}
+ (v_{x}, v_{y}, v_{z}) = (U,V,W) + (\su, \sv, \sw)e^{ikx + \lambda t}
+\end{equation}
+\begin{equation}
+T_{ij} = C_{ij} + \delta c_{ij} e^{ikx + \lambda t}
+\end{equation}
+
+NAVIER STOKES X DIRECTION:
+\begin{multline}
+ 0 = -Re \left[ \lambda \su + ikU \su + V \dy{\su} + W\dz{\su} + \sv \dy{U} +\sw \dz{U} \right]\\
+ - ik\spr + \beta \laplacian \su \\
+ + \frac{(1-\beta)}{W_{i}}\left[ ik\scxx + \dy{\scxy} + \dz{\scxz} \right]  
+\end{multline}
+
+NAVIER STOKES Y DIRECTION:
+\begin{multline}
+0 = -Re \left[ \lambda \sv + ikU \sv + V \dy{\sv} + W\dz{\sv} + \sv \dy{V} +\sw \dz{V} \right]\\
+ - \dy{\spr} + \beta \laplacian \sv \\
+ + \frac{(1-\beta)}{W_{i}}\left[ ik \scxy + \dy{\scyy} + \dz{\scyz} \right]
+\end{multline}
+
+NAVIER STOKES Z DIRECTION:
+\begin{multline}
+ 0 = -Re \left[ \lambda \sw + ikU \sw + V \dy{\sw} + W\dz{\sw} + \sv \dy{W} +\sw \dz{W} \right]\\
+ - \dz{\spr} + \beta \laplacian \sw \\
+ + \frac{(1-\beta)}{W_{i}}\left[ ik \scxz + \dy{\scyz} + \dz{\sczz} \right]
+\end{multline}
+
+INCOMPRESSABILITY:
+\begin{equation}
+ 0 = ik\su + \dy{\sv} + \dz{\sw}
+\end{equation}
+
+XX EQUATION:
+\begin{multline}
+ 0 = \first{x}{x} \\
+- 2ik\su C_{xx} - 2C_{xy} \dy{\su} - 2C_{xz} \dz{\su} - 2\scxy \dy{U} - 2\scxz \dz{U}
+\end{multline}
+
+YY EQUATION:
+\begin{multline}
+ 0 = \first{y}{y} \\
+- 2ik\sv C_{xy} - 2C_{yy}\dy{\sv} - 2C_{yz}\dz{\sv} - 2\scyy \dy{V} - 2\scyz \dz{V}\\
+\end{multline}
+
+ZZ EQUATION:
+\begin{multline}
+ 0 = \first{z}{z} \\
+- 2ik\sw C_{xz} - 2C_{yz}\dy{\sw} - 2C_{zz}\dz{\sw} - 2\scyz \dy{W} - 2\sczz \dz{W}\\
+\end{multline}
+
+XY EQUATION:
+\begin{multline}
+ 0 = \first{x}{y} \\
+ - C_{yy}\dy{\su} - C_{yz}\dz{\su} - \scyy \dy{U} - \scyz \dz{U} \\
+ - ik\sv C_{xx} - C_{xz}\dz{\sv} - \scxy \dy{V} - \scxz \dz{V} + C_{xy}\dz{\sw}
+\end{multline}
+
+XZ EQUATION:
+\begin{multline}
+0 = \first{x}{z} \\
+- C_{yz}\dy{\su} - C_{zz}\dz{\su} - \scyz \dy{U} - \sczz \dz{U} \\
+- ik\sw C_{xx} - C_{xy}\dy{\sw} - \scxy \dy{W} - \scxz \dz{W} + C_{xz}\dy{\sv}
+\end{multline}
+
+YZ EQUATION:
+\begin{multline}
+ 0 = \first{y}{z} \\
+- ik\sv C_{xz} - C_{zz}\dz{\sv} - \scyz \dy{V} - \sczz \dz{V} \\
+- ik\sw C_{xy} - C_{yy}\dy{\sw} - \scyy \dy{W} - \scyz \dz{W} + ik\su C_{yz}
+\end{multline}
+
+\end{document}
