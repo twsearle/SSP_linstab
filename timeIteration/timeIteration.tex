@@ -1,32 +1,263 @@
 \documentclass[12pt,a4paper]{article}
-\usepackage{algorithmic}
+\usepackage{algorithmic,amsmath}
+
+%my macros
+\newcommand{\dy}[1]{\frac{\partial #1}{\partial y}}
+\newcommand{\dz}[1]{\frac{\partial #1}{\partial z}}
+\newcommand{\dt}[1]{\frac{\partial #1}{\partial t}}
+\newcommand{\scxx}{\delta c_{xx}}
+\newcommand{\scyy}{\delta c_{yy}}
+\newcommand{\sczz}{\delta c_{zz}}
+\newcommand{\scxy}{\delta c_{xy}}
+\newcommand{\scxz}{\delta c_{xz}}
+\newcommand{\scyz}{\delta c_{yz}}
+\newcommand{\stxx}{\delta t_{xx}}
+\newcommand{\styy}{\delta t_{yy}}
+\newcommand{\stzz}{\delta t_{zz}}
+\newcommand{\stxy}{\delta t_{xy}}
+\newcommand{\stxz}{\delta t_{xz}}
+\newcommand{\styz}{\delta t_{yz}}
 \newcommand{\su}{\delta u}
 \newcommand{\sv}{\delta v}
 \newcommand{\sw}{\delta w}
+\newcommand{\spr}{\delta p}
+\newcommand{\Wi}{\frac{1}{W_{i}}}
+\newcommand{\first}[2]{-\Wi \delta c_{#1 #2} - \left[ ikU
++ V\frac{\partial}{\partial y} + W\frac{\partial}{\partial z} \right] \delta c_{#1 #2} 
+- \left[ \sv\frac{\partial }{\partial y} + \sw\frac{\partial }{\partial z} \right] C_{#1 #2}}
+\newcommand{\laplacian}{\left[-k^{2} + \frac{\partial^{2}}{\partial y^{2}} + \frac{\partial^{2}}{\partial z^{2}}\right]}
+\newcommand{\curl}{\nabla \times}
+\newcommand{\biharmop}{\nabla^{4}}
+\newcommand{\dd}[1]{\partial_{#1}}
 
 \begin{document}
+\title{Time iteration method for linear stability analysis}
+\maketitle
 
-\noindent Essentially, we need to:
+\section{Outline}
 \begin{itemize}
-    \item Calculate the time derivative of the vector of disturbance variables 
-    \item Calculate new vector of disturbances from old
-    \item Calculate magnitudes of disturbances
-    \item use a plot of the log of this magnitude against time to find the growth rate, $\lambda$ 
+    \item Use streamfunction equations to make $2N+1$, $(2N+1)M$ matrix equations for the operators.
+    \begin{itemize}
+	\item split the 6th order operator into three steps, solve these 3 equations simultaneously. (2 steps for 4th order)
+	\item apply the boundary conditions to this matrix.
+	\item invert this matrix
+	\item save only the part of the new matrix which multiplies the function of stresses, this will be the inverse of the operator.
+	\item repeat this for all $z$ Fourier modes.
+    \end{itemize}
+    \item Make matrices for the operators from the zeroth mode equations
+    \item LOOP
+    \item make vectors from stresses for the functions of stress of the RHS of equations \ref{eq:curlcurl} and \ref{eq:curl}
+    \item put boundary conditions in appropriate elements of these vectors
+    \item Use the inverted operator matrices made before the loop on these vectors to find the stream function modes. 
+    \item Stitch the answers together to give the full stream function vectors
+    \item Uses the stream functions to solve for the velocities
+	\begin{itemize}
+	    \item solve the zeroth mode equations to find $\sw_{0}$, $\sv_{0}$ by making vectors for the terms constant in the velocity disturbances and then left multiplying these by the appropriate precalculated matrices.
+	    \item use the incompressibility equation to find $\su_{0}$.
+	    \item use the zeroth mode of the x component of the Navier-Stokes equation to find $\spr_{0}$.
+	    \item Use equation \ref{eq:streamfunction_def} to calculate the rest of the components of the velocities.
+	\end{itemize}
+    \item Use the x-component of the Navier-Stokes equation to solve for the pressure.
+    \item Calculate magnitude of the disturbance
+    \item Calculate the time derivative of the vector of stress disturbance variables 
+    \item Calculate new vector of stress disturbances from old using an approximation of the derivative
+    \item END LOOP
+    \item use a plot of the log of the magnitudes against time to find the growth rate $\lambda$ 
 \end{itemize}
 
-I am thinking that I will use variables which still contain the time dependence:
+\section{Description}
 
+We will do a linear stability analysis using a disturbance of the form, 
 \begin{equation}
- (v_{x}, v_{y}, v_{z}) = (U,V,W) + (\su(t), \sv(t), \sw(t))e^{ikx}
+    (v_{x}, v_{y}, v_{z}) = (U,V,W) + (\su(y,z,t), \sv(y,z,t), \sw(y,z,t))e^{ikx}
 \end{equation}
 \begin{equation}
-    T_{ij} = C_{ij} + \delta c_{ij}(t) e^{ikx} 
+    T_{ij} = T_{ij} + \delta \tau_{ij}(t) e^{ikx} 
 \end{equation}
- 
 
-The main problem is working out how to deal with the equations and boundary conditions which do not contain a time derivative.
+The stress equations will be solved for the time derivatives and then these derivatives will be used to calculate the stresses at the next time step. However, before they can be solved, we must first find $\su,\sv,\sw,\spr$.  We do this using a stream function representation of the Navier-Stokes equations.
 
-I remember you told me something about this but I have forgotten what it was! I can't see how to solve them separately from the other equations because there are more unknowns than equations, and I cannot solve them with the other equations because they set the time derivatives of u,v,w,p to zero.
+\subsection{Calculating the stream functions}
+
+The stream functions are given by 
+\begin{equation}
+    \mathbf{v} = \curl \curl \phi \hat{\mathbf{j}} + \curl \psi\hat{\mathbf{j}}
+\end{equation}
+so that the disturbance velocities are
+\begin{equation}
+    \begin{pmatrix}
+	u \\
+	v \\
+	w \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    \partial _{xy} \phi - \partial_{z} \psi \\
+    -\partial_{xx} \phi - \partial_{zz} \phi \\
+    \partial _{yz} \phi + \partial_{x} \psi \\
+    \end{pmatrix}
+    \label{eq:streamfunction_def}
+\end{equation}
+
+By taking $\hat{\mathbf{j}} \cdot \curl \curl (~ \cdot ~) $ and $\hat{\mathbf{j}} \cdot \curl (~ \cdot ~)$ of the Navier-stokes equation, we find
+
+\begin{align}
+    \biharmop  \Delta_{2} \phi = - \frac{1-\beta}{\beta Wi} &\left(-k^{2}\dd{y} \stxx + (k^{2}\dd{y} - \dd{yzz})\styy + \dd{yzz} \stzz \right. \nonumber \\ 
+   & \left. + (ik^{3} - ik\dd{zz} + ik\dd{yy}) \stxy + 2ik\dd{yz}\stxz \right. \nonumber \\
+   & \left. + (k^{2}\dd{z} + \dd{yyz} - \dd{zzz})\styz \right)
+\label{eq:curlcurl}
+\end{align}
+
+\begin{align}
+    \nabla ^{2} \Delta_{2} = \frac{1-\beta}{\beta Wi} &\left( ik\dd{z}\stxx +\dd{yz} \stxy + (\dd{zz} +k^{2})\stxz \right. \nonumber \\ 
+    & \left. - ik\dd{y} \styz - ik\dd{z} \stzz \right)
+\label{eq:curl}
+\end{align}
+
+where
+\begin{equation}
+    \Delta_{2} = \dd{xx} + \dd{zz}
+\end{equation}
+
+The right hand sides of equations \ref{eq:curlcurl} and \ref{eq:curl} are used to generate vectors $a(\mathbf{T})$ and  $b(\mathbf{T})$, so matrix methods can be used to solve equations for the stream functions.
+
+\begin{equation}
+    \left( -k^{2} + \dd{yy} -(n\gamma)^{2} \right)^{2}(-k^{2} -(n\gamma)^{2})\phi_{n} = a
+\end{equation}
+\begin{equation}
+    \left( -k^{2} + \dd{yy} -(n\gamma)^{2} \right)(-k^{2} -(n\gamma)^{2})\psi_{n} = b
+\end{equation}
+
+Where $n$ is the z Fourier mode. The boundary conditions will be applied to matrices for the Left-handside operators. These matrices will then be inverted to find the stream functions. This can be performed once at the beginning of the program for each z mode, giving $2N+1$ $(2N+1)M$ matrices. The matrices will be inverted in pieces, so that at most a second order derivative is inverted. For example, for equation \ref{eq:curlcurl} we define extra variables (for the purpose of illustration)
+
+\begin{eqnarray}
+    m &= \Delta_{2} \phi_{n} \\
+    p &= \nabla^{2}\Delta_{2} \phi_{n} \\
+    a &= \nabla^{4}\Delta_{2} \phi_{n} \\
+\end{eqnarray}
+
+These then allow us to form a matrix of simulutaneous equations and form an equation.
+
+\begin{equation}
+    \begin{bmatrix}
+    -\Delta_{2} & \mathbf{I}	& 0 \\
+    0	        & - \nabla^{2}	& \mathbf{I} \\
+    0		& 0		& \nabla^{2} \\
+    \end{bmatrix}
+    \begin{pmatrix}
+    \phi_{n} \\
+    m \\
+    p \\
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+    0 \\
+    0\\
+    a\\
+    \end{pmatrix}
+\end{equation}
+
+This matrix is then inverted. The top right block in the inverted matrix corresponding to the vector $a$ and the stream function $\phi_{n}$ (the inverse of the operator) is then stored for each z Fourier mode. 
+
+\subsubsection{Boundary conditions}
+
+The boundary conditions derived from equation \ref{eq:streamfunction_def} are,
+\begin{align}
+     \phi_{n} \left( \pm 1 \right)  &= 0 \\ 
+    \phi'_{n} \left( \pm 1 \right)  &= 0 \\
+    \psi _{n} \left( \pm 1 \right)  &= 0 \\
+\end{align}
+where $\phi' \equiv \frac{\partial \phi}{ \partial y}$. To impose the boundary conditions on $\phi$ and $\psi$ equations must be added to the matrices for the calculation of the $\phi$ and $\psi$ z-modes. The upper and lower boundary arrays are given by the coefficients of the stream function components in,
+\begin{equation}
+    \phi_{n}(\pm 1) = \sum\limits_{m=0}^{M-1} (\pm1)^{m}\widetilde{\phi}_{n,m} = 0
+\end{equation}
+and similarly for $\psi$. Writing a similar equation for the derivative boundary condition gives,
+\begin{equation}
+    \phi_{n}(\pm 1) = \dd{y} \sum\limits_{m=0}^{M-1} \cos{\left(m\arccos{\pm 1} \right)}\widetilde{\phi}_{m} = 0
+\end{equation}
+so that
+\begin{equation}
+    \phi_{n}(\pm 1) = \sum\limits_{m=0}^{M-1} \frac{-m\sin{\left(m\arccos{\pm 1} \right)}}{\sqrt{1 \mp 1}}\widetilde{\phi}_{m} = 0
+\end{equation}
+Which at all m gives a coefficient of zero when $y=-1$ and is undefined for $y=1$. I am not sure how to account for this boundary condition, but this does not seem right!
+
+\subsection{Velocities and pressure}
+
+Next I will need to calculate all components except the zeroth component of the velocities using equation \ref{eq:streamfunction_def}. This just uses straight forward matrix products.
+
+To calculate the zeroth component of the velocities, we will need to use the Navier-Stokes equation with the incompressibility equation for the zeroth mode. For the zeroth z mode all z deriviatives are zero. Firstly, we can calculate $\sw_{0}$ component by solving,
+
+\begin{equation}
+    0 = \beta \nabla_{0}^{2} \sw_{0} + \frac{1-\beta}{Wi} \left( \nabla \cdot \delta \mathbf{\tau} \right)_{z}
+\end{equation}
+
+for $\sw_{0}$, where $\nabla_{0}^{2} = -k^{2} + \dd{yy}$. First we form a matrix for the operator $\nabla_{0}^{2}$ and a vector containing the stress component. At this point we can impose boundary conditions on $\sw_{0}$ such that it is zero at the walls. We can do this by adding rows of the boundary condition arrays to the operator matrix and inserting zeros into the vector on the RHS. Then we invert this operator and multiply by the vector to find $\sw_{0}$. 
+
+To calculate the other velocities, we will use the Navier-Stokes equations and incompressibility to solve for $\sv_{0}$ and then $\spr$ and $\su_{0}$. Boundary condition rows can also be inserted into the equations for $\sv_{0}$ and $\su_{0}$. For $\sv$ we have,
+
+\begin{align}
+    \frac{1}{ik} & \left( - \beta \nabla_{0}^{2} \frac{\dd{yy} \sv}{ik} + \frac{1-\beta}{Wi} \dd{y} \left( \nabla \cdot \delta \mathbf{\tau} \right)_{x0} \right) \nonumber\\
+    = & \beta \nabla_{0}^{2} \sv + \frac{1-\beta}{Wi}\left( \nabla \cdot \delta \mathbf{\tau} \right)_{y0} 
+\end{align}
+where $\left( \nabla \cdot \delta \mathbf{\tau} \right)_{x0}$ is the x component of the divergence of the stress for the 0th z-mode. This simplifies to:
+\begin{align}
+    \beta\nabla_{0}^{2}\left( 1+ \frac{\dd{yy}}{k^{2}} \right)\sv_{0} &= \frac{1-\beta}{Wi}\left( \frac{\dd{y}}{ik} \left( \nabla \cdot \delta \mathbf{\tau} \right)_{x0} - ik\stxy - \dd{y}\styy \right)
+    \label{eq:zeroth_v}
+\end{align}
+Then using the incompressibility equation, the streamwise disturbance velocity is:
+\begin{align}
+    \su_{0} = \frac{\dd{y}\sv_{0}}{ik} 
+\end{align}
+To calculate the pressure we can used the x component of the Navier-stokes equation,
+\begin{align}
+    p_{0} = \frac{\beta}{ik}\nabla^{2}\su_{0} + \frac{1-\beta}{ikWi}\left( \nabla \cdot \delta \mathbf{\tau} \right)_{x0}
+\end{align}
+The operators for $\sw_{0}$ and $\sv_{0}$ equations should be created before the start of the main time iteration loop. The operator on the left-hand-side of equation \ref{eq:zeroth_v} is fourth order, so to invert it I will again use the inversion method discussed above. 
+
+\subsection{Time iteration}
+
+\noindent XX EQUATION:
+\begin{align}
+    \dt{\delta c_{xx}}  = \first{x}{x} \nonumber\\
++ 2ik\su C_{xx} + 2C_{xy} \dy{\su} + 2C_{xz} \dz{\su} + 2\scxy \dy{U} + 2\scxz \dz{U}
+\end{align}
+
+\noindent YY EQUATION:
+\begin{align}
+    \dt{\delta c_{yy}} = \first{y}{y} \nonumber\\
++ 2ik\sv C_{xy} + 2C_{yy}\dy{\sv} + 2C_{yz}\dz{\sv} + 2\scyy \dy{V} + 2\scyz \dz{V}
+\end{align}
+
+\noindent ZZ EQUATION:
+\begin{align}
+    \dt{\delta c_{zz}} = \first{z}{z} \nonumber\\
++ 2ik\sw C_{xz} + 2C_{yz}\dy{\sw} + 2C_{zz}\dz{\sw} + 2\scyz \dy{W} + 2\sczz \dz{W}
+\end{align}
+
+\noindent XY EQUATION:
+\begin{align}
+    \dt{ \delta c_{xy}} = \first{x}{y} \nonumber\\
+ + C_{yy}\dy{\su} + C_{yz}\dz{\su} + \scyy \dy{U} + \scyz \dz{U} \nonumber\\
+ + ik\sv C_{xx} + C_{xz}\dz{\sv} + \scxy \dy{V} + \scxz \dz{V} - C_{xy}\dz{\sw}
+\end{align}
+
+\noindent XZ EQUATION:
+\begin{align}
+    \dt{ \delta c_{xz}} = \first{x}{z} \nonumber\\
++ C_{yz}\dy{\su} + C_{zz}\dz{\su} + \scyz \dy{U} + \sczz \dz{U} \nonumber\\
++ ik\sw C_{xx} + C_{xy}\dy{\sw} + \scxy \dy{W} + \scxz \dz{W} - C_{xz}\dy{\sv}
+\end{align}
+
+\noindent YZ EQUATION:
+\begin{align}
+    \dt{ \delta c_{yz}} = \first{y}{z} \nonumber\\
++ ik\sv C_{xz} + C_{zz}\dz{\sv} + \sczz \dz{V} \nonumber\\
++ ik\sw C_{xy} + C_{yy}\dy{\sw} + \scyy \dy{W} - ik\su C_{yz}
+\end{align}
+
+Using the equations above we can now calculate the time derivatives of the stresses. Using a numerical iteration technique, we can find the new stress values after an appropriate time interval. 
+
+Before each iteration, we will calculate the magnitude of the instability (the 2-norm of the disturbance velocities and stresses vector). Using this we will build up a list of times and magnitudes. The gradient of the graph of the log of the magnitudes against time is the growth rate. 
 
 %\begin{algorithmic}
 %    \STATE{Make $A$}
