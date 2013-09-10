@@ -259,6 +259,43 @@ Using the equations above we can now calculate the time derivatives of the stres
 
 Before each iteration, we will calculate the magnitude of the instability (the 2-norm of the disturbance velocities and stresses vector). Using this we will build up a list of times and magnitudes. The gradient of the graph of the log of the magnitudes against time is the growth rate. 
 
+\section{Variable names}
+
+\subsection{parameters}
+
+\begin{itemize}
+    \item number of time steps NSTEPS
+    \item width of a time step DT
+    \item number of Fourier modes N
+    \item number of Chebychev modes M
+    \item gamma, the spanwise wavenumber of the base flow
+    \item kx, the streamwise wavenumber of the disturbance
+    \item Wi, the Weissenberg number 
+    \item Re, the Reynolds number
+    \item L, the height of the system
+\end{itemize}
+
+\subsection{operators}
+
+\begin{itemize}
+    \item derivative and double derivative operator arrays MDY, MDYY, MDZ, MDZZ 
+    \item List of $2*N+1$ arrays of $(2*N+1)M$ phi\_operator
+    \item List of $2*N+1$ arrays of $(2*N+1)M$ psi\_operator
+    \item Upper and lower boundary arrays BTOP, BBOT
+    \item Upper and lower derivative boundary arrays DBTOP DBBOT
+    \item Zeroth mode array dwZerothOp
+    \item Zeroth mode array dvZerothOp
+\end{itemize}
+
+\subsection{variables}
+
+\begin{itemize}
+    \item Arrays for $U$, $V$, $W$ and $Cij$
+    \item Arrays for $du$, $dv$, $dw$, $dp$, and $dcij$
+    \item Small arrays for zeroth modes $du0$, $dv0$, $dw0$
+    \item Arrays for $\phi$ and $\psi$ phi and psi
+\end{itemize}
+
 %\begin{algorithmic}
 %    \STATE{Make $A$}
 %    \STATE{Make $x$}
