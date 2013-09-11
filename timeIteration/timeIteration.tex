@@ -109,7 +109,7 @@ By taking $\hat{\mathbf{j}} \cdot \curl \curl (~ \cdot ~) $ and $\hat{\mathbf{j}
 \end{align}
 
 \begin{align}
-    \nabla ^{2} \Delta_{2} = \frac{1-\beta}{\beta Wi} &\left( ik\dd{z}\stxx +\dd{yz} \stxy + (\dd{zz} +k^{2})\stxz \right. \nonumber \\ 
+    \nabla ^{2} \Delta_{2} \psi = \frac{1-\beta}{\beta Wi} &\left( ik\dd{z}\stxx +\dd{yz} \stxy + (\dd{zz} +k^{2})\stxz \right. \nonumber \\ 
     & \left. - ik\dd{y} \styz - ik\dd{z} \stzz \right)
 \label{eq:curl}
 \end{align}
@@ -173,13 +173,18 @@ where $\phi' \equiv \frac{\partial \phi}{ \partial y}$. To impose the boundary c
 \end{equation}
 and similarly for $\psi$. Writing a similar equation for the derivative boundary condition gives,
 \begin{equation}
-    \phi_{n}(\pm 1) = \dd{y} \sum\limits_{m=0}^{M-1} \cos{\left(m\arccos{\pm 1} \right)}\widetilde{\phi}_{m} = 0
+    \phi_{n}'(\pm 1) = \dd{y} \sum\limits_{m=0}^{M-1} \cos{\left(m\arccos{\pm 1} \right)}\widetilde{\phi}_{m} = 0
 \end{equation}
 so that
 \begin{equation}
-    \phi_{n}(\pm 1) = \sum\limits_{m=0}^{M-1} \frac{-m\sin{\left(m\arccos{\pm 1} \right)}}{\sqrt{1 \mp 1}}\widetilde{\phi}_{m} = 0
+    \phi_{n}'(\pm 1) = \sum\limits_{m=0}^{M-1} \sum\limits_{j=0}^{M-1} DY_{m,j}\widetilde{\phi}_{j} (\pm1)^{m} = 0
 \end{equation}
-Which at all m gives a coefficient of zero when $y=-1$ and is undefined for $y=1$. I am not sure how to account for this boundary condition, but this does not seem right!
+
+So the boundary condition will be given by,
+\begin{align}
+    K_{\pm}& \cdot \widetilde{\phi} = 0 \\
+    K_{\pm}& = \sum\limits_{m=0}^{M-1} (\pm1)^m DY_{m,j}  
+\end{align}
 
 \subsection{Velocities and pressure}
 
@@ -201,7 +206,8 @@ To calculate the other velocities, we will use the Navier-Stokes equations and i
 \end{align}
 where $\left( \nabla \cdot \delta \mathbf{\tau} \right)_{x0}$ is the x component of the divergence of the stress for the 0th z-mode. This simplifies to:
 \begin{align}
-    \beta\nabla_{0}^{2}\left( 1+ \frac{\dd{yy}}{k^{2}} \right)\sv_{0} &= \frac{1-\beta}{Wi}\left( \frac{\dd{y}}{ik} \left( \nabla \cdot \delta \mathbf{\tau} \right)_{x0} - ik\stxy - \dd{y}\styy \right)
+    \beta\nabla_{0}^{2}\left( 1+ \frac{\dd{yy}}{k^{2}} \right)\sv_{0} &= \frac{1-\beta}{Wi}\left( \frac{\dd{y}}{ik} \left( \nabla \cdot \delta \mathbf{\tau} \right)_{x0} - ik\stxy - \dd{y}\styy \right) \nonumber \\
+    \nabla_{0}^{2}\left( 1+ \frac{\dd{yy}}{k^{2}} \right)\sv_{0} &= \frac{1-\beta}{\beta Wi}\left( \dd{y} \stxx + \left( \dd{yy} - ik \right) \stxy - \dd{y} \styy \right)
     \label{eq:zeroth_v}
 \end{align}
 Then using the incompressibility equation, the streamwise disturbance velocity is:
@@ -210,9 +216,10 @@ Then using the incompressibility equation, the streamwise disturbance velocity i
 \end{align}
 To calculate the pressure we can used the x component of the Navier-stokes equation,
 \begin{align}
-    p_{0} = \frac{\beta}{ik}\nabla^{2}\su_{0} + \frac{1-\beta}{ikWi}\left( \nabla \cdot \delta \mathbf{\tau} \right)_{x0}
+    \spr = \frac{\beta}{ik}\nabla^{2}\su + \frac{1-\beta}{ikWi}\left( \nabla \cdot \delta \mathbf{\tau} \right)_{x}
+    \spr =  \frac{\beta}{ik}\nabla^{2}\su + \frac{1-\beta}{Wi}\left( \stxx + \frac{\dd{y}}{ik}\stxy\right)
 \end{align}
-The operators for $\sw_{0}$ and $\sv_{0}$ equations should be created before the start of the main time iteration loop. The operator on the left-hand-side of equation \ref{eq:zeroth_v} is fourth order, so to invert it I will again use the inversion method discussed above. 
+The operators for $\sw_{0}$ and $\sv_{0}$ equations should be created before the start of the main time iteration loop. The operator on the left-hand-side of equation \ref{eq:zeroth_v} is fourth order, so to invert it I will again use the inversion method discussed above.
 
 \subsection{Time iteration}
 
