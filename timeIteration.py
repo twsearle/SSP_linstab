@@ -3,7 +3,7 @@
 #   SSP
 #   timeIteration.py
 # 
-#   Last modified: Wed 11 Sep 17:14:36 2013
+#   Last modified: Tue 17 Sep 12:24:55 2013
 #--------------------------------------------------------------------------------------------------
 
 """ Time Iteration Program for the Linear Stability Analysis of the Viscoelastic SSP
@@ -41,8 +41,8 @@ kx = config.getfloat('settings', 'k')
 
 fp.close()
 
-filename = '-N{N}-M{M}-Re{Re}-b{beta}-Wi{Weiss}-amp{Amp}.pickle'.format(\
-            N=N,M=M,Re=Re,beta=beta,Weiss=Weiss,Amp=Amp)
+filename = '-N{N}-M{M}-Re{Re}-b{beta}-Wi{Wi}-amp{Amp}.pickle'.format(\
+            N=N,M=M,Re=Re,beta=beta,Wi=Wi,Amp=Amp)
 
 # FUNCTIONS
 
@@ -128,13 +128,14 @@ def prod_mat(velA):
 #(U,V,W,Cxx,Cyy,Czz,Cxy,Cxz,Cyz) = pickle.load(fpickle)
 #fpickle.close()
 
-# Setup variables:
+#### SETUP VARIABLES ####
+
 gamma = pi / 2.
 zLength = 2.*pi/gamma
 vecLen = M*(2*N+1)
 vLen = vecLen
 print vLen, type(vLen)
-oneOverWeiss = 1./Weiss
+oneOverWi = 1./Wi
 # Set the oneOverC function: 1/2 for m=0, 1 elsewhere:
 oneOverC = ones(M)
 oneOverC[0] = 1. / 2.
@@ -142,10 +143,17 @@ oneOverC[0] = 1. / 2.
 CFunc = ones(M)
 CFunc[0] = 2.
 
-#### MAKE OPERATORS
+# make psi and phi vectors
+phi = zeros(((2*N+1)*M), dtype='complex')
+psi = zeros(((2*N+1)*M), dtype='complex')
+
+# Read in the base profile
+(U,V,W,Cxx,Cyy,Czz,Cxy,Cxz,Cyz) = pickle.load(open('pf'+filename, 'r'))
+
+#### MAKE OPERATORS ####
 
 # basic operators
-II = eye(((2*N+1)*M,(2*N+1)*M))
+II = eye((2*N+1)*M,(2*N+1)*M)
 MDY = mk_diff_y()
 MDYY = dot(MDY,MDY)
 MDZ = mk_diff_z()
@@ -153,6 +161,7 @@ MDZZ = dot(MDZ,MDZ)
 MDYZ = dot(MDY,MDZ)
 MDYZZ = dot(MDY,MDZZ)
 MDYYZ = dot(MDYY,MDZ)
+MDZZZ = dot(MDZ,MDZZ)
 
 LAPLACIAN = -(kx**2)*eye((2*N+1)*M, (2*N+1)*M) + MDYY + MDZZ
 
@@ -205,8 +214,8 @@ for i in range(2*N+1):
 del i, n
 
 # The zeroth mode operators
-dw0thOp = -k**2*eye(M,M) + singleMDYY
-dv0thOp = (-k**2*eye(M,M) + singleMDYY)*(eye(M,M) + (1./k**2)*singleMDYY)
+dw0thOp = -kx**2*eye(M,M) + singleMDYY
+dv0thOp = (-kx**2*eye(M,M) + singleMDYY)*(eye(M,M) + (1./kx**2)*singleMDYY)
 
 # The zeroth mode boundary conditions
 dw0thOp[M-2,:] = BTOP
@@ -219,10 +228,13 @@ dv0thOp[M-1,:] = BBOT
 
 
 
-#### ITERATE THE INSTABILITY
+#### ITERATE THE INSTABILITY ####
 
 # As a test, use only the stresses to recreate a disturbance.
 # need to make a reasonable disturbance using Oldroyd-B2-full.py
+
+(du_test,dv_test,dw_test,dp_test,dcxx,dcyy,dczz,dcxy,dcxz,dcyz) = pickle.load(
+                                    open('full-evecs-k0.7'+filename,'r'))
 
 ### MAKE STREAM FUNCTIONS
 
@@ -234,7 +246,7 @@ phiStressVec = - kx**2*dot(MDY,dcxx) \
                + dot( ((1.j*kx**3)*II - 1.j*kx*MDZZ \
                       + 1.j*kx*MDYY), dcxy) \
                + dot( 2.j*kx*MDYZ, dcxz) \
-               + dot( (k**2*MDZ + MDYYZ - MDZZZ), dcyz) \
+               + dot( (kx**2*MDZ + MDYYZ - MDZZZ), dcyz) 
 phiStressVec = -((1.-beta)/(beta*Wi))*phiStressVec
 
 psiStressVec = dot(1.j*kx*MDZ, dcxx) + dot(MDYZ,dcxy) \
@@ -254,10 +266,10 @@ psiStressVec[M-1:(2*N+1)*M:M] = 0
 
 # solve for stream functions
 
-for i in 2*N+1:
+for i in range(2*N+1):
     # go through each operator and z mode and generate the corresponding z mode
     # of phi and psi
-    if i = N: continue #miss out the zeroth mode
+    if i is N: continue #miss out the zeroth mode
     phi[i*M:(i+1)*M] = linalg.solve(phiOps[i], phiStressVec[i*M:(i+1)*M])
     psi[i*M:(i+1)*M] = linalg.solve(psiOps[i], psiStressVec[i*M:(i+1)*M])
 del i
@@ -270,8 +282,8 @@ dv = kx**2*phi - dot(MDZZ, phi)
 dw = dot(MDYZ, phi) + 1.j*kx*psi
 
 # calculate dw0 
-dw0vec = -(1.-beta)/(beta*Wi)*(-k**2*dtxz[N*M:(N+1)*M] + \
-                               dot(singleMDYY,dtyz[N*M:(N+1)*M]))
+dw0vec = -(1.-beta)/(beta*Wi)*(-kx**2*dcxz[N*M:(N+1)*M] + \
+                               dot(singleMDYY,dcyz[N*M:(N+1)*M]))
 # put in boundary conditions
 dw0vec[M-2] = 0 
 dw0vec[M-1] = 0
@@ -279,20 +291,24 @@ dw0vec[M-1] = 0
 dw[N*M:(N+1)*M] = linalg.solve(dw0thOp, dw0vec)
 
 # calculate dv0
-dv0vec = (1.-beta)/(beta*Wi)*( dot(singleMDY,dtxx[N*M:(N+1)*M]) \
+dv0vec = (1.-beta)/(beta*Wi)*( dot(singleMDY,dcxx[N*M:(N+1)*M]) \
                               + dot( ((1./(1.j*kx))*singleMDYY - 1.j*kx), \
-                                    dtxy[N*M:(N+1)*M]) \
-                              - dot( singleMDY, ddcyy[N*M:(N+1)*M] ) )
+                                    dcxy[N*M:(N+1)*M]) \
+                              - dot( singleMDY, dcyy[N*M:(N+1)*M] ) )
 dv0vec[M-2] = 0 
 dv0vec[M-1] = 0
 
 dv[N*M:(N+1)*M] =  linalg.solve(dv0thOp, dv0vec)
 
 # calculate du0
-du[N*M:(N+1)*M] = dot( (1./(1.j*kx))*MDY, dv[N*M:(N+1)*M] )
+du[N*M:(N+1)*M] = dot( (1./(1.j*kx))*singleMDY, dv[N*M:(N+1)*M] )
 
 # calculate pressure
 dp = (beta/(1.j*kx))*dot(LAPLACIAN, du) \
     + (1.-beta)/(Wi)*( dcxx + (1./(1.j*kx))*dot(MDY,dcxy) )
 
+print 'du has been calculated correctly: ', allclose(du_test, du)
+print 'dv has been calculated correctly: ', allclose(dv_test, dv)
+print 'dw has been calculated correctly: ', allclose(dw_test, dw)
+print 'dp has been calculated correctly: ', allclose(dp_test, dp)
 
