@@ -3,7 +3,7 @@
 #   SSP
 #   timeIteration.py
 # 
-#   Last modified: Tue 17 Sep 12:24:55 2013
+#   Last modified: Mon 11 Nov 17:44:01 2013
 #--------------------------------------------------------------------------------------------------
 
 """ Time Iteration Program for the Linear Stability Analysis of the Viscoelastic SSP
@@ -282,8 +282,9 @@ dv = kx**2*phi - dot(MDZZ, phi)
 dw = dot(MDYZ, phi) + 1.j*kx*psi
 
 # calculate dw0 
-dw0vec = -(1.-beta)/(beta*Wi)*(-kx**2*dcxz[N*M:(N+1)*M] + \
-                               dot(singleMDYY,dcyz[N*M:(N+1)*M]))
+dw0vec = -(1.-beta)/(beta*Wi)*(-kx*1.j*dcxz[N*M:(N+1)*M] + \
+                               dot(singleMDY,dcyz[N*M:(N+1)*M]))
+                              
 # put in boundary conditions
 dw0vec[M-2] = 0 
 dw0vec[M-1] = 0
@@ -307,6 +308,14 @@ du[N*M:(N+1)*M] = dot( (1./(1.j*kx))*singleMDY, dv[N*M:(N+1)*M] )
 dp = (beta/(1.j*kx))*dot(LAPLACIAN, du) \
     + (1.-beta)/(Wi)*( dcxx + (1./(1.j*kx))*dot(MDY,dcxy) )
 
+############TEST
+print '==================TESTS======================='
+print 'zeroth modes'
+print 'du0 has been calculated correctly: ', allclose(du_test[N*M:(N+1)*M], du[N*M:(N+1)*M])
+print 'dv0 has been calculated correctly: ', allclose(dv_test[N*M:(N+1)*M], dv[N*M:(N+1)*M])
+print 'dw0 has been calculated correctly: ', allclose(dw_test[N*M:(N+1)*M], dw[N*M:(N+1)*M])
+print 'dp0 has been calculated correctly: ', allclose(dp_test[N*M:(N+1)*M], dp[N*M:(N+1)*M])
+print '=============================================='
 print 'du has been calculated correctly: ', allclose(du_test, du)
 print 'dv has been calculated correctly: ', allclose(dv_test, dv)
 print 'dw has been calculated correctly: ', allclose(dw_test, dw)

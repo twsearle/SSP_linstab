@@ -36,7 +36,7 @@
 
 \section{Outline}
 \begin{itemize}
-    \item Use streamfunction equations to make $2N+1$, $(2N+1)M$ matrix equations for the operators.
+    \item Use streamfunction equations to make $2N+1$, $M\times M$ matrix equations for the operators.
     \begin{itemize}
 	\item split the 6th order operator into three steps, solve these 3 equations simultaneously. (2 steps for 4th order)
 	\item apply the boundary conditions to this matrix.
@@ -102,10 +102,18 @@ so that the disturbance velocities are
 By taking $\hat{\mathbf{j}} \cdot \curl \curl (~ \cdot ~) $ and $\hat{\mathbf{j}} \cdot \curl (~ \cdot ~)$ of the Navier-stokes equation, we find
 
 \begin{align}
+    0 = \beta \biharmop \Delta_{2}\Phi + \frac{(1-\beta)}{Wi}\left( \curl \curl \nabla \cdot \mathbf{T} \right)
+\end{align}
+
+\begin{align}
     \biharmop  \Delta_{2} \phi = - \frac{1-\beta}{\beta Wi} &\left(-k^{2}\dd{y} \stxx + (k^{2}\dd{y} - \dd{yzz})\styy + \dd{yzz} \stzz \right. \nonumber \\ 
    & \left. + (ik^{3} - ik\dd{zz} + ik\dd{yy}) \stxy + 2ik\dd{yz}\stxz \right. \nonumber \\
    & \left. + (k^{2}\dd{z} + \dd{yyz} - \dd{zzz})\styz \right)
 \label{eq:curlcurl}
+\end{align}
+
+\begin{align}
+    0 = \beta \nabla^{2} \Delta_{2}\Psi - \frac{(1-\beta)}{Wi}\left( \curl \nabla \cdot \mathbf{T} \right)
 \end{align}
 
 \begin{align}
