@@ -3,7 +3,7 @@
 #   SSP
 #   timeIteration.py
 # 
-#   Last modified: Wed 13 Nov 22:10:56 2013
+#   Last modified: Mon 18 Nov 00:03:49 2013
 #--------------------------------------------------------------------------------------------------
 
 """ Time Iteration Program for the Linear Stability Analysis of the Viscoelastic SSP
@@ -341,6 +341,7 @@ for currTime in range(numTimeSteps):
                                       dot(singleMDY, dcyz[N*M:(N+1)*M]))
                                   
     # put in boundary conditions
+    # TODO: Find out why the zeroth modes are so large always
     dw0vec[M-2] = 0 
     dw0vec[M-1] = 0
 
@@ -357,6 +358,8 @@ for currTime in range(numTimeSteps):
     dv[N*M:(N+1)*M] =  linalg.solve(dv0thOp, dv0vec)
 
     # calculate du0
+    # TODO: How to enforce the boundary conditions here?
+    # The first modes do satisfy the bcs...???
     du[N*M:(N+1)*M] = dot( (1./(1.j*kx))*singleMDY, dv[N*M:(N+1)*M] )
 
     # calculate pressure
@@ -365,6 +368,9 @@ for currTime in range(numTimeSteps):
 
 
     # ---TESTS-----------------------------------------------------------------------
+
+    pickle.dump((du[(N+1)*M:(N+2)*M], dv[(N+1)*M:(N+2)*M],
+                 dw[(N+1)*M:(N+2)*M]),open('test.pickle', 'w'))
     #print '==================TESTS======================='
     #print 'zeroth modes'
     #print 'du0 has been calculated correctly: ', allclose(du_test[N*M:(N+1)*M], du[N*M:(N+1)*M])
@@ -376,7 +382,6 @@ for currTime in range(numTimeSteps):
     #print 'dv has been calculated correctly: ', allclose(dv_test, dv)
     #print 'dw has been calculated correctly: ', allclose(dw_test, dw)
     #print 'dp has been calculated correctly: ', allclose(dp_test, dp)
-
     #duData = vstack((du_test[N*M:(N+1)*M], du[N*M:(N+1)*M])).T
     #dvData = vstack((dv_test[N*M:(N+1)*M], dv[N*M:(N+1)*M])).T
     #dwData = vstack((dw_test[N*M:(N+1)*M], dw[N*M:(N+1)*M])).T
@@ -385,8 +390,8 @@ for currTime in range(numTimeSteps):
     #savetxt("dv_comp.dat", (dvData))
     #savetxt("dw_comp.dat", (dwData))
 
-    #print "exit before time step."
-    #exit(1)
+    print "exit before time step."
+    exit(1)
     # -------------------------------------------------------------------------------
 
     ### TAKE A TIME STEP IN THE CONFORMATION VECTORS
