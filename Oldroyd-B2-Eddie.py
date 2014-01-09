@@ -1,6 +1,6 @@
 #----------------------------------------------------------------------------#
 #   Fully Spectral Linear stability analysis Oldroyd B Model
-#   Last modified: Fri 06 Sep 2013 17:22:26 BST
+#   Last modified: Wed 13 Nov 16:49:00 2013
 #----------------------------------------------------------------------------#
 """ Perform Linear stability analysis to find eigenvalues for the stability 
 of the streaky flow"""
@@ -399,7 +399,7 @@ eigarray = vstack((real(eigenvals), imag(eigenvals))).T
 eigarray = eigarray[~isnan(eigarray).any(1), :]
 eigarray = eigarray[~isinf(eigarray).any(1), :]
 
-savetxt('ev-k'+str(k)+filename[:-7]+'SPARSE.dat', eigarray)
+savetxt('ev-k'+str(k)+filename[:-7]+'.dat', eigarray)
 
 #stop the clock
 print 'done in', (time.time()-startTime)
