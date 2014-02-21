@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 #   colour map plotter for 2D coherent state finder
 #
-#   Last modified: Thu 09 Jan 2014 18:22:20 GMT
+#   Last modified: Fri 21 Feb 16:47:29 2014
 #
 #------------------------------------------------------------------------------
 #TODO check that the axes are the right way up?
@@ -30,12 +30,12 @@ Amp = config.getfloat('settings', 'amp')
 
 fp.close()
 
-numYs = 50
-numZs = 50
+numYs = 100
+numZs = 100
 baseFileName = '-N'+str(N)+'-M'+str(M)+'-Re'+str(Re)+'-b'+str(beta)\
           +'-Wi'+str(Weiss)+'-amp'+str(Amp)+'.pickle'
 
-inFileName = 'full_profile-N'+str(N)+'-M'+str(M)+'-Re'+str(Re)+'-b'+str(beta)\
+inFileName = 'real-pf-N'+str(N)+'-M'+str(M)+'-Re'+str(Re)+'-b'+str(beta)\
           +'-Wi'+str(Weiss)+'-amp'+str(Amp)+'.pickle'
 
 #------------------------------------------------
@@ -109,6 +109,21 @@ titleString = 'Cyy for Re = {Re}, beta = {beta}, Wi = {Wi}, amp = {amp}'.format(
 plt.title(titleString)
 plt.savefig(r'Cyy_map{0}.pdf'.format(baseFileName[:-7]))
 
+plt.figure()
+extent_=[-0.5*zLength, 0.5*zLength,-1,1]
+plt.imshow(Cxx-Cyy, origin='lower', extent=extent_) 
+plt.colorbar(orientation='horizontal')
+titleString = 'N1 Re = {Re}, beta = {beta}, Wi = {Wi}, amp = {amp}'.format(**keyDict)
+plt.title(titleString)
+plt.savefig(r'N1_map{0}.pdf'.format(baseFileName[:-7]))
+
+plt.figure()
+extent_=[-0.5*zLength, 0.5*zLength,-1,1]
+plt.imshow(Cyy-Czz, origin='lower', extent=extent_) 
+plt.colorbar(orientation='horizontal')
+titleString = 'N2 Re = {Re}, beta = {beta}, Wi = {Wi}, amp = {amp}'.format(**keyDict)
+plt.title(titleString)
+plt.savefig(r'N2_map{0}.pdf'.format(baseFileName[:-7]))
 
 plt.figure()
 extent_=[-0.5*zLength, 0.5*zLength,-1,1]
