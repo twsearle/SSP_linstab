@@ -1,4 +1,4 @@
-#Last modified: Mon 11 Mar 2013 14:18:50 GMT
+#Last modified: Fri 21 Feb 17:15:34 2014
 from scipy import *
 import sys
 import ConfigParser
@@ -27,9 +27,15 @@ b_filename = '-N{N}-M{M}-Re{Re}-b{b}-Wi{Wi}-amp{amp}.dat'.format(
 for kindex, k in enumerate(ksettings):
     filename = 'ev-k{k}{base}'.format(k=k, base=b_filename)
     eigs = genfromtxt(filename)
-    row_index = argmax(eigs[:,0])
-    eig = eigs[row_index,:]
-    leading_eigs[kindex, 1:3] = eig
+    eig = [100,0]
+    while(eig[0] > 50): 
+        row_index = argmax(eigs[:,0])
+        eig = eigs[row_index,:]
+        leading_eigs[kindex, 1:3] = eig
+        if (eig[0] > 50):
+            eigs[row_index,:] = [0,0]
+            eig = [100,0] 
+    
 
 
 savetxt('lead-ev{0}'.format(b_filename), leading_eigs, fmt='%10.4f')

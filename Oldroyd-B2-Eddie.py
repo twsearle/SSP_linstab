@@ -1,6 +1,6 @@
 #----------------------------------------------------------------------------#
 #   Fully Spectral Linear stability analysis Oldroyd B Model
-#   Last modified: Wed 13 Nov 16:49:00 2013
+#   Last modified: Tue 25 Feb 15:18:50 2014
 #----------------------------------------------------------------------------#
 """ Perform Linear stability analysis to find eigenvalues for the stability 
 of the streaky flow"""
@@ -13,6 +13,18 @@ from scipy import linalg
 from scipy.sparse import linalg as sparselinalg
 import cPickle as pickle
 import ConfigParser
+
+#set parameters 
+#-----------------------------------
+N       = 5
+M       = 40
+Re      = 0.01
+beta    = 0.1
+Weiss   = 10.0 
+Amp     = 0.02
+gamma   = pi / 2
+k       = float(sys.argv[1])
+#-----------------------------------
 
 #FUNCTIONS
 
@@ -302,25 +314,12 @@ def mk_bigM():
 # MAIN
 #
 
-#set parameters 
-#-----------------------------------
-N       = 7
-M       = 80
-Re      = 0
-beta    = 0.1
-Weiss   = 5.0 
-Amp     = 0.04
-pi_divide=16.0
-gamma   = pi / pi_divide
-k       = 0.2
-#-----------------------------------
-
 
 #Start the clock:
 startTime = time.time()
 
-filename = '-N{N}-M{M}-Re{Re}-b{beta}-Wi{Weiss}-amp{Amp}-g{gamma}.pickle'.format(\
-            N=N,M=M,Re=Re,beta=beta,Weiss=Weiss,Amp=Amp,gamma=pi_divide)
+filename = '-N{N}-M{M}-Re{Re}-b{beta}-Wi{Weiss}-amp{Amp}.pickle'.format(\
+            N=N,M=M,Re=Re,beta=beta,Weiss=Weiss,Amp=Amp)
 
 # Unpickle the answer from part1 and the V and W vectors
 
