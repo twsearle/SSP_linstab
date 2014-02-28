@@ -1,6 +1,6 @@
 #----------------------------------------------------------------------------#
 #   Fully Spectral Linear stability analysis Oldroyd B Model
-#   Last modified: Thu 04 Apr 2013 17:08:36 BST
+#   Last modified: Fri 28 Feb 17:33:23 2014
 #----------------------------------------------------------------------------#
 """ Perform Linear stability analysis to find eigenvalues for the stability 
 of the streaky flow"""
@@ -13,6 +13,68 @@ from scipy import linalg
 from scipy.sparse import linalg as sparselinalg
 import cPickle as pickle
 import ConfigParser
+import argparse
+
+# SETTINGS -------------------------------------------------------------------
+
+config = ConfigParser.RawConfigParser()
+fp = open('OB-settings.cfg')
+config.readfp(fp)
+cfgN = config.getint('settings', 'N')
+cfgM = config.getint('settings', 'M')
+cfgRe = config.getfloat('settings', 'Re')
+cfgbeta = config.getfloat('settings','beta')
+cfgWeiss = config.getfloat('settings','Weiss')
+cfgAmp = config.getfloat('settings', 'Amp')
+cfgk = config.getfloat('settings', 'k')
+
+fp.close()
+
+argparser = argparse.ArgumentParser()
+
+argparser.add_argument("-N", type=int, default=cfgN, 
+                help='Override Number of Fourier modes given in the config file')
+argparser.add_argument("-M", type=int, default=cfgM, 
+                help='Override Number of Chebyshev modes in the config file')
+argparser.add_argument("-Re", type=float, default=cfgRe, 
+                help="Override Reynold's number in the config file") 
+argparser.add_argument("-b", type=float, default=cfgbeta, 
+                help='Override beta of the config file')
+argparser.add_argument("-Wi", type=float, default=cfgWeiss, 
+                help='Override Weissenberg number of the config file')
+argparser.add_argument("-amp", type=float, default=cfgAmp,
+                help='Override amplitude of the streamwise vortices from the config file')
+argparser.add_argument("-kx", type=float, default=cfgk,
+                help='Override kx from the config file')
+argparser.add_argument("-evecs", 
+                help = 'output eigenvectors instead of eigenvalues',
+                       action="store_true")
+
+args = argparser.parse_args()
+N = args.N 
+M = args.M
+Re = args.Re
+beta = args.b
+Weiss = args.Wi
+Amp = args.amp
+k = args.kx
+
+print """
+----------------------------------------
+N     = {0}
+M     = {1}
+Re    = {2}
+beta  = {3}
+Weiss = {4}
+amp   = {5}
+k     = {6}
+----------------------------------------
+""". format(N, M, Re, beta, Weiss, Amp, k)
+
+filename = '-N{N}-M{M}-Re{Re}-b{beta}-Wi{Weiss}-amp{Amp}.pickle'.format(\
+            N=N,M=M,Re=Re,beta=beta,Weiss=Weiss,Amp=Amp)
+
+# -----------------------------------------------------------------------------
 
 #FUNCTIONS
 
@@ -304,22 +366,6 @@ def mk_bigM():
 #Start the clock:
 startTime = time.time()
 
-config = ConfigParser.RawConfigParser()
-fp = open('OB-settings.cfg')
-config.readfp(fp)
-N = config.getint('settings', 'N')
-M = config.getint('settings', 'M')
-Re = config.getfloat('settings', 'Re')
-beta = config.getfloat('settings','beta')
-Weiss = config.getfloat('settings','Weiss')
-Amp = config.getfloat('settings', 'Amp')
-k = config.getfloat('settings', 'k')
-
-fp.close()
-
-filename = '-N{N}-M{M}-Re{Re}-b{beta}-Wi{Weiss}-amp{Amp}.pickle'.format(\
-            N=N,M=M,Re=Re,beta=beta,Weiss=Weiss,Amp=Amp)
-
 # Unpickle the answer from part1 and the V and W vectors
 
 fpickle = open('pf'+filename, 'r')
@@ -386,21 +432,65 @@ for i in range(3*(2*N+1)):
     RHS[M*(i+1)-2, M*(i+1)-2] = 0
 del i
 
-# Use library function to solve for eigenvalues/vectors
-print 'in linalg.eig time=', (time.time() - startTime)
-eigenvals = linalg.eigvals(equations_matrix, RHS, overwrite_a=True)
+if args.evecs:
+    print 'finding eigenvectors and eigenvalues'
+    # Use library function to solve for eigenvalues/vectors
+    print 'in linalg.eig time=', (time.time() - startTime)
+    eigenvals, evecs = linalg.eig(equations_matrix, RHS, overwrite_a=True)
 
-# Save output
+    # Save output
 
-eigarray = vstack((real(eigenvals), imag(eigenvals))).T
-#remove nans and infs from eigenvalues
-eigarray = eigarray[~isnan(eigarray).any(1), :]
-eigarray = eigarray[~isinf(eigarray).any(1), :]
+    #make large_evs, as large as eigenvals, but only contains real part of large, 
+    #physical eigenvalues. Rest are zeros. Index of large_evs same as that of 
+    #eigenvalues 
+    large_evs = zeros(len(eigenvals))
+    for i in xrange(10*(2*N+1)*M):
+        if (real(eigenvals[i]) > 0) and (real(eigenvals[i]) < 50):
+            large_evs[i] = real(eigenvals[i])
+    del i
 
-savetxt('ev-k'+str(k)+filename[:-7]+'.dat', eigarray)
+    lead_index = argmax(large_evs)
 
-#stop the clock
-print 'done in', (time.time()-startTime)
+    du =   evecs[           :(2*N+1)*M,   lead_index]
+    dv =   evecs[  (2*N+1)*M:2*(2*N+1)*M, lead_index]
+    dw =   evecs[2*(2*N+1)*M:3*(2*N+1)*M, lead_index]
+    dp =   evecs[3*(2*N+1)*M:4*(2*N+1)*M, lead_index]
+    dcxx = evecs[4*(2*N+1)*M:5*(2*N+1)*M, lead_index]
+    dcyy = evecs[5*(2*N+1)*M:6*(2*N+1)*M, lead_index]
+    dczz = evecs[6*(2*N+1)*M:7*(2*N+1)*M, lead_index]
+    dcxy = evecs[7*(2*N+1)*M:8*(2*N+1)*M, lead_index]
+    dcxz = evecs[8*(2*N+1)*M:9*(2*N+1)*M, lead_index]
+    dcyz = evecs[9*(2*N+1)*M:10*(2*N+1)*M, lead_index]
+
+    eigarray = vstack((real(eigenvals), imag(eigenvals))).T
+    #remove nans and infs from eigenvalues
+    #eigarray = eigarray[~isnan(eigarray).any(1), :]
+    #eigarray = eigarray[~isinf(eigarray).any(1), :]
+
+    print 'chosen eig: {e}'.format(e=lead_index)
+    savetxt('ev-k{k}{fn}.dat'.format(k=k, fn=filename[:-7],
+                                                     ), eigarray)
+
+    pickle.dump((du,dv,dw,dp,dcxx,dcyy,dczz,dcxy,dcxz,dcyz), open('full-evecs-k{k}{fn}'.format(k=k,fn=filename), 'w'))
+
+else:
+    # eigenvalues only
+    print 'finding eigenvalues only'
+    # Use library function to solve for eigenvalues/vectors
+    print 'in linalg.eig time=', (time.time() - startTime)
+    eigenvals = linalg.eigvals(equations_matrix, RHS, overwrite_a=True)
+
+    # Save output
+
+    eigarray = vstack((real(eigenvals), imag(eigenvals))).T
+    #remove nans and infs from eigenvalues
+    eigarray = eigarray[~isnan(eigarray).any(1), :]
+    eigarray = eigarray[~isinf(eigarray).any(1), :]
+
+    savetxt('ev-k'+str(k)+filename[:-7]+'.dat', eigarray)
+
+    #stop the clock
+    print 'done in', (time.time()-startTime)
 
 ######################TESTS####################################################
 
