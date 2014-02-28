@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------#
 #   Fully Spectral Newton Raphson Solver                            
 #   Oldroyd B Model
-#   Last modified: Fri 28 Feb 2014 17:50:54 GMT
+#   Last modified: Fri 28 Feb 2014 17:49:24 GMT
 #----------------------------------------------------------------------------#
 """Solves system of equations using a fully spectral method. Equations given 
 by: V.dU(y,z)/dy + W.dU/dz = 1/Re .del^2."""
@@ -27,6 +27,7 @@ cfgRe = config.getfloat('settings', 'Re')
 cfgbeta = config.getfloat('settings','beta')
 cfgWeiss = config.getfloat('settings','Weiss')
 cfgAmp = config.getfloat('settings', 'Amp')
+cfgPiDivide = config.getfloat('settings', 'pi divide')
 
 fp.close()
 
@@ -44,6 +45,8 @@ argparser.add_argument("-Wi", type=float, default=cfgWeiss,
                 help='Override Weissenberg number of the config file')
 argparser.add_argument("-amp", type=float, default=cfgAmp,
                 help='Override amplitude of the streamwise vortices from the config file')
+argparser.add_argument("-piDivide", type=float, default=cfgPiDivide,
+                help='Override piDivide from the config file')
 
 args = argparser.parse_args()
 N = args.N 
@@ -52,6 +55,7 @@ Re = args.Re
 beta = args.b
 Weiss = args.Wi
 Amp = args.amp
+piDivide = args.piDivide
 
 print """
 ----------------------------------------
@@ -64,12 +68,10 @@ amp   = {5}
 ----------------------------------------
 """. format(N, M, Re, beta, Weiss, Amp)
 
-filename = '-N{N}-M{M}-Re{Re}-b{beta}-Wi{Weiss}-amp{Amp}.pickle'.format(\
-            N=N,M=M,Re=Re,beta=beta,Weiss=Weiss,Amp=Amp)
+filename = '-N{N}-M{M}-Re{Re}-b{beta}-Wi{Weiss}-amp{Amp}-gdiv{gdiv}.pickle'.format(\
+            N=N,M=M,Re=Re,beta=beta,Weiss=Weiss,Amp=Amp, gdiv=piDivide)
 
-# -----------------------------------------------------------------------------
-
-# FUNCTIONS   
+#FUNCTIONS
 
 def mk_single_diffy():
     """Makes a matrix to differentiate a single vector of Chebyshev's, 
@@ -365,8 +367,21 @@ def save_pickle(array, name):
 #
 # MAIN
 #
+#set global variables from settings file
+config = ConfigParser.RawConfigParser()
+fp = open('OB-settings.cfg')
+config.readfp(fp)
+N = config.getint('settings', 'N')
+M = config.getint('settings', 'M')
+Re = config.getfloat('settings', 'Re')
+beta = config.getfloat('settings','beta')
+Weiss = config.getfloat('settings','Weiss')
+Amp = config.getfloat('settings', 'Amp')
+piDivide = config.getfloat('settings', 'pi divide')
 
-gamma = pi / 2.
+fp.close()
+
+gamma = pi / piDivide
 p = optimize.fsolve(lambda p: p*tan(p) + gamma*tanh(gamma), 2)
 zLength = 2.*pi/gamma
 vecLen = M*(2*N+1)
@@ -401,7 +416,7 @@ BBOT = ones(M)
 BBOT[1:M:2] = -1
 
 filename = 'pf-N'+str(N)+'-M'+str(M)+'-Re'+str(Re)+'-b'+str(beta)\
-          +'-Wi'+str(Weiss)+'-amp'+str(Amp)+'.pickle'
+          +'-Wi'+str(Weiss)+'-amp'+str(Amp)+'-gdiv'+str(piDivide)+'.pickle'
 
 oneOverWeiss = 1. / Weiss
 
