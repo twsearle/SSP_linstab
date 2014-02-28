@@ -21,6 +21,10 @@ def to_real(velA):
     return real(realVel)
 
 def faster_FC_transform(vecin) :
+    """
+    This uses f2py. much faster but uses 64 bit floats instead of doubles so it
+    is a little less accurate.
+    """
 
     vecout = RStransform.rstransform(vecin, N, M, numZs, numYs, gamma)
 
@@ -36,7 +40,7 @@ def y_point(yIndex):
     return -1. + (2./(yDataPts-1.))*yIndex
 
 def z_point(zIndex):
-    zLength = 4 #2Pi/gamma where gamma = pi/2
+    zLength = 2.*pi/gamma
     return zLength*((zIndex/(1.*(zDataPts-1.))) - 0.5)
 
 def x_point(xIndex):
@@ -79,9 +83,9 @@ Re = config.getfloat('settings', 'Re')
 beta = config.getfloat('settings','beta')
 Weiss = config.getfloat('settings','Weiss')
 Amp = config.getfloat('settings', 'Amp')
+k = config.getfloat('settings', 'k')
 gamma = pi/2.
 
-k =0.7
 
 fp.close()
 
@@ -93,8 +97,8 @@ outFileName = 'real-pf{0}'.format(filename)
 
 element_number = r_[0:M]
 YPOINTS = cos(pi*element_number/(M-1))
-zDataPts = 100
-yDataPts = 100
+zDataPts = 25
+yDataPts = 50
 numZs = zDataPts
 numYs = yDataPts
 
@@ -103,15 +107,15 @@ numYs = yDataPts
 
 Nselect =1 
 # Set all components to zero apart from the selected Fourier mode.
-U[:(N-Nselect)*M]                     = 0
-U[(N-Nselect+1)*M:(N+Nselect)*M]      = 0
-U[(N+Nselect+1)*M:]                   = 0 
-V[:(N-Nselect)*M]                     = 0
-V[(N-Nselect+1)*M:(N+Nselect)*M]      = 0
-V[(N+Nselect+1)*M:]                   = 0 
-W[:(N-Nselect)*M]                     = 0
-W[(N-Nselect+1)*M:(N+Nselect)*M]      = 0
-W[(N+Nselect+1)*M:]                   = 0 
+#U[:(N-Nselect)*M]                     = 0
+#U[(N-Nselect+1)*M:(N+Nselect)*M]      = 0
+#U[(N+Nselect+1)*M:]                   = 0 
+#V[:(N-Nselect)*M]                     = 0
+#V[(N-Nselect+1)*M:(N+Nselect)*M]      = 0
+#V[(N+Nselect+1)*M:]                   = 0 
+#W[:(N-Nselect)*M]                     = 0
+#W[(N-Nselect+1)*M:(N+Nselect)*M]      = 0
+#W[(N+Nselect+1)*M:]                   = 0 
 #Cxx[:(N-Nselect)*M]                 = 0
 #Cxx[(N-Nselect+1)*M:(N+Nselect)*M]  = 0  
 #Cxx[(N+Nselect+1)*M:]               = 0  
@@ -144,10 +148,10 @@ Cyz   = zeros((2*N+1)*M, dtype='complex')
 
 print 'finished reading in files'
 
+#U2 = to_real(U)
 U = faster_FC_transform(U)
 #print shape(U), shape(U2)
-#print allclose(U,U2)
-#print allclose(U.T,U2)
+#print allclose(U,U2,atol=1e-6)
 #print U
 #print U2
 #exit(1)
@@ -170,41 +174,41 @@ Cyz = faster_FC_transform(Cyz)
 
 pickle.dump((U,V,W,Cxx,Cyy,Czz,Cxy,Cxz,Cyz), open(outFileName, 'w'))
 
-f = open('VW'+'.dat', 'w')
-delim = ', \t\t'
-for n in r_[0:zDataPts:5]:
-    for m in r_[0:yDataPts:5]:
-        f.write(str(z_point(n)))
-        f.write(delim)
-        f.write(str(y_point(m)))
-        f.write(delim)
-        f.write(str(W[m,n]))
-        f.write(delim)
-        f.write(str(V[m,n]))
-        f.write('\n')
-    f.write('\n')
-f.close()
+#f = open('VW'+'.dat', 'w')
+#delim = ', \t\t'
+#for n in r_[0:zDataPts:5]:
+#    for m in r_[0:yDataPts:5]:
+#        f.write(str(z_point(n)))
+#        f.write(delim)
+#        f.write(str(y_point(m)))
+#        f.write(delim)
+#        f.write(str(W[m,n]))
+#        f.write(delim)
+#        f.write(str(V[m,n]))
+#        f.write('\n')
+#    f.write('\n')
+#f.close()
 
 #xz plane (top down) with array[xindx, zindx]
 xDataPts = 100
 
 topdownU = zeros((xDataPts, zDataPts), dtype='complex')
 
-for xindx in xrange(xDataPts):
-    topdownU[xindx, :] = U[50, :]
-del xindx
-
-fs = open('U_xz_plane.dat', 'w')
-delim = ', '
-for zindx in xrange(zDataPts):
-    for xindx in xrange(xDataPts):
-        fs.write(str(z_point(zindx)))
-        fs.write(delim)
-        fs.write(str(x_point(xindx)))
-        fs.write(delim)
-        fs.write(str(real(topdownU[xindx, zindx])))
-        fs.write('\n')
-    fs.write('\n')
-fs.flush()
-fs.close()
+#for xindx in xrange(xDataPts):
+#    topdownU[xindx, :] = U[yDataPts/2-1, :]
+#del xindx
+#
+#fs = open('U_xz_plane.dat', 'w')
+#delim = ', '
+#for zindx in xrange(zDataPts):
+#    for xindx in xrange(xDataPts):
+#        fs.write(str(z_point(zindx)))
+#        fs.write(delim)
+#        fs.write(str(x_point(xindx)))
+#        fs.write(delim)
+#        fs.write(str(real(topdownU[xindx, zindx])))
+#        fs.write('\n')
+#    fs.write('\n')
+#fs.flush()
+#fs.close()
 
