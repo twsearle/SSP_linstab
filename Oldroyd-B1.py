@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------#
 #   Fully Spectral Newton Raphson Solver                            
 #   Oldroyd B Model
-#   Last modified: Fri 28 Feb 2014 17:50:54 GMT
+#   Last modified: Sun 02 Mar 2014 11:11:07 GMT
 #----------------------------------------------------------------------------#
 """Solves system of equations using a fully spectral method. Equations given 
 by: V.dU(y,z)/dy + W.dU/dz = 1/Re .del^2."""
@@ -399,9 +399,6 @@ MMDZW = prod_mat(dot(MDZ, W))
 BTOP = ones(M)
 BBOT = ones(M)
 BBOT[1:M:2] = -1
-
-filename = 'pf-N'+str(N)+'-M'+str(M)+'-Re'+str(Re)+'-b'+str(beta)\
-          +'-Wi'+str(Weiss)+'-amp'+str(Amp)+'.pickle'
 
 oneOverWeiss = 1. / Weiss
 
