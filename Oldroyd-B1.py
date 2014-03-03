@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------#
 #   Fully Spectral Newton Raphson Solver                            
 #   Oldroyd B Model
-#   Last modified: Sun 02 Mar 2014 11:11:07 GMT
+#   Last modified: Mon 03 Mar 2014 17:06:12 GMT
 #----------------------------------------------------------------------------#
 """Solves system of equations using a fully spectral method. Equations given 
 by: V.dU(y,z)/dy + W.dU/dz = 1/Re .del^2."""
@@ -64,7 +64,7 @@ amp   = {5}
 ----------------------------------------
 """. format(N, M, Re, beta, Weiss, Amp)
 
-filename = '-N{N}-M{M}-Re{Re}-b{beta}-Wi{Weiss}-amp{Amp}.pickle'.format(\
+filename = 'pf-N{N}-M{M}-Re{Re}-b{beta}-Wi{Weiss}-amp{Amp}.pickle'.format(\
             N=N,M=M,Re=Re,beta=beta,Weiss=Weiss,Amp=Amp)
 
 # -----------------------------------------------------------------------------
