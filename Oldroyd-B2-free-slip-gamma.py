@@ -1,6 +1,6 @@
 #----------------------------------------------------------------------------#
 #   Fully Spectral Linear stability analysis Oldroyd B Model
-#   Last modified: Fri 28 Feb 2014 17:19:28 GMT
+#   Last modified: Tue  4 Mar 10:59:12 2014
 #----------------------------------------------------------------------------#
 """ Perform Linear stability analysis to find eigenvalues for the stability 
 of the streaky flow"""
@@ -63,17 +63,6 @@ Amp = args.amp
 k = args.kx
 piDivide = args.piDivide
 
-print """
-----------------------------------------
-N     = {0}
-M     = {1}
-Re    = {2}
-beta  = {3}
-Weiss = {4}
-amp   = {5}
-k     = {6}
-----------------------------------------
-""". format(N, M, Re, beta, Weiss, Amp, k)
 
 filename = '-N{N}-M{M}-Re{Re}-b{beta}-Wi{Weiss}-amp{Amp}-gdiv{gdiv}.pickle'.format(\
             N=N,M=M,Re=Re,beta=beta,Weiss=Weiss,Amp=Amp, gdiv=piDivide)
@@ -379,6 +368,17 @@ def mk_bigM():
 #Start the clock:
 startTime = time.time()
 
+print """
+----------------------------------------
+N     = {0}
+M     = {1}
+Re    = {2}
+beta  = {3}
+Weiss = {4}
+amp   = {5}
+k     = {6}
+----------------------------------------
+""". format(N, M, Re, beta, Weiss, Amp, k)
 
 # Unpickle the answer from part1 and the V and W vectors
 

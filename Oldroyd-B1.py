@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------#
 #   Fully Spectral Newton Raphson Solver                            
 #   Oldroyd B Model
-#   Last modified: Mon 03 Mar 2014 17:06:12 GMT
+#   Last modified: Tue  4 Mar 10:56:51 2014
 #----------------------------------------------------------------------------#
 """Solves system of equations using a fully spectral method. Equations given 
 by: V.dU(y,z)/dy + W.dU/dz = 1/Re .del^2."""
@@ -53,16 +53,6 @@ beta = args.b
 Weiss = args.Wi
 Amp = args.amp
 
-print """
-----------------------------------------
-N     = {0}
-M     = {1}
-Re    = {2}
-beta  = {3}
-Weiss = {4}
-amp   = {5}
-----------------------------------------
-""". format(N, M, Re, beta, Weiss, Amp)
 
 filename = 'pf-N{N}-M{M}-Re{Re}-b{beta}-Wi{Weiss}-amp{Amp}.pickle'.format(\
             N=N,M=M,Re=Re,beta=beta,Weiss=Weiss,Amp=Amp)
@@ -365,6 +355,17 @@ def save_pickle(array, name):
 #
 # MAIN
 #
+
+print """
+----------------------------------------
+N     = {0}
+M     = {1}
+Re    = {2}
+beta  = {3}
+Weiss = {4}
+amp   = {5}
+----------------------------------------
+""". format(N, M, Re, beta, Weiss, Amp)
 
 gamma = pi / 2.
 p = optimize.fsolve(lambda p: p*tan(p) + gamma*tanh(gamma), 2)

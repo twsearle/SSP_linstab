@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------#
 #   Fully Spectral Newton Raphson Solver                            
 #   Oldroyd B Model
-#   Last modified: Sun 02 Mar 2014 11:07:44 GMT
+#   Last modified: Tue  4 Mar 10:58:08 2014
 #----------------------------------------------------------------------------#
 """Solves system of equations using a fully spectral method. Equations given 
 by: V.dU(y,z)/dy + W.dU/dz = 1/Re .del^2."""
@@ -57,16 +57,6 @@ Weiss = args.Wi
 Amp = args.amp
 piDivide = args.piDivide
 
-print """
-----------------------------------------
-N     = {0}
-M     = {1}
-Re    = {2}
-beta  = {3}
-Weiss = {4}
-amp   = {5}
-----------------------------------------
-""". format(N, M, Re, beta, Weiss, Amp)
 
 filename = 'pf-N{N}-M{M}-Re{Re}-b{beta}-Wi{Wi}-amp{Amp}-gdiv{gdiv}.pickle'.format(\
             N=N,M=M,Re=Re,beta=beta,Wi=Weiss,Amp=Amp, gdiv=piDivide)
@@ -367,19 +357,18 @@ def save_pickle(array, name):
 #
 # MAIN
 #
-#set global variables from settings file
-config = ConfigParser.RawConfigParser()
-fp = open('OB-settings.cfg')
-config.readfp(fp)
-N = config.getint('settings', 'N')
-M = config.getint('settings', 'M')
-Re = config.getfloat('settings', 'Re')
-beta = config.getfloat('settings','beta')
-Weiss = config.getfloat('settings','Weiss')
-Amp = config.getfloat('settings', 'Amp')
-piDivide = config.getfloat('settings', 'pi divide')
 
-fp.close()
+print """
+----------------------------------------
+N     = {0}
+M     = {1}
+Re    = {2}
+beta  = {3}
+Weiss = {4}
+amp   = {5}
+gamma = {6}
+----------------------------------------
+""". format(N, M, Re, beta, Weiss, Amp, pi/piDivide)
 
 gamma = pi / piDivide
 p = optimize.fsolve(lambda p: p*tan(p) + gamma*tanh(gamma), 2)
