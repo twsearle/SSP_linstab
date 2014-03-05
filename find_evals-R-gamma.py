@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------
 #
 #   maximum eigenvalues finder
-#   Last modified: Mon  3 Mar 16:55:59 2014
+#   Last modified: Mon  3 Mar 17:42:12 2014
 #
 # ----------------------------------------------------------------------------
 """
@@ -30,6 +30,8 @@ cfgRe = config.getfloat('settings', 'Re')
 cfgbeta = config.getfloat('settings','beta')
 cfgWeiss = config.getfloat('settings','Weiss')
 cfgAmp = config.getfloat('settings', 'Amp')
+
+gDiv = config.getfloat('settings', 'pi divide')
 
 fp.close()
 
@@ -97,7 +99,7 @@ else:
     for filename in fileList:
         splitString = filename.split('-')
 
-        if len(splitString) < 8: continue
+        if len(splitString) < 9: continue
         if splitString[0] != 'ev': continue
         sk = splitString[1]
         sN = splitString[2]
@@ -106,7 +108,8 @@ else:
         sb = splitString[5]
         sWi = splitString[6]
         sAmp = splitString[7]
-       
+        sGdiv = splitString[8]
+
         if sk[0] != 'k': continue
         if sN[0] != 'N': continue
         if sM[0] != 'M': continue
@@ -114,6 +117,7 @@ else:
         if sb[0] != 'b': continue
         if sWi[:2] != 'Wi': continue
         if sAmp[:3] != 'amp': continue
+        if sGdiv[:4] != 'gdiv': continue
 
         fk = float(sk[1:]) 
         fN = int(sN[1:])
@@ -121,10 +125,13 @@ else:
         fRe = float(sRe[2:])
         fb = float(sb[1:])
         fWi = float(sWi[2:])
-        fAmp = float(sAmp[3:-4])
+        fAmp = float(sAmp[3:])
+        fGdiv = float(sGdiv[4:-4])
 
-        kwargs = {'fk':fk, 'fN':fN, 'fM':fM, 'fRe':fRe, 'fb':fb, 'fWi':fWi, 'fAmp':fAmp}
-        #print 'kx = {fk}, N={fN}, M={fM}, Re={fRe}, b={fb}, Wi={fWi}, amp={fAmp}'.format(**kwargs)
+        kwargs = {'fk':fk, 'fN':fN, 'fM':fM, 'fRe':fRe, 'fb':fb, 'fWi':fWi,
+                  'fAmp':fAmp, 'fGdiv':fGdiv}
+        print """kx = {fk}, N={fN}, M={fM}, Re={fRe}, b={fb}, Wi={fWi},
+        amp={fAmp}, gDiv={fGdiv}""".format(**kwargs)
 
         if fN != N: continue
         if fM != M: continue
@@ -132,6 +139,7 @@ else:
         if fRe != Re: continue
         if fWi != Weiss: continue
         if fAmp != Amp: continue
+        if fGdiv != gDiv: continue
 
 
         fnameKxArr.append([filename, fk])
