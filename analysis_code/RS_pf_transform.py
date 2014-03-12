@@ -4,6 +4,9 @@ import cPickle as pickle
 import ConfigParser
 import sys
 import RStransform
+import scipy.weave as weave
+from scipy.weave.converters import blitz
+
 
 #FUNCTIONS
 
@@ -30,6 +33,42 @@ def faster_FC_transform(vecin) :
 
     return real(vecout)
 
+def c_FC_transform(vecIn):
+    """
+    use scipy weave to do the fourier transform. Blitz arrays ought to be
+    accurate and fast
+    """
+
+    weaveCode = r"""
+    #include <cmath>
+    #include <complex>
+    int n, m, zind, yind;
+    double cheb, tmp, tmp2;
+    double PI;
+    PI = 3.14159265358979323846264338327950288419716939937510582097494459230781640628;
+    for (zind=0; zind<zDataPts; zind++) {
+        for (yind=0; yind<yDataPts; yind++) {
+            for (n=0; n<2*N+1; n++) {
+                for (m=0; m<M; m++) {
+                tmp = acos(-1. + (2./((double)yDataPts-1.))*(double)yind);
+                cheb = cos((double)m*tmp);
+                tmp2=2.*PI*((double)n-(double)N)*(((double)zind/((double)zDataPts-1.))-0.5);
+                fou.imag() = sin(tmp2);
+                fou.real() = cos(tmp2);
+                vecOut(yind, zind) += vecIn(n*M+m)*cheb*fou;
+                }
+            }
+        }
+    }
+    """
+    vecOut = zeros((yDataPts, zDataPts), dtype='D', order='C')
+    EI = 1.j
+    fou = 1. + 1.j
+    weave.inline(weaveCode,['vecOut', 'vecIn', 'N', 'M', 'zDataPts',
+                            'yDataPts', 'fou'],type_converters = blitz, compiler='gcc',
+                 headers=["<cmath>", "<complex>" ] )
+
+    return real(vecOut)
 
 def cheb(yIndex, chebIndex):
     """Take a yIndex(cies) in the array, change it into a y value in the system,
@@ -73,6 +112,39 @@ def save_field(mat, name):
         f.write('\n')
     f.close()
 
+def mk_single_diffy():
+    """Makes a matrix to differentiate a single vector of Chebyshev's, 
+    for use in constructing large differentiation matrix for whole system"""
+    # make matrix:
+    mat = zeros((M, M), dtype='d')
+    for m in range(M):
+        for p in range(m+1, M, 2):
+            mat[m,p] = 2*p*oneOverC[m]
+
+    return mat
+
+def mk_diff_y():
+    """Make the matrix to differentiate a velocity vector wrt y."""
+    D = mk_single_diffy()
+    MDY = zeros( (vecLen,  vecLen) )
+     
+    for cheb in range(0,vecLen,M):
+        MDY[cheb:cheb+M, cheb:cheb+M] = D
+    del cheb
+    return MDY
+
+def mk_diff_z():
+    """Make matrix to do fourier differentiation wrt z."""
+    MDZ = zeros( (vecLen, vecLen), dtype='complex')
+
+    n = -N
+    for i in range(0, vecLen, M):
+        MDZ[i:i+M, i:i+M] = eye(M, M, dtype='complex')*n*gamma*1.j
+        n += 1
+    del n, i
+    return MDZ
+
+
 #MAIN
 config = ConfigParser.RawConfigParser()
 fp = open('OB-settings.cfg')
@@ -94,6 +166,14 @@ filename = '-N{N}-M{M}-Re{Re}-b{b}-Wi{Wi}-amp{amp}.pickle'.format(
 
 outFileName = 'real-pf{0}'.format(filename)
 
+# Set the oneOverC function: 1/2 for m=0, 1 elsewhere:
+oneOverC = ones(M)
+oneOverC[0] = 1. / 2.
+#set up the CFunc function: 2 for m=0, 1 elsewhere:
+CFunc = ones(M)
+CFunc[0] = 2.
+zLength = 2.*pi/gamma
+vecLen = (2*N+1)*M
 
 element_number = r_[0:M]
 YPOINTS = cos(pi*element_number/(M-1))
@@ -105,7 +185,7 @@ numYs = yDataPts
 
 (U,V,W,Cxx,Cyy,Czz,Cxy,Cxz,Cyz) = pickle.load(open('pf'+filename, 'r'))
 
-Nselect =1 
+#Nselect =1 
 # Set all components to zero apart from the selected Fourier mode.
 #U[:(N-Nselect)*M]                     = 0
 #U[(N-Nselect+1)*M:(N+Nselect)*M]      = 0
@@ -137,42 +217,58 @@ Nselect =1
 
 #V     = zeros((2*N+1)*M, dtype='complex')
 #W     = zeros((2*N+1)*M, dtype='complex')
-Cyy   = zeros((2*N+1)*M, dtype='complex')
-Czz   = zeros((2*N+1)*M, dtype='complex')
+#Cyy   = zeros((2*N+1)*M, dtype='complex')
+#Czz   = zeros((2*N+1)*M, dtype='complex')
 
-Cxy   = zeros((2*N+1)*M, dtype='complex')
-Cxz   = zeros((2*N+1)*M, dtype='complex')
-Cyz   = zeros((2*N+1)*M, dtype='complex')
+#Cxy   = zeros((2*N+1)*M, dtype='complex')
+#Cxz   = zeros((2*N+1)*M, dtype='complex')
+#Cyz   = zeros((2*N+1)*M, dtype='complex')
 
 #(U,V,W,Cxx,Cyy,Czz,Cxy,Cxz,Cyz) = pickle.load(open('real_base_profile.pickle', 'r'))
 
 print 'finished reading in files'
 
+# Vorticity
+MDY = mk_diff_y()
+MDZ = mk_diff_z()
+
+omegaX = dot(MDY, W) - dot(MDZ, V)
+# MDX = 0 because base profile no x dependence 
+omegaY = dot(MDZ, U) 
+omegaZ = - dot(MDY, U)
+
+omegaX = c_FC_transform(omegaX)
+omegaY = c_FC_transform(omegaY)
+omegaZ = c_FC_transform(omegaZ)
+
 #U2 = to_real(U)
-U = faster_FC_transform(U)
-#print shape(U), shape(U2)
-#print allclose(U,U2,atol=1e-6)
-#print U
+U = c_FC_transform(U)
+#print shape(U1), shape(U2)
+#print allclose(U1,U2)
+#print U1
 #print U2
-#exit(1)
+#U = faster_FC_transform(U)
 
 #save_field(U, 'U')
-V = faster_FC_transform(V)
-W = faster_FC_transform(W)
-Cxx = faster_FC_transform(Cxx)
+V = c_FC_transform(V)
+W = c_FC_transform(W)
+Cxx = c_FC_transform(Cxx)
 #save_field(Cxx, 'Cxx')
-Cyy = faster_FC_transform(Cyy)
+Cyy = c_FC_transform(Cyy)
 #save_field(Cyy, 'Cyy')
-Czz = faster_FC_transform(Czz)
+Czz = c_FC_transform(Czz)
 #save_field(Czz, 'Czz')
-Cxy = faster_FC_transform(Cxy)
+Cxy = c_FC_transform(Cxy)
 #save_field(Cxy, 'Cxy')
-Cxz = faster_FC_transform(Cxz)
+Cxz = c_FC_transform(Cxz)
 #save_field(Cxz, 'Cxz')
-Cyz = faster_FC_transform(Cyz)
+Cyz = c_FC_transform(Cyz)
 #save_field(Cyz, 'Cyz')
 
+
 pickle.dump((U,V,W,Cxx,Cyy,Czz,Cxy,Cxz,Cyz), open(outFileName, 'w'))
+
+pickle.dump((omegaX, omegaY, omegaZ), open('vorticity-pf'+filename, 'w'))
 
 #f = open('VW'+'.dat', 'w')
 #delim = ', \t\t'
