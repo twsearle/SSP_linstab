@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 #   colour map plotter for 2D coherent state finder
 #
-#   Last modified: Fri 21 Feb 16:47:29 2014
+#   Last modified: Wed 12 Mar 15:53:41 2014
 #
 #------------------------------------------------------------------------------
 #TODO check that the axes are the right way up?
@@ -30,8 +30,6 @@ Amp = config.getfloat('settings', 'amp')
 
 fp.close()
 
-numYs = 100
-numZs = 100
 baseFileName = '-N'+str(N)+'-M'+str(M)+'-Re'+str(Re)+'-b'+str(beta)\
           +'-Wi'+str(Weiss)+'-amp'+str(Amp)+'.pickle'
 
@@ -53,8 +51,13 @@ def y_point(yIndex):
 # Read in
 
 (U,V,W,Cxx,Cyy,Czz,Cxy,Cxz,Cyz) = pickle.load(open(inFileName, 'r'))
+(OX, OY, OZ) = pickle.load(open('vorticity-pf'+baseFileName, 'r'))
+Osq = OX*OX + OY*OY + OZ*OZ
 gamma = pi / 2.
 zLength = 2.*pi/gamma
+
+numYs = len(U[:,0])
+numZs = len(U[0,:])
 
 z_points = zeros(numZs,dtype='d') 
 for zIndx in range(numZs):
@@ -157,3 +160,10 @@ titleString = 'Cyz for Re = {Re}, beta = {beta}, Wi = {Wi}, amp = {amp}'.format(
 plt.title(titleString)
 plt.savefig(r'Cyz_map{0}.pdf'.format(baseFileName[:-7]))
 
+plt.figure()
+extent_=[-0.5*zLength, 0.5*zLength,-1,1]
+plt.imshow(Osq, origin='lower', extent=extent_) 
+plt.colorbar(orientation='horizontal')
+titleString = 'vorticity squared for Re = {Re}, beta = {beta}, Wi = {Wi}, amp = {amp}'.format(**keyDict)
+plt.title(titleString)
+plt.savefig(r'vorticity_map{0}.pdf'.format(baseFileName[:-7]))
