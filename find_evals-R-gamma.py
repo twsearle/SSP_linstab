@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------
 #
 #   maximum eigenvalues finder
-#   Last modified: Mon  3 Mar 17:42:12 2014
+#   Last modified: Fri 21 Mar 2014 18:38:13 GMT
 #
 # ----------------------------------------------------------------------------
 """
@@ -107,9 +107,15 @@ else:
         sRe = splitString[4]
         sb = splitString[5]
         sWi = splitString[6]
-        sAmp = splitString[7]
-        sGdiv = splitString[8]
-
+        if splitString[7][0] == '0':
+            sWi = sWi + '-' + splitString[7]
+            sAmp = splitString[8]
+            sGdiv = splitString[9]
+        else:
+            sAmp = splitString[7]
+            sGdiv = splitString[8]
+            
+       
         if sk[0] != 'k': continue
         if sN[0] != 'N': continue
         if sM[0] != 'M': continue
