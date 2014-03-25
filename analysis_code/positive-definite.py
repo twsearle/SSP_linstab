@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------#
 #   Check for Positive definiteness of                              24-01-13
 #   Conformation tensors                              positive_definite_R.py
-#   Last modified: Tue 25 Mar 16:58:09 2014
+#   Last modified: Tue 25 Mar 17:16:47 2014
 #----------------------------------------------------------------------------#
 
 
@@ -10,6 +10,7 @@ import sys
 import ConfigParser
 from scipy import *
 from scipy import linalg
+from matplotlib import pyplot as plt
 import cPickle as pickle
 
 # FUNCTIONS
@@ -114,7 +115,18 @@ for Weiss in Weissenbergs:
     boolmap = reshape(boolmap, (zDataPts, yDataPts)).T
     
     #Print positive definiteness test as contour map data:
-    save_field(boolmap, 'posdef' + basefilename[:-7])
+    # save_field(boolmap, 'posdef' + basefilename[:-7])
+
+    plt.figure()
+    extent_=[-0.5*zLength, 0.5*zLength,-1,1]
+    plt.imshow(boolmap, origin='lower', extent=extent_, cmap='Greys_r', vmin=0,
+               vmax=1.0) 
+    plt.colorbar(orientation='horizontal')
+    keyDict = {'Re':Re, 'Wi':Weiss, 'beta':beta, 'amp':Amp}
+    titleString =\
+    'positive definite map for Re = {Re}, beta = {beta}, Wi = {Wi}, amp = {amp}'.format(**keyDict)
+    plt.title(titleString)
+    plt.savefig(r'posdef_map{0}.pdf'.format(basefilename[:-7]))
 
     # Output result to terminal
     print "For Weiss: ", Weiss
