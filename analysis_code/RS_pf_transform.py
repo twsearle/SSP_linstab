@@ -6,7 +6,53 @@ import sys
 import RStransform
 import scipy.weave as weave
 from scipy.weave.converters import blitz
+import argparse
 
+# SETTINGS -------------------------------------------------------------------
+
+config = ConfigParser.RawConfigParser()
+fp = open('OB-settings.cfg')
+config.readfp(fp)
+cfgN = config.getint('settings', 'N')
+cfgM = config.getint('settings', 'M')
+cfgRe = config.getfloat('settings', 'Re')
+cfgbeta = config.getfloat('settings','beta')
+cfgWeiss = config.getfloat('settings','Weiss')
+cfgAmp = config.getfloat('settings', 'Amp')
+gamma = pi/2.
+
+fp.close()
+
+argparser = argparse.ArgumentParser()
+
+argparser.add_argument("-N", type=int, default=cfgN, 
+                help='Override Number of Fourier modes given in the config file')
+argparser.add_argument("-M", type=int, default=cfgM, 
+                help='Override Number of Chebyshev modes in the config file')
+argparser.add_argument("-Re", type=float, default=cfgRe, 
+                help="Override Reynold's number in the config file") 
+argparser.add_argument("-b", type=float, default=cfgbeta, 
+                help='Override beta of the config file')
+argparser.add_argument("-Wi", type=float, default=cfgWeiss, 
+                help='Override Weissenberg number of the config file')
+argparser.add_argument("-amp", type=float, default=cfgAmp,
+                help='Override amplitude of the streamwise vortices from the config file')
+
+args = argparser.parse_args()
+N = args.N 
+M = args.M
+Re = args.Re
+beta = args.b
+Weiss = args.Wi
+Amp = args.amp
+
+
+filename = '-N{N}-M{M}-Re{Re}-b{b}-Wi{Wi}-amp{amp}.pickle'.format(
+                    N=N, M=M, Re=Re, b=beta, Wi=Weiss, amp=Amp)
+
+outFileName = 'real-pf{0}'.format(filename)
+
+# ----------------------------------------------------------------------------
 
 #FUNCTIONS
 
@@ -146,25 +192,6 @@ def mk_diff_z():
 
 
 #MAIN
-config = ConfigParser.RawConfigParser()
-fp = open('OB-settings.cfg')
-config.readfp(fp)
-N = config.getint('settings', 'N')
-M = config.getint('settings', 'M')
-Re = config.getfloat('settings', 'Re')
-beta = config.getfloat('settings','beta')
-Weiss = config.getfloat('settings','Weiss')
-Amp = config.getfloat('settings', 'Amp')
-k = config.getfloat('settings', 'k')
-gamma = pi/2.
-
-
-fp.close()
-
-filename = '-N{N}-M{M}-Re{Re}-b{b}-Wi{Wi}-amp{amp}.pickle'.format(
-                    N=N, M=M, Re=Re, b=beta, Wi=Weiss, amp=Amp)
-
-outFileName = 'real-pf{0}'.format(filename)
 
 # Set the oneOverC function: 1/2 for m=0, 1 elsewhere:
 oneOverC = ones(M)
