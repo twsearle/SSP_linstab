@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------
 #
 #   maximum eigenvalues finder
-#   Last modified: Fri 21 Mar 2014 18:38:13 GMT
+#   Last modified: Wed 26 Mar 2014 17:21:55 GMT
 #
 # ----------------------------------------------------------------------------
 """
@@ -151,6 +151,9 @@ else:
         fnameKxArr.append([filename, fk])
     del filename 
 
+
+    assert fnameKxArr != [], 'No files present with those settings'
+
     fnameKxArr.sort(key=operator.itemgetter(1))
     fnameKxArr = array(fnameKxArr) 
 
@@ -168,7 +171,7 @@ else:
                                  dispersionData[maxIndx,1]]
             if leading_eigs[i,1] > upperEigLimit:
                 leading_eigs[i,1] = 2*upperEigLimit
-                dispersionData[maxIndx, :] = 0 
+                dispersionData[maxIndx, :] = [-1,0]
 
         print 'kx = ', fk
 
