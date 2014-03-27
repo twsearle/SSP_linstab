@@ -139,12 +139,15 @@ for n in range(N,2*N+1):
     var = Cheb_to_real_transform(var[n*M: (n+1)*M], y_points)
     var2 = Cheb_to_real_transform(var2[n*M: (n+1)*M], y_points)
 
-    if max(abs(var)) > max(abs(var2)):
-        print n-N, ": var bigger than var2 "
-        var2 = var2 * (max(abs(var))/max(abs(var2)))
-    else:
-        print n-N, ": var smaller than var2 "
-        var2 = var2 * (max(abs(var2))/max(abs(var)))
+    if n == N:
+        if max(abs(var)) > max(abs(var2)):
+            print n-N, ": var bigger than var2 "
+            varscale = (max(abs(var))/max(abs(var2)))
+        else:
+            print n-N, ": var smaller than var2 "
+            varscale = (max(abs(var2))/max(abs(var)))
+
+    var2 = varscale*var2
 
     ax1 = plt.subplot(plotNum)
     titleString = '{comp}  n = {mode} mode'.format(comp=args.comp, mode=n-N)
@@ -174,10 +177,15 @@ for n in range(N,2*N+1):
     var = Cheb_to_real_transform(var[n*M: (n+1)*M], y_points)
     var2 = Cheb_to_real_transform(var2[n*M: (n+1)*M], y_points)
 
-    if max(abs(var)) > max(abs(var2)):
-        var2 = var2 * (max(abs(var))/max(abs(var2)))
-    else:
-        var2 = var2 * (max(abs(var2))/max(abs(var)))
+    if n == N:
+        if max(abs(var)) > max(abs(var2)):
+            print n-N, ": var bigger than var2 "
+            varscale = (max(abs(var))/max(abs(var2)))
+        else:
+            print n-N, ": var smaller than var2 "
+            varscale = (max(abs(var2))/max(abs(var)))
+
+    var2 = varscale*var2
 
     ax1 = plt.subplot(plotNum)
     titleString = '{comp}  n = {mode} mode'.format(comp='N1', mode=n-N)

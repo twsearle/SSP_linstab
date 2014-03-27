@@ -102,7 +102,7 @@ oneOverC[0] = 1. / 2.
 # Set up the CFunc function: 2 for m=0, 1 elsewhere:
 CFunc = ones(M)
 CFunc[0] = 2.
-#Psi = pickle.load(open(inFileName, 'r'))
+Psi = pickle.load(open(inFileName, 'r'))
 
 numYs = 50
 
@@ -131,27 +131,34 @@ for n in range(N,2*N+1):
     v2 = Cheb_to_real_transform(dv2[n*M: (n+1)*M], y_points)
     w2 = Cheb_to_real_transform(dw2[n*M: (n+1)*M], y_points)
 
-    if max(abs(u)) > max(abs(u2)):
-        print n-N, ": u smaller than u2 "
-        u2 = u2 * (max(abs(u))/max(abs(u2)))
-    else:
-        print n-N, ": u bigger than u2 "
-        u2 = u2 * (max(abs(u2))/max(abs(u)))
+    if n == N:
+        if max(abs(u)) > max(abs(u2)):
+            print n-N, ": u smaller than u2 "
+            uscale = (max(abs(u))/max(abs(u2)))
+        else:
+            print n-N, ": u bigger than u2 "
+            uscale = (max(abs(u2))/max(abs(u)))
 
-    if max(abs(v)) > max(abs(v2)):
-        print n-N, ": v smaller than v2 "
-        v2 = v2 * (max(abs(v))/max(abs(v2)))
-    else:
-        print n-N, ": v bigger than v2 "
-        v2 = v2 * (max(abs(v2))/max(abs(v)))
+        if max(abs(v)) > max(abs(v2)):
+            print n-N, ": v smaller than v2 "
+            vscale = (max(abs(v))/max(abs(v2)))
+        else:
+            print n-N, ": v bigger than v2 "
+            vscale = (max(abs(v2))/max(abs(v)))
 
-    if max(abs(w)) > max(abs(w2)):
-        print n-N, ": w smaller than w2 "
-        w2 = w2 * (max(abs(w))/max(abs(w2)))
-    else:
-        print n-N, ": w bigger than w2 "
-        w2 = w2 * (max(abs(w2))/max(abs(w)))
+        if max(abs(w)) > max(abs(w2)):
+            print n-N, ": w smaller than w2 "
+            wscale = (max(abs(w))/max(abs(w2)))
+        else:
+            print n-N, ": w bigger than w2 "
+            wscale = (max(abs(w2))/max(abs(w)))
     
+        scales = [uscale, vscale, wscale]
+        scale = scales[argmin([log(uscale), log(vscale), log(wscale)])]
+
+    u2 = scale*u2
+    v2 = scale*v2
+    w2 = scale*w2
 
     plt.figure()
     ax1 = plt.subplot(311)
@@ -182,9 +189,9 @@ for n in range(N,2*N+1):
     plt.plot(y_points, imag(w2), 'm--')
     ax3.axhline(linewidth=.5, linestyle='-', color='k')
     ax3.axvline(linewidth=.5, linestyle='-', color='k')
-    plt.savefig('pertb-n{n}{pf}.pdf'.format(n=n-N, pf='comparison'))
+    plt.savefig('pertb-n{n}{pf}.pdf'.format(n=n-N, pf='comparsion'))
 
-    if n-N > 1: break
+    #if n-N > 1: break
 
     plt.show()
 
