@@ -142,7 +142,7 @@ for n in range(N,2*N+1):
     plt.plot(y_points, imag(w), 'r-')
     ax3.axhline(linewidth=0.5, linestyle='--', color='k')
     ax3.axvline(linewidth=0.5, linestyle='--', color='k')
-    plt.savefig('pertb-n{n}{pf}.pdf'.format(n=n-N, pf=baseFileName))
+    plt.savefig('pertb-n{n}{pf}.pdf'.format(n=n-N, pf=baseFileName[:-7]))
     plt.show()
 
     

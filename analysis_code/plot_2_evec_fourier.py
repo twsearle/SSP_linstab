@@ -189,7 +189,7 @@ for n in range(N,2*N+1):
     plt.plot(y_points, imag(w2), 'm--')
     ax3.axhline(linewidth=.5, linestyle='-', color='k')
     ax3.axvline(linewidth=.5, linestyle='-', color='k')
-    plt.savefig('pertb-n{n}{pf}.pdf'.format(n=n-N, pf='comparsion'))
+    plt.savefig('pertb-n{n}{pf}.pdf'.format(n=n-N, pf='comparison'))
 
     #if n-N > 1: break
 
