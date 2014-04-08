@@ -81,6 +81,7 @@
     - Weissenberg number correct?
 
 * How do I eliminate pressure from the base profile?
+    - don't understand how the boundary conditions and the pressure relate
 
 * Have I written the decomposition of the disturbance right? 
     - signs on time?
@@ -92,3 +93,34 @@
 
 * Fix up eigenmode plot so that there is no zeroth component of N1. Also think about add txy plot as well.
     - consider not including this at all, instead have only the version with Cauchy boundary conditions.
+
+* Varying the amplitude? Perhaps lower amplitude I won't have kx = 0 solution?
+    - What can I do about kx=0 solution?
+
+* Express var slip parameter as proper slip length of the polymeric fluid?
+    - at this point I don't understand the proper way of talking about slip in fluid dynamics
+    - could read about it and find out?
+
+* Variable slip dispersion relations. Are they complete?
+    - Should I extend to higher kx?
+    - Lower $\alpha$? Or can I not resolve that?
+    - some sort of better tracking of one eigenvalue?
+
+* Is it the First normal stress difference or the gradients in the first normal stress difference that matter?
+    - Seems from the heat maps that it is the gradients where we expect instability to happen
+    - trying to convince people that it is only the magnitude that matters in the eigenmode.
+    - Contradictory!
+
+* AGAINST THE RULES: free free slip might be useful if I change the amplitude of the rolls
+    - alternatively, check the most unstable eigenfunctions, see if they behave as you would expect
+
+* Do I want to include my 3D vorticity plots?
+    - vorticity? O2 or Ox2? - that is the waviness that is important?
+
+* Can I plot streamwise independent instability on top of the base profile somehow?
+    - COOL IDEA
+
+* Should I include plots of Cxy anywhere? 
+    - eigenvectors
+    - base profile
+

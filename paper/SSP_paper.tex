@@ -1,5 +1,5 @@
 %	paper.tex	Toby Searle
-%	Last modified: Mon  7 Apr 18:12:55 2014
+%	Last modified: Tue  8 Apr 11:48:40 2014
 %	using jfm template
 
 \NeedsTeXFormat{LaTeX2e}
@@ -140,7 +140,7 @@
 
 \author[T. W. Searle and A. N. Morozov]%
 {T. W. Searle$^1$ and A. N. Morozov$^1$%
-  \thanks{Email address for correspondence: jfm@damtp.cam.ac.uk},\ns
+  \thanks{Email address for correspondence: T.W.Searle@sms.ed.ac.uk},\ns
 }
 
 % NOTE: A full address must be provided: department, university/institution, town/city, zipcode/postcode, country.
@@ -180,7 +180,7 @@ We use a Chebyshev-Fourier decomposition, with Chebyshev polynomials in the wall
 \end{align}
 where $\Rey$ is the Reynold's number, $\Wi$ is the Weissenberg number, $\nabla$ is the gradient operator, $\nabla^{2}$ is the Laplacian and $ \overset{\nabla}\tau$ is the upper convected derivative of the stress tensor. In order to decompose the system onto the computational grid, we take a Fourier and Chebyshev transform of the variables,
 \begin{equation}
-    \check{G}(y,z) = \sum_{n=-N}^{N} \sum_{m=0}^{M+1} G_{m,n} \me{i\gamma z} T_{m}(y) \label{eq:decomp}
+    \check{G}(y,z) = \sum_{n=-N}^{N} \sum_{m=0}^{M+1} G_{m,n} \me^{i\gamma z} T_{m}(y) \label{eq:decomp}
 \end{equation}
 where $g$ stands for any of the base profile variables ($U,V,W,\boldmath{\tau}_{ij}$) in the problem and $T_{m}(y)$ is the \textit{m}th Chebyshev polynomial of the first kind.
 
@@ -205,7 +205,7 @@ Having obtained the full base profile of the problem, we then performed a linear
 
 We decompose the disturbance velocities in a similar way to above (equation \ref{eq:decomp}), but include streamwise dependence
 \begin{equation}
-    \check{g}(x,y,z,t) = \sum_{n=-N}^{N} \sum_{m=0}^{M+1} g_{m,n}(k_{x}) \me{i(k_{x} x + \gamma z)} T_{m}(y) \me{i\lambda t}\label{eq:decomp_disturbances}
+    \check{g}(x,y,z,t) = \sum_{n=-N}^{N} \sum_{m=0}^{M+1} g_{m,n}(k_{x}) \me^{i(k_{x} x + \gamma z)} T_{m}(y) \me{i\lambda t}\label{eq:decomp_disturbances}
 \end{equation}
 where $g$ can be any of the disturbance variables ($u,v,w,p,\boldmath{\tau}_{ij}$). To increase the numerical stability of the problem, we use free slip boundary conditions on the disturbance velocities, $\dy{w}(\pm1) = v(\pm 1) = \dy{w}(\pm1) = 0$.
 
@@ -278,25 +278,56 @@ In Fabian Waleffe's treatment of the Newtonian version of this self-sustaining p
 
 \subsection{Cauchy boundary conditions}
 
-\section{No slip case}
+To investigate the affect of free slip boundary conditions on linear stability analysis, we implemented Cauchy boundary conditions,
+\begin{align}
+    \alpha\left.\dy{u}\right|_{y=\pm1} + (1-\alpha)u(y=\pm1) &= 0 \\
+    v(y=\pm1) &=0 \\
+    \alpha\left.\dy{w}\right|_{y=\pm1} + (1-\alpha)w(y=\pm1) &= 0 
+\end{align}
+Where $\alpha$ is a control parameter which controls the relative strength of the free slip to no-slip conditions. (Slip length?)
 
-\section{Discussion}
-
-\section{Conclusion}
+We found that on decreasing $\alpha$ the instability grows in strength and broadens. It appears that the no-slip system is infinitely unstable (figure \ref{fig:dispersions_varslip}).
 
 \begin{figure}
 %    \showthe\columnwidth %use this to determine size of figures.
     \centering
-    \includegraphics[width=0.7\textwidth]{./figures/robot}
-    \caption{}
-    \label{fig:KH_drag_reduction}
+    \includegraphics[width=\textwidth]{./figures/dispersions_varslip}
+    \caption{Dispersion relations as $\alpha$ the slip parameter, is reduced. As the system becomes closer to no-slip at the walls the instability grows.}
+    \label{fig:dispersions_varslip}
 \end{figure}
 
+\section{No slip case}
+
+When we completely remove slip at the walls the instability appears infinitely amplified (figure \ref{fig:evaldiverg_varslip}). A possible explanation for this is that the instability moves into a region very close to the boundaries as we introduce free slip and can no longer be resolved. It is clear from figure \ref{fig:eigenmode_varslip} that the first normal stress difference introduced via the instability moves towards the walls as $\alpha$ tends to zero.
+
+\begin{figure}
+%    \showthe\columnwidth %use this to determine size of figures.
+    \centering
+    \includegraphics[width=\textwidth]{./figures/evaldiverg_varslip}
+    \caption{Growth rate of an eigenvalue at $k_x=0.01$ as $\alpha$ the slip parameter, is reduced. The growth rate assymtotes to the no-slip condition.}
+    \label{fig:evaldiverg_varslip}
+\end{figure}
+
+\begin{figure}
+%    \showthe\columnwidth %use this to determine size of figures.
+    \centering
+    \includegraphics[width=\textwidth]{./figures/eigenmode_varslip}
+    \caption{Eigenmodes of the first normal stress difference at $k_x=0.01$ as $\alpha$ the slip parameter, is reduced. As the slip at the walls is reduced, the first normal stress difference of the instablity becomes more and more localised at the walls.}
+    \label{fig:eigenmode_varslip}
+\end{figure}
+
+\section{Discussion}
+
+I do not understand at all how to interpret these results.
+
+\section{Conclusion}
+
+We have shown that the velocity profile for the plane Couette viscoelastic self-sustaining process is susceptible to a viscoelastic lift up effect and does become streaky in the purely elastic regime. This streaky base profile is linearly unstable, with a range of wave numbers between about $k_x = 0$ and $k_x = 0.04$. The eigenmodes of this instability are localised in the centre of the channel.
 
 \bibliographystyle{jfm}
 % Note the spaces between the initials
 
 
-\bibliography{KH_paper}
+\bibliography{SSP_paper}
 
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.1)  7 APR 2014 18:23
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.1)  8 APR 2014 18:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -350,7 +350,7 @@ See the caption package documentation for explanation.
 LaTeX Warning: Reference `fig:pf_N1_map' on page 2 undefined on input line 222.
 
 
-[2] <./figures/vorticity_map_Re200_Wi2_amp002.pdf, id=24, 578.16pt x 433.62pt>
+[2] <./figures/vorticity_map_Re200_Wi2_amp002.pdf, id=25, 578.16pt x 433.62pt>
 File: ./figures/vorticity_map_Re200_Wi2_amp002.pdf Graphic file (type pdf)
 
 <use ./figures/vorticity_map_Re200_Wi2_amp002.pdf>
@@ -358,7 +358,7 @@ Package pdftex.def Info: ./figures/vorticity_map_Re200_Wi2_amp002.pdf used on i
 nput line 234.
 (pdftex.def)             Requested size: 184.31836pt x 138.23853pt.
 
-<./figures/N1_map_Rey002_Wi2_amp002.pdf, id=25, 578.16pt x 433.62pt>
+<./figures/N1_map_Rey002_Wi2_amp002.pdf, id=26, 578.16pt x 433.62pt>
 File: ./figures/N1_map_Rey002_Wi2_amp002.pdf Graphic file (type pdf)
 
 <use ./figures/N1_map_Rey002_Wi2_amp002.pdf>
@@ -366,7 +366,7 @@ Package pdftex.def Info: ./figures/N1_map_Rey002_Wi2_amp002.pdf used on input l
 ine 239.
 (pdftex.def)             Requested size: 184.31836pt x 138.23853pt.
 
-<./figures/dispersions_varyRe.pdf, id=26, 433.62pt x 289.08pt>
+<./figures/dispersions_varyRe.pdf, id=27, 433.62pt x 289.08pt>
 File: ./figures/dispersions_varyRe.pdf Graphic file (type pdf)
 
 <use ./figures/dispersions_varyRe.pdf>
@@ -374,7 +374,7 @@ Package pdftex.def Info: ./figures/dispersions_varyRe.pdf used on input line 25
 2.
 (pdftex.def)             Requested size: 384.0pt x 256.01442pt.
 
-<./figures/dispersions_varyWi.pdf, id=27, 469.755pt x 289.08pt>
+<./figures/dispersions_varyWi.pdf, id=28, 469.755pt x 289.08pt>
 File: ./figures/dispersions_varyWi.pdf Graphic file (type pdf)
 
 <use ./figures/dispersions_varyWi.pdf>
@@ -386,23 +386,12 @@ Package pdftex.def Info: ./figures/dispersions_varyWi.pdf used on input line 26
 Package natbib Warning: Citation `Waleffe1997' on page 3 undefined on input lin
 e 269.
 
-
-LaTeX Warning: Reference `fig:eigenmode_visco' on page 3 undefined on input lin
-e 269.
-
-<./figures/eigenmode_visco.pdf, id=28, 722.7pt x 635.97598pt>
+<./figures/eigenmode_visco.pdf, id=29, 722.7pt x 635.97598pt>
 File: ./figures/eigenmode_visco.pdf Graphic file (type pdf)
 
 <use ./figures/eigenmode_visco.pdf>
 Package pdftex.def Info: ./figures/eigenmode_visco.pdf used on input line 274.
 (pdftex.def)             Requested size: 384.0pt x 337.91963pt.
-
-<./figures/robot.jpeg, id=29, 183.68625pt x 276.03125pt>
-File: ./figures/robot.jpeg Graphic file (type jpg)
-
-<use ./figures/robot.jpeg>
-Package pdftex.def Info: ./figures/robot.jpeg used on input line 290.
-(pdftex.def)             Requested size: 268.79883pt x 403.99626pt.
 
 Underfull \vbox (badness 1558) has occurred while \output is active []
 
@@ -416,46 +405,77 @@ lusion: multiple pdfs with page group included in a single page
 pdfTeX warning: pdflatex (file ./figures/dispersions_varyWi.pdf): PDF inclusion
 : multiple pdfs with page group included in a single page
 >]
-No file SSP_paper.bbl.
 
-Package natbib Warning: There were undefined citations.
+LaTeX Warning: Reference `fig:dispersions_varslip' on page 5 undefined on input
+ line 289.
 
-[5 <./figures/eigenmode_visco.pdf>] [6 <./figures/robot.jpeg>] (./SSP_paper.aux
-)
+<./figures/dispersions_varslip.pdf, id=636, 469.755pt x 289.08pt>
+File: ./figures/dispersions_varslip.pdf Graphic file (type pdf)
 
-LaTeX Warning: There were undefined references.
+<use ./figures/dispersions_varslip.pdf>
+Package pdftex.def Info: ./figures/dispersions_varslip.pdf used on input line 2
+94.
+(pdftex.def)             Requested size: 384.0pt x 236.30608pt.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: Reference `fig:evaldiverg_varslip' on page 5 undefined on input 
+line 301.
 
- ) 
+
+LaTeX Warning: Reference `fig:eigenmode_varslip' on page 5 undefined on input l
+ine 301.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5 <./figures/eigenmode_visco.pdf>]
+<./figures/evaldiverg_varslip.png, id=661, 803.0pt x 501.875pt>
+File: ./figures/evaldiverg_varslip.png Graphic file (type png)
+
+<use ./figures/evaldiverg_varslip.png>
+Package pdftex.def Info: ./figures/evaldiverg_varslip.png used on input line 30
+6.
+(pdftex.def)             Requested size: 384.0pt x 240.00127pt.
+
+
+! LaTeX Error: File `./figures/eigenmode_varslip' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.314 ...=\textwidth]{./figures/eigenmode_varslip}
+                                                  
+? X
+ 
 Here is how much of TeX's memory you used:
- 4603 strings out of 493315
- 66702 string characters out of 6137905
- 133206 words of memory out of 5000000
- 7988 multiletter control sequences out of 15000+600000
+ 4615 strings out of 493315
+ 67141 string characters out of 6137905
+ 134210 words of memory out of 5000000
+ 7991 multiletter control sequences out of 15000+600000
  14354 words of font info for 55 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,11n,38p,777b,400s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
-usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></us
-r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/loc
-al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
-texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/tex
-live/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texliv
-e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
-/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2
-013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/201
-3/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb>
-Output written on SSP_paper.pdf (6 pages, 717871 bytes).
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
+/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
+usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
+sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/
+local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
+cal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loca
+l/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texl
+ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive
+/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/20
+13/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/201
+3/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2013/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2013/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb>
+Output written on SSP_paper.pdf (5 pages, 716291 bytes).
 PDF statistics:
- 710 PDF objects out of 1000 (max. 8388607)
- 91 compressed objects within 1 object stream
+ 712 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
