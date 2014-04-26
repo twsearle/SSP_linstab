@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.1)  10 APR 2014 16:35
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.1)  24 APR 2014 14:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**SSP_paper.tex
+**SSP_paper
 (./SSP_paper.tex
 LaTeX2e <2011/06/27>
 Babel <3.9f> and hyphenation patterns for 78 languages loaded.
@@ -219,14 +219,7 @@ Found the 'amsbsy' package on the system, using it.
 \astrutbox=\box29
 \c@lemma=\count110
 \c@corollary=\count111
-(./SSP_paper.aux
-
-LaTeX Warning: Label `fig:pf_N1_map' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:pf_N1_map' multiply defined.
-
-)
+(./SSP_paper.aux)
 \openout1 = `SSP_paper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 157.
@@ -241,7 +234,8 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 157.
 LaTeX Font Info:    ... okay on input line 157.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 157.
 LaTeX Font Info:    ... okay on input line 157.
- (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
+
+(/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count112
 \scratchdimen=\dimen129
@@ -316,39 +310,39 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
 Package natbib Warning: Citation `Waleffe1997' on page 1 undefined on input lin
-e 171.
+e 176.
 
 
 Package natbib Warning: Citation `Ellingson1970' on page 1 undefined on input l
-ine 173.
+ine 182.
 
 
 Package natbib Warning: Citation `Landahl1980' on page 1 undefined on input lin
-e 173.
+e 182.
 
 
-Package natbib Warning: Citation `PIPEECS' on page 1 undefined on input line 17
-5.
+Package natbib Warning: Citation `PIPEECS' on page 1 undefined on input line 19
+2.
 
 
 Package natbib Warning: Citation `PIPEECSEXP' on page 1 undefined on input line
- 175.
+ 193.
 
 
-Package natbib Warning: Citation `NOIDEA' on page 1 undefined on input line 175
+Package natbib Warning: Citation `NOIDEA' on page 1 undefined on input line 199
 .
 
 
 Package natbib Warning: Citation `Larson1990' on page 1 undefined on input line
- 177.
-
-
-Package natbib Warning: Citation `WeissenbergLONGLONGAGO' on page 1 undefined o
-n input line 177.
+ 202.
 
 
 Package natbib Warning: Citation `ByarsWHENEVER' on page 1 undefined on input l
-ine 177.
+ine 203.
+
+
+Package natbib Warning: Citation `WeissenbergLONGLONGAGO' on page 1 undefined o
+n input line 205.
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
@@ -358,175 +352,169 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
 Package natbib Warning: Citation `Stone2004' on page 2 undefined on input line 
-179.
+215.
 
 
 Package natbib Warning: Citation `Stone2002' on page 2 undefined on input line 
-179.
+215.
 
 
 Package natbib Warning: Citation `Sureshkumar1997' on page 2 undefined on input
- line 179.
+ line 215.
 
 
 Package natbib Warning: Citation `Sureshkumar1997' on page 2 undefined on input
- line 179.
+ line 224.
 
 
 Package natbib Warning: Citation `Stone2004' on page 2 undefined on input line 
-179.
+225.
 
 
 Package natbib Warning: Citation `MorozovNONLINEARANALYSIS' on page 2 undefined
- on input line 181.
+ on input line 241.
+
+
+Package natbib Warning: Citation `taylorCouetteExperiments?' on page 2 undefine
+d on input line 242.
 
 
 Package natbib Warning: Citation `Stone2004' on page 2 undefined on input line 
-191.
+271.
 
 
 Underfull \vbox (badness 2173) has occurred while \output is active []
 
  [2]
 
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 201.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 201
-.
-
-
 Package natbib Warning: Citation `Waleffe97' on page 3 undefined on input line 
-216.
+318.
 
 
 Package natbib Warning: Citation `Waleffe1997' on page 3 undefined on input lin
-e 218.
+e 323.
 
 
-Package caption Warning: \label without proper \caption on input line 222.
+Package caption Warning: \label without proper \caption on input line 356.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:pf_N1_map' on page 3 undefined on input line 220.
+LaTeX Warning: Reference `fig:pf_N1_map' on page 3 undefined on input line 332.
 
 
-[3] <./figures/vorticity_map_Re200_Wi2_amp002.pdf, id=27, 578.16pt x 433.62pt>
+[3] <./figures/vorticity_map_Re200_Wi2_amp002.pdf, id=28, 578.16pt x 433.62pt>
 File: ./figures/vorticity_map_Re200_Wi2_amp002.pdf Graphic file (type pdf)
 
 <use ./figures/vorticity_map_Re200_Wi2_amp002.pdf>
 Package pdftex.def Info: ./figures/vorticity_map_Re200_Wi2_amp002.pdf used on i
-nput line 232.
+nput line 350.
 (pdftex.def)             Requested size: 184.31836pt x 138.23853pt.
 
-<./figures/N1_map_Rey002_Wi2_amp002.pdf, id=28, 578.16pt x 433.62pt>
+<./figures/N1_map_Rey002_Wi2_amp002.pdf, id=29, 578.16pt x 433.62pt>
 File: ./figures/N1_map_Rey002_Wi2_amp002.pdf Graphic file (type pdf)
 
 <use ./figures/N1_map_Rey002_Wi2_amp002.pdf>
 Package pdftex.def Info: ./figures/N1_map_Rey002_Wi2_amp002.pdf used on input l
-ine 237.
+ine 355.
 (pdftex.def)             Requested size: 184.31836pt x 138.23853pt.
-
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 251.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 251
-.
-
-[4 <./figures/vorticity_map_Re200_Wi2_amp002.pdf> <./figures/N1_map_Rey002_Wi2_
-amp002.pdf
+ [4 <./figures/vorticity_map_Re200_Wi2_amp002.pdf> <./figures/N1_map_Rey002_Wi2
+_amp002.pdf
 
 pdfTeX warning: pdflatex (file ./figures/N1_map_Rey002_Wi2_amp002.pdf): PDF inc
 lusion: multiple pdfs with page group included in a single page
->] <./figures/dispersions_varyRe.pdf, id=618, 433.62pt x 289.08pt>
+>] <./figures/dispersions_varyRe.pdf, id=619, 451.6875pt x 279.14288pt>
 File: ./figures/dispersions_varyRe.pdf Graphic file (type pdf)
 
 <use ./figures/dispersions_varyRe.pdf>
-Package pdftex.def Info: ./figures/dispersions_varyRe.pdf used on input line 26
-2.
-(pdftex.def)             Requested size: 384.0pt x 256.01442pt.
+Package pdftex.def Info: ./figures/dispersions_varyRe.pdf used on input line 40
+5.
+(pdftex.def)             Requested size: 384.0pt x 237.32367pt.
 
-<./figures/dispersions_varyWi.pdf, id=619, 469.755pt x 289.08pt>
+<./figures/dispersions_varyWi.pdf, id=620, 451.6875pt x 279.14288pt>
 File: ./figures/dispersions_varyWi.pdf Graphic file (type pdf)
 
 <use ./figures/dispersions_varyWi.pdf>
-Package pdftex.def Info: ./figures/dispersions_varyWi.pdf used on input line 27
+Package pdftex.def Info: ./figures/dispersions_varyWi.pdf used on input line 42
 2.
-(pdftex.def)             Requested size: 384.0pt x 236.30608pt.
+(pdftex.def)             Requested size: 384.0pt x 237.32367pt.
 
-
-Package natbib Warning: Citation `Waleffe1997' on page 5 undefined on input lin
-e 279.
-
-<./figures/eigenmode_visco.pdf, id=620, 722.7pt x 635.97598pt>
-File: ./figures/eigenmode_visco.pdf Graphic file (type pdf)
-
-<use ./figures/eigenmode_visco.pdf>
-Package pdftex.def Info: ./figures/eigenmode_visco.pdf used on input line 284.
-(pdftex.def)             Requested size: 384.0pt x 337.91963pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [5 <./figures/dispersions_varyRe.pdf>]
-<./figures/dispersions_varslip.pdf, id=632, 469.755pt x 289.08pt>
+<./figures/dispersions_varslip.pdf, id=621, 451.6875pt x 279.14288pt>
 File: ./figures/dispersions_varslip.pdf Graphic file (type pdf)
 
 <use ./figures/dispersions_varslip.pdf>
-Package pdftex.def Info: ./figures/dispersions_varslip.pdf used on input line 3
-04.
-(pdftex.def)             Requested size: 384.0pt x 236.30608pt.
+Package pdftex.def Info: ./figures/dispersions_varslip.pdf used on input line 4
+51.
+(pdftex.def)             Requested size: 384.0pt x 237.32367pt.
 
-<./figures/evaldiverg_varslip.png, id=633, 803.0pt x 501.875pt>
-File: ./figures/evaldiverg_varslip.png Graphic file (type png)
 
-<use ./figures/evaldiverg_varslip.png>
-Package pdftex.def Info: ./figures/evaldiverg_varslip.png used on input line 31
-6.
-(pdftex.def)             Requested size: 384.0pt x 240.00127pt.
+Package natbib Warning: Citation `Waleffe1997' on page 5 undefined on input lin
+e 462.
 
-<./figures/eigenmode_varslip.pdf, id=634, 722.7pt x 635.97598pt>
+
+Underfull \vbox (badness 1348) has occurred while \output is active []
+
+ [5 <./figures/dispersions_varyRe.pdf>] [6 <./figures/dispersions_varyWi.pdf> <
+./figures/dispersions_varslip.pdf
+
+pdfTeX warning: pdflatex (file ./figures/dispersions_varslip.pdf): PDF inclusio
+n: multiple pdfs with page group included in a single page
+>] <./figures/eigenmode_visco.pdf, id=724, 722.7pt x 635.97598pt>
+File: ./figures/eigenmode_visco.pdf Graphic file (type pdf)
+
+<use ./figures/eigenmode_visco.pdf>
+Package pdftex.def Info: ./figures/eigenmode_visco.pdf used on input line 474.
+(pdftex.def)             Requested size: 384.0pt x 337.91963pt.
+
+<./figures/vara_ev_kx001_Wi2_log.pdf, id=725, 461.62462pt x 327.02174pt>
+File: ./figures/vara_ev_kx001_Wi2_log.pdf Graphic file (type pdf)
+
+<use ./figures/vara_ev_kx001_Wi2_log.pdf>
+Package pdftex.def Info: ./figures/vara_ev_kx001_Wi2_log.pdf used on input line
+ 494.
+(pdftex.def)             Requested size: 384.0pt x 272.04672pt.
+
+<./figures/eigenmode_varslip.pdf, id=726, 722.7pt x 635.97598pt>
 File: ./figures/eigenmode_varslip.pdf Graphic file (type pdf)
 
 <use ./figures/eigenmode_varslip.pdf>
-Package pdftex.def Info: ./figures/eigenmode_varslip.pdf used on input line 324
+Package pdftex.def Info: ./figures/eigenmode_varslip.pdf used on input line 506
 .
 (pdftex.def)             Requested size: 384.0pt x 337.91963pt.
 
-Overfull \hbox (0.55618pt too wide) in paragraph at lines 335--336
+Overfull \hbox (0.55618pt too wide) in paragraph at lines 518--524
 []\OT1/cmr/m/n/10 We have shown that the ve-loc-ity pro-file for the plane Cou-
 ette vis-coelas-tic self-sustaining
  []
 
-[6 <./figures/dispersions_varyWi.pdf>]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7 <./figures/eigenmode_visco.pdf>]
 No file SSP_paper.bbl.
 
 Package natbib Warning: There were undefined citations.
 
-[7 <./figures/eigenmode_visco.pdf>] [8 <./figures/dispersions_varslip.pdf> <./f
-igures/evaldiverg_varslip.png>] [9 <./figures/eigenmode_varslip.pdf>]
+[8 <./figures/vara_ev_kx001_Wi2_log.pdf>] [9 <./figures/eigenmode_varslip.pdf>]
 (./SSP_paper.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 4632 strings out of 493315
- 67443 string characters out of 6137905
- 133286 words of memory out of 5000000
- 8018 multiletter control sequences out of 15000+600000
- 14354 words of font info for 55 fonts, out of 8000000 for 9000
+ 4645 strings out of 493315
+ 67612 string characters out of 6137905
+ 133349 words of memory out of 5000000
+ 8025 multiletter control sequences out of 15000+600000
+ 16184 words of font info for 61 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,11n,38p,1611b,400s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,11n,38p,643b,400s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
 /usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
 usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></us
 r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/
+local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/
 local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
 cal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local
 /texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/te
@@ -537,10 +525,10 @@ ve/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/
 3/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2013/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb>
-Output written on SSP_paper.pdf (9 pages, 761471 bytes).
+Output written on SSP_paper.pdf (9 pages, 774629 bytes).
 PDF statistics:
- 762 PDF objects out of 1000 (max. 8388607)
- 115 compressed objects within 2 object streams
+ 869 PDF objects out of 1000 (max. 8388607)
+ 139 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

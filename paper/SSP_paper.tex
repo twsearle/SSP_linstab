@@ -1,5 +1,5 @@
 %	paper.tex	Toby Searle
-%	Last modified: Thu 10 Apr 16:35:43 2014
+%	Last modified: Fri 25 Apr 15:43:24 2014
 %	using jfm template
 
 \NeedsTeXFormat{LaTeX2e}
@@ -163,48 +163,156 @@ Edinburgh, EH9 3JZ, UK\\[\affilskip]
 \end{abstract}
 
 \begin{keywords}
-Authors should not enter keywords on the manuscript, as these must be chosen by the author during the online submission process and will then be added during the typesetting process (see http://journals.cambridge.org/data/\linebreak[3]relatedlink/jfm-\linebreak[3]keywords.pdf for the full list)
+Authors should not enter keywords on the manuscript, as these must be chosen by
+the author during the online submission process and will then be added during
+the typesetting process (see
+http://journals.cambridge.org/data/\linebreak[3]relatedlink/jfm-\linebreak[3]keywords.pdf
+for the full list)
 \end{keywords}
 
 \section{Introduction}\label{sec:intro}
 
-We present a study of a purely elastic analogue of the Newtonian self-sustaining process presented by Fabian Waleffe \cite{Waleffe1997}.
+We present a study of a purely elastic analogue of the Newtonian
+self-sustaining process presented by Fabian Waleffe \cite{Waleffe1997}.
 
-In 1997 Waleffe published a seminal article that demonstrated the existence of an exact coherent state that sustains turbulence in Newtonian plane Couette fluid turbulence. This solution consists of a self-sustaining process (SSP) of three phases. First the lift-up mechanism (sometimes called shear tilting), first studied by Ellingson, Palm and Landahl \cite{Ellingson1970, Landahl1980} induced by streamwise rolls moves fluid between the plates. Due to conservation of momentum, this creates spanwise streaks in the streamwise velocity. Second, these streaks become wavy in the streamwise direction. This is due to a linear instability in the streaky profile from a Kelvin-Helmholtz like instability as the streaks shear with the rest of the fluid. Finally, the nonlinear self-interaction terms from the disturbance which produces these wavy streaks regenerate the original streamwise rolls.
+In 1997 Waleffe published a seminal article that demonstrated the existence of
+an exact coherent state that sustains turbulence in Newtonian plane Couette
+fluid flow. This solution consists of a self-sustaining process (SSP) of three
+phases. First the lift-up mechanism (sometimes called shear tilting), first
+studied by Ellingson, Palm and Landahl \cite{Ellingson1970, Landahl1980}
+induced by streamwise rolls moves fluid between the plates. Due to conservation
+of momentum, this creates spanwise streaks in the streamwise velocity. In the
+second phase, these streaks become wavy in the streamwise direction. This is
+due to a linear instability in the streaky profile from a Kelvin-Helmholtz like
+effect as the streaks shear with the rest of the fluid. Finally, the nonlinear
+self-interaction terms from the wavy disturbance regenerate the original
+streamwise rolls.
 
-This mechanism has proven very important. Since then, similar structures have been found in Newtonian pipe flow, both in numerical simulations \cite{PIPEECS} and in experiments \cite{PIPEECSEXP}. The success of these exact solutions has fuelled the move towards an understanding of Newtonian turbulence in terms of these exact solutions, with the turbulent attactor constructed out of many exact solutions which become more densely packed as the Reynold's number increases. According to this picture, a turbulent fluid trajectory in phase space `pinballs' between these states, spending most of its time very close to one of these solutions \cite{NOIDEA}.
+This mechanism has proven very important. Since then, similar structures have
+been found in Newtonian pipe flow, both in numerical simulations \cite{PIPEECS}
+and in experiments \cite{PIPEECSEXP}. The success of these exact solutions has
+fuelled the move towards an understanding of Newtonian turbulence in terms of
+these exact solutions, with the turbulent attactor constructed out of many
+exact solutions which become more densely packed as the Reynold's number
+increases. According to this picture, a turbulent fluid trajectory in phase
+space `pinballs' between these states, spending most of its time very close to
+one of these solutions \cite{NOIDEA}.
 
-In 1990 Larson, Shaqfeh and Muller provided theoretical and experimental evidence of purely elastic instability \cite{Larson1990}. The mechanism behind this instability is the Weissenberg effect\cite{WeissenbergLONGLONGAGO}. Later, Byars et al. \cite{ByarsWHENEVER} found spiral patterns in a low Reynold's number plate-plate flow. These instabilities are part of a body of evidence which supports the existence of a different kind of turbulence, purely elastic turbulence, where the instabilities are generated and sustained by this Normal stress mechanism. Curved streamlines in the fluid lead to large normal stresses, which create more curved streamlines. It is this feedback which it is supposed will lead to a state of continuous instability. We think that this mechanism can be carried over to provide a viscoelastic analogue of the Newtonian SSP.
+In 1990 Larson, Shaqfeh and Muller provided theoretical and experimental
+evidence of purely elastic instability \cite{Larson1990}. Later, Byars et al.
+\cite{ByarsWHENEVER} found spiral patterns in a low Reynold's number
+plate-plate flow. The mechanism behind this instability is similar to the
+Weissenberg effect \cite{WeissenbergLONGLONGAGO}. These instabilities are part
+of a body of evidence which supports the existence of a different kind of
+turbulence, purely elastic turbulence, where the instabilities are generated
+and sustained by this Normal stress mechanism. Curved streamlines in the fluid
+lead to large normal stresses, which create more curved streamlines. It is this
+feedback which it is supposed will lead to a state of continuous instability.
+We think that this mechanism might provide a viscoelastic analogue of the
+Newtonian SSP.
 
-Studies have already been carried out on a viscoelastic self-sustaining process \cite{Stone2004, Stone2002, Sureshkumar1997}. However, these studies were concerned with high Reynold's number viscoelastic flows. Primarly they were interested in discovering how a small concentration of polymeric fluid can bring about a reduction in viscous drag in a fluid, a phenomenon known as drag reduction. They sought to explain drag reduction by an appeal to the effect of the polymers on Waleffe's Newtonian self-sustaining process. These studies found that there is a minimum Reynold's number below which the SSP solution ceases to exist. We are find results which are consistent with this, however, the streak instabilty reappears at much lower Reynold's number, in the purely elastic regime. Neither the simulations by Sureshkumar \cite{Sureshkumar1997} nor of Stone \cite{Stone2004} give any results for $Re~1$. They also introduce an unphysical approximation to the equations via a stress diffusion term. It is not clear what effect this term will have in the purely elastic limit (or is it? I just don't know). The mechanism these papers suggest for the effect of the polymeric fluid on the SSP is that of vortex unwinding. The polymeric stress opposes the nonlinearities that produce the vortices in the third phase of the process. In our study, the polymeric stresses are responsible for the production of the voritices. But this mechanism cannot take place in the Navier-stokes equation, and must take place in the constituitive equation because we are at low Reynold's number.
+Studies have already been carried out on a viscoelastic self-sustaining process
+\cite{Stone2004, Stone2002, Sureshkumar1997}. However, these studies were
+concerned with high Reynold's number viscoelastic flows. Primarly they were
+interested in discovering how a small concentration of polymeric fluid can
+bring about a reduction in viscous drag in a fluid. They sought to explain this
+viscoelastic drag reduction by an appeal to the effect of the polymers on
+Waleffe's Newtonian self-sustaining process. These studies found that there is
+a minimum Reynold's number below which the SSP solution ceases to exist. We are
+find results which are consistent with this, however, the streak instabilty
+reappears at much lower Reynold's number, in the purely elastic regime. Neither
+the simulations by Sureshkumar \cite{Sureshkumar1997} nor of Stone
+\cite{Stone2004} give any results for $Re~1$. They also introduce an unphysical
+approximation to the equations via a stress diffusion term. It is possible that
+in the purely elastic limit this stress diffusion will remove the large stress
+gradients necessary for instability. The mechanism these papers suggest for the
+effect of the polymeric fluid on the SSP is that of vortex unwinding. The
+polymeric stress opposes the nonlinearities that produce the vortices in the
+third phase of the process. In our study, the polymeric stresses are
+responsible for the production of the vortices. But this mechanism cannot take
+place in the Navier-stokes equation, and must take place in the constituitive
+equation because we are at low Reynold's number.
 
-In the absence of any clear notions of what might structure purely elastic turbulence, we have attempted to construct a viscoelastic analogue of the SSP. By analogy of the Weissenberg number with the Reynold's number, purely elastic fluids can be expected to undergo a transition to turbulence at high Weissenberg number. This is strongly suggested by previous nonlinear stability analyses e.g \cite{MorozovNONLINEARANALYSIS}. 
+In the absence of any clear notions of what might structure purely elastic
+turbulence, we have attempted to construct a viscoelastic analogue of the SSP.
+By analogy of the Weissenberg number with the Reynold's number purely elastic
+fluids might be expected to undergo a transition to turbulence at high
+Weissenberg number. This is strongly suggested by earlier experimental and
+numerical results e.g \cite{MorozovNONLINEARANALYSIS} and
+\cite{taylorCouetteExperiments?}. 
 
-We use the Oldroyd-B model for the constituitive equation for the polymeric component of the fluid and the full Navier-Stokes equations,
+We use the Oldroyd-B model for the constituitive equation for the polymeric
+component of the fluid and the full Navier-Stokes equations,
 \begin{align}
     \Rey \left[ \dt{\mathbf{v}} + \mathbf{v} \cdot \nabla  \mathbf{v} \right] &= - \nabla p + \beta \nabla^{2} \mathbf{v} + \frac{1-\beta}{Wi} \nabla \cdot \mathbf{\tau} \label{eq:Navier-Stokes}\\
     \nabla \cdot \mathbf{v} &= 0 \label{eq:incompressibility}\\
     \dot{\tau}/Wi + \overset{\nabla}\tau &= \left(\nabla \mathbf{v}\right)^{T} + \nabla{\mathbf{v}}\label{eq:Oldroyd-B}
 \end{align}
-where $\Rey$ is the Reynold's number, $\Wi$ is the Weissenberg number, $\nabla$ is the gradient operator, $\nabla^{2}$ is the Laplacian and $ \overset{\nabla}\tau$ is the upper convected derivative of the stress tensor. By direct numerical simulation, we investigate the three phases of the process. First we use a Newton-Raphson method to show that streaky flow is a solution at low $\Rey$ to the these equations when forced by streamwise independent rolls. Then we do a linear stability analysis of the streaky flow to show that these streaks are unstable to perturbations both dependent and independent of the streamwise wavenumber $k_x$. Finally we investigate how the eigenvectors which correspond to these instabilities will affect the base flow, completing the SSP.
+where $\Rey$ is the Reynold's number, $\Wi$ is the Weissenberg number, $\nabla$
+is the gradient operator, $\nabla^{2}$ is the Laplacian and $
+\overset{\nabla}\tau$ is the upper convected derivative of the stress tensor.
+By direct numerical simulation, we investigate the three phases of the process.
+First we use a Newton-Raphson method to show that streaky flow is a solution at
+low $\Rey$ to the these equations when forced by streamwise independent rolls.
+Then we do a linear stability analysis of the streaky flow to show that these
+streaks are unstable to perturbations both dependent and independent of the
+streamwise wavenumber $k_x$. Finally we investigate how the eigenvectors which
+correspond to these instabilities will affect the base flow, completing the
+SSP.
 
-At this point it is important to note that we are using the Oldroyd-B fluid and so our results have limitations. They include all of the ingredients for the normal stress effect believed to be responsible for viscoelastic turbulence. However, they do not capture the shear thinning behaviour. It is also well known that under extensional flows (when $\lambda \dot{\epsilon} > 1/2$) the Oldroyd-B model breaks down. In the self-sustaining process as we have outlined it, there ought to be no extensional flows, so this danger turns out to be irrelevent (is this actually true?). Support for this point of view can be found in the studies mentioned earlier Stone \cite{Stone2004} finds that in their simulations the polymer extension never exceeds 10\% of the contour length (check understanding of this fact).
+At this point it is important to note that we are using the Oldroyd-B fluid and
+so our results have limitations. They include all of the ingredients for the
+normal stress effect believed to be responsible for viscoelastic turbulence.
+However, they do not capture the shear thinning behaviour. It is also well
+known that under extensional flows (when $\lambda \dot{\epsilon} > 1/2$) the
+Oldroyd-B model breaks down. In the self-sustaining process as we have outlined
+it, there ought to be no extensional flows, so this danger turns out to be
+irrelevent (is this actually true?). Support for this point of view can be
+found in the studies mentioned earlier Stone \cite{Stone2004} finds that in
+their simulations the polymer extension never exceeds 10\% of the contour
+length (check understanding of this fact).
 
-The viscoelastic streamwise vortex system we observe does produce streaks and these streaks do become unstable. The instabilities we observe can be wavy in the streamwise direction, but tend to have very long wavelengths. The instability can only be tracked for Free slip Boundary conditions, suggesting that polymer slip at the walls might be important in this system. 
+The viscoelastic streamwise vortex system we observe does produce streaks and
+these streaks do become unstable. The instabilities we observe can be wavy in
+the streamwise direction, but tend to have very long wavelengths. The
+instability can only be tracked for Free slip Boundary conditions, suggesting
+that polymer slip at the walls might be important in this system. 
 
 \section{Streaky profile}\label{sec:streaks}
 
-We use a Chebyshev-Fourier decomposition, with Chebyshev polynomials in the wall-normal (y) direction and Fourier modes in the spanwise (z) direction. We then solve for the velocity in the streamwise (x) direction, subject to forcing in the y and z directions, via a Newton-Raphson iteration of the governing Navier-Stokes and Oldroyd-B equations. In order to decompose the system onto the computational grid, we take a Fourier and Chebyshev transform of the variables,
-\begin{equation}
-    \check{G}(y,z) = \sum_{n=-N}^{N} \sum_{m=0}^{M+1} G_{m,n} \me^{i\gamma z} T_{m}(y) \label{eq:decomp}
-\end{equation}
-where $g$ stands for any of the base profile variables ($U,V,W,\boldmath{\tau}_{ij}$) in the problem and $T_{m}(y)$ is the \textit{m}th Chebyshev polynomial of the first kind.
+We would now like to solve the equations for the streaky profile, given the
+streamwise independent rolls. We can safely ignore the pressure gradient, but I
+can't remember why right now.
 
-Given that the base profile is independent of the streamise direction and time, we reduce the Navier-Stokes and Oldroyd-B equations and then solve them using a simple Newton-Rhaphson iteration for the base Streamwise velocity $U$. The system is driven by the standard no-slip boundary conditions on the streamwise velocity at the walls,
+\begin{equation}
+\mathit{Re} \left[V(y,z) \frac{\partial U}{\partial y} + W(y,z) \frac{\partial U}{\partial z} \right] &= \beta \nabla^{2}_{2} U + \left(1-\beta \right) \left(\frac{\partial T_{xy}}{\partial y} + \frac{\partial T_{xz}}{\partial z} \right)
+\end{equation}
+
+We use a Chebyshev-Fourier decomposition, with Chebyshev polynomials in the
+wall-normal (y) direction and Fourier modes in the spanwise (z) direction. We
+then solve for the velocity in the streamwise (x) direction, subject to forcing
+in the y and z directions, via a Newton-Raphson iteration of the governing
+Navier-Stokes and Oldroyd-B equations. In order to decompose the system onto
+the computational grid, we take a Fourier and Chebyshev transform of the
+variables,
+
+\begin{equation}
+    \check{G}(y,z) = \sum_{n=-N}^{N} \sum_{m=0}^{M-1} G_{m,n} \me^{i n \gamma z} T_{m}(y) \label{eq:decomp}
+\end{equation}
+where $g$ stands for any of the base profile variables
+($U,V,W,\boldsymbol{\tau}_{ij}$) in the problem and $T_{m}(y)$ is the
+\textit{m}th Chebyshev polynomial of the first kind.
+
+Given that the base profile is independent of the streamise direction and time,
+we reduce the Navier-Stokes and Oldroyd-B equations and then solve them using a
+simple Newton-Rhaphson iteration for the base Streamwise velocity $U$. The
+system is driven by the standard no-slip boundary conditions on the streamwise
+velocity at the walls,
 \begin{align}
     U(\pm 1) = 1 \\
 \end{align}
-and forcing terms introduced via fixing of the wall-normal and spanwise base profile velocities,
+and forcing terms introduced via fixing of the wall-normal and spanwise base
+profile velocities,
 \begin{align}
     V(y,z) &= V_0 \hat{v}(y) cos(\gamma z) \\
     W(y,z) &= \frac{V_0}{\gamma} \dy{\hat{v}} sin(\gamma z) 
@@ -213,16 +321,35 @@ Where,
 \begin{equation}
     \hat{v}(y) = \frac{\cos(py)}{\cos(p)} - \frac{\cosh(\gamma y)}{cosh(\gamma)} 
 \end {equation}
-$p$ is given by solutions to $p\tan p + \gamma \tanh \gamma = 0$ and governs the number of rolls in the wall-normal direction. These velocities are a guess for the rolls derived from the lowest order eigenmode of the operator $\nabla^{4}$, precisely the same rolls used in \cite{Waleffe97}. This provides us with the streaky profile shown below.
+$p$ is given by solutions to $p\tan p + \gamma \tanh \gamma = 0$ and governs
+the number of rolls in the wall-normal direction. These velocities are a guess
+for the rolls derived from the lowest order eigenmode of the operator
+$\nabla^{4}$, precisely the same rolls used in \cite{Waleffe97}. This provides
+us with the streaky profile shown below.
 
-After using the above Newton-Rhaphson method we obtain a streaky profile in the fluid. At high $\Rey$ we find streaks in the streamwise velocity similar to those in \cite{Waleffe1997}. However, as we decrease the Reynold's number for constant and large Weissenberg number, we find that the streaks in the streamwise velocity become less pronounced. This can be explained by considering that at low Reynold's number the fluid has a higher inertia, so it is more difficult for the lift up effect to produce streaks in the streamwise velocity. 
+After using the above Newton-Rhaphson method we obtain a streaky profile in the
+fluid. At high $\Rey$ we find streaks in the streamwise velocity similar to
+those in \cite{Waleffe1997}. However, as we decrease the Reynold's number for
+constant and large Weissenberg number, we find that the streaks in the
+streamwise velocity become less pronounced. This can be explained by
+considering that at low Reynold's number the fluid has a higher inertia, so it
+is more difficult for the lift up effect to produce streaks in the streamwise
+velocity. 
 
-Although we do not see streaks in the streamwise velocity, we do see them in the first normal stress difference, $N_{1} = T_{xx} - T_{yy}$ (figure \ref{fig:pf_N1_map}). These streaks appear in much the same place as the streamwise velocity streaks appear in the Newtonian self-sustaining process. As noted earlier, instabilities in viscoelastic fluids are brought about by large changes in the first normal stress difference, since this brings about polymer stretching of the kind seen in the Weissenberg effect. It is important to note that the purely elastic 1st normal stress difference shows very large gradients near the wall, suggesting that resolving the instability in this base profile will be more difficult than in the Newtonian case.
+Although we do not see streaks in the streamwise velocity, we do see them in
+the first normal stress difference, $N_{1} = T_{xx} - T_{yy}$ (figure
+\ref{fig:pf_N1_map}). These streaks appear in much the same place as the
+streamwise velocity streaks appear in the Newtonian self-sustaining process. As
+noted earlier, instabilities in viscoelastic fluids are brought about by large
+changes in the first normal stress difference, since this brings about polymer
+stretching of the kind seen in the Weissenberg effect. It is important to note
+that the purely elastic 1st normal stress difference shows very large gradients
+near the wall, suggesting that resolving the instability in this base profile
+will be more difficult than in the Newtonian case.
 
 %\begin{figure}
 %    \showthe\columnwidth %use this to determine size of figures.
 %    \includegraphics[width=\textwidth]{./figures/vel_map_Rey002_Wi2_amp002}
-%    \caption{Streaky profile at $\Rey = 0.02$, $\Wi = 2.0$, amp=0.02. The heat map gives the streamwise velocity, U, whilst the arrows show direction the forcing from the rolls via the velocity in the wall-normal and spanwise directions.}
 %    \label{fig:pf_vel_map}
 %\end{figure}
 
@@ -230,91 +357,160 @@ Although we do not see streaks in the streamwise velocity, we do see them in the
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
 	\includegraphics[width=\textwidth]{./figures/vorticity_map_Re200_Wi2_amp002}
-	\label{fig:pf_N1_map}
+	\label{fig:pf_vort_map}
     \end{subfigure}
     ~
     \begin{subfigure}[b]{0.48\textwidth}
 	\includegraphics[width=\textwidth]{./figures/N1_map_Rey002_Wi2_amp002}
 	\label{fig:pf_N1_map}
     \end{subfigure}
-	\caption{a) The magnitude of the vorticity of the fluid at $\Rey = 200$, $\Wi = 2.0$, amp=0.02. b) The first normal stress difference in the polymeric fluid at $\Rey = 0.02$, $\Wi = 2$, amp=0.02. The Newtonian vorticity and purely elastic first normal stress difference have large gradients in similar regions. However, the first normal stress difference also shows large gradients next to the wall. }
+    \caption{
+	a) The magnitude of the vorticity of the fluid at $\Rey = 200$, $\Wi =
+	2.0$, amp=0.02. b) The first normal stress difference in the polymeric
+	fluid at $\Rey = 0.02$, $\Wi = 2$, amp=0.02. The Newtonian vorticity
+	and purely elastic first normal stress difference have large gradients
+	in similar regions. However, the first normal stress difference also
+	shows large gradients next to the wall. 
+    } 
 \end{figure}
 
 \section{Linear Stability Analysis}\label{sec:linear_stability}
 
-Having obtained the full base profile of the problem, we then performed a linear stability analysis, to look for instabilities that might produce waviness in the streaks. These wavy instabilities are responsible for sustaining the exact coherent state in the Newtonian version of the process.
+Having obtained the full base profile of the problem, we then performed a
+linear stability analysis, to look for instabilities that might produce
+waviness in the streaks. These wavy instabilities are responsible for
+sustaining the exact coherent state in the Newtonian version of the process.
+This gives us the linear stability equations,
+\begin{align}
+(\nabla \mathbf{v})^T + (\nabla \mathbf{v}) =& \tau + Wi \left[ \frac{\partial \tau}{\partial t} + (\mathbf{V} \cdot \nabla) \tau + (\mathbf{v} \cdot \nabla) T \right.\\ 
+& \left. \phantom{\tau + Wi} - (\nabla \mathbf{v})^T \tau - (\nabla \mathbf{v})^T T - \tau (\nabla \mathbf{V}) - T (\nabla \mathbf{v}) \right]
+\end{align}
 
-We decompose the disturbance velocities in a similar way to above (equation \ref{eq:decomp}), but include streamwise dependence
+We decompose the disturbance velocities in the same basis as above (equation
+\ref{eq:decomp}), but include streamwise dependence
 \begin{equation}
-    \check{g}(x,y,z,t) = \sum_{n=-N}^{N} \sum_{m=0}^{M+1} g_{m,n}(k_{x}) \me^{i(k_{x} x + \gamma z)} T_{m}(y) \me{i\lambda t}\label{eq:decomp_disturbances}
+    \check{g}(x,y,z,t) = \sum_{n=-N}^{N} \sum_{m=0}^{M+1} g_{m,n}  T_{m}(y) \me^{i(k_{x} x + n \gamma z)} \me{i\lambda t}\label{eq:decomp_disturbances}
 \end{equation}
-where $g$ can be any of the disturbance variables ($u,v,w,p,\boldmath{\tau}_{ij}$). To increase the numerical stability of the problem, we use free slip boundary conditions on the disturbance velocities, $\dy{w}(\pm1) = v(\pm 1) = \dy{w}(\pm1) = 0$.
+where $g$ can be any of the disturbance variables
+($u,v,w,p,\boldsymbol{\tau}_{ij}$). To increase the numerical stability of the
+problem, we use free slip boundary conditions on the disturbance velocities,
+$\dy{u}(\pm1) = v(\pm 1) = \dy{w}(\pm1) = 0$.
 
-The linearised system of equations now gives an eigenvalue problem for the growth rate of the instability $\lambda$ at every streamwise wavenumber of the disturbance.
+The linearised system of equations now gives an eigenvalue problem for the
+growth rate of the instability $\lambda$ at every streamwise wavenumber of the
+disturbance.
 
-The solution to the eigenvalue problem provides spectra for which eigenmodes with positive growth rates are unstable.
+The solution to the eigenvalue problem provides spectra for which eigenmodes
+with positive growth rates are unstable.
 
-As the Reynold's number is decreased, we find that the base profile becomes more stable. The dispersion relation is reduced in height and moves to lower streamwise wavenumbers. By about $\Rey = 100$ the base profile has become completely stable. The Newtonian instability is no longer present at this Reynold's number. However, once the Reynolds number becomes negligible in comparison to the Weissenberg number, we begin to see a purely elastic instability arise at very low streamwise wavenumber \ref{fig:dispersions_varyRe}. This purely elastic instability is hugely amplified by further reductions in the Reynold's number.
+As the Reynold's number is decreased, we find that the base profile becomes
+more stable. The dispersion relation is reduced in height and moves to lower
+streamwise wavenumbers. By about $\Rey = 100$ the base profile has become
+completely stable. The Newtonian instability is no longer present at this
+Reynold's number. However, once the Reynolds number becomes negligible in
+comparison to the Weissenberg number, we begin to see a purely elastic
+instability arise at very low streamwise wavenumber
+\ref{fig:dispersions_varyRe}. This purely elastic instability is hugely
+amplified by further reductions in the Reynold's number.
 
 \begin{figure}
 %    \showthe\columnwidth %use this to determine size of figures.
     \centering
     \includegraphics[width=\textwidth]{./figures/dispersions_varyRe}
-    \caption{Dispersion relations as the Reynold's number is decreased at $\Wi = 2$, $\beta=0.1$ and amp = 0.02. A clear instability can be seen at low $k_{x}$ in the purely elastic regime.}
+    \caption{
+	Dispersion relations as the Reynold's number is decreased at $\Wi = 2$,
+	$\beta=0.1$ and amp = 0.02. A clear instability can be seen at low
+	$k_{x}$ in the purely elastic regime.
+    }
     \label{fig:dispersions_varyRe}
 \end{figure}
 
-We can further examine how the purely elastic instability changes with changing Weissenberg number. We find that it grows as the Weissenberg number increases, and saturates by around $\Wi ~ 20$. Doubling the amplitude of the rolls increases the width of the instablity by about a third and the height, 3 fold.  
+We can further examine how the purely elastic instability changes with changing
+Weissenberg number. We find that it grows as the Weissenberg number increases,
+and saturates by around $\Wi ~ 20$. Doubling the amplitude of the rolls
+increases the width of the instablity by about a third and the height, 3 fold.  
 
 \begin{figure}
 %    \showthe\columnwidth %use this to determine size of figures.
     \centering
     \includegraphics[width=\textwidth]{./figures/dispersions_varyWi}
-    \caption{Dispersion relations as the $\Wi$ is decreased at $\Rey = 0.001$, $\beta=0.1$ and amp = 0.02. The instability grows and then saturates.}
+    \caption{
+	Dispersion relations as the $\Wi$ is decreased at $\Rey = 0.001$,
+	$\beta=0.1$ and amp = 0.02. The instability grows and then saturates.
+    }
     \label{fig:dispersions_varyWi}
-\end{figure}
-
-\section{Nonlinear feedback on the rolls}\label{sec:nonlinear_feedback}
-
-In Fabian Waleffe's treatment of the Newtonian version of this self-sustaining process \cite{Waleffe1997}, he found that the feedback on the original rolls was provided by the eigenmode of the instability. The eigenmodes of the viscoelastic instability is quite different to that of the Newtonian instability. Although the components of the instability are large at the walls, the velocity is less important for the instability of the purely elastic fluid than the first normal stress difference. We find that $N_{1}$ is large away from the walls, another encouraging sign for a viscoelastic self-sustaining process (\ref{fig:eigenmode_visco}).
-
-\begin{figure}
-%    \showthe\columnwidth %use this to determine size of figures.
-    \centering
-    \includegraphics[width=\textwidth]{./figures/eigenmode_visco}
-    \caption{Eigenmodes of the first normal stress difference of the viscoelastic instability at $\Wi = 2.0$, $\Rey = 0.02$, $\beta=0.1$, amp=0.02 and $k_x = 0.01$.}
-    \label{fig:eigenmode_visco}
 \end{figure}
 
 \subsection{Cauchy boundary conditions}\label{sec:Cauchy}
 
-To investigate the affect of free slip boundary conditions on linear stability analysis, we implemented Cauchy boundary conditions,
+To investigate the affect of free slip boundary conditions on linear stability
+analysis, we implemented Cauchy boundary conditions,
 \begin{align}
     \alpha\left.\dy{u}\right|_{y=\pm1} + (1-\alpha)u(y=\pm1) &= 0 \\
     v(y=\pm1) &=0 \\
     \alpha\left.\dy{w}\right|_{y=\pm1} + (1-\alpha)w(y=\pm1) &= 0 
 \end{align}
-Where $\alpha$ is a control parameter which controls the relative strength of the free slip to no-slip conditions. (Slip length?)
+Where $\alpha$ is a control parameter which controls the relative strength of
+the free slip to no-slip conditions. (Slip length?)
 
-We found that on decreasing $\alpha$ the instability grows in strength and broadens. It appears that the no-slip system is infinitely unstable (figure \ref{fig:dispersions_varslip}).
+We found that on decreasing $\alpha$ the instability grows in strength and
+broadens (figure \ref{fig:dispersions_varslip}). If we examine the dependence
+of the instability at one wavenumber, $k_{x}=0.01$, it appears that the growth
+rate of the no-slip system tends to infinity as $\alpha \rightarrow 0$ (figure
+\ref{fig:evaldiverg_varslip}).
 
 \begin{figure}
 %    \showthe\columnwidth %use this to determine size of figures.
     \centering
     \includegraphics[width=\textwidth]{./figures/dispersions_varslip}
-    \caption{Dispersion relations as $\alpha$ the slip parameter, is reduced. As the system becomes closer to no-slip at the walls the instability grows.}
+    \caption{
+	Dispersion relations as $\alpha$ the slip parameter, is reduced. As the
+	system becomes closer to no-slip at the walls the instability grows.
+    }
     \label{fig:dispersions_varslip}
 \end{figure}
 
-\section{No slip case}\label{sec:variable_slip}
+\section{Nonlinear feedback on the rolls}\label{sec:nonlinear_feedback}
 
-When we completely remove slip at the walls the instability appears infinitely amplified (figure \ref{fig:evaldiverg_varslip}). A possible explanation for this is that the instability moves into a region very close to the boundaries as we introduce free slip and can no longer be resolved. It is clear from figure \ref{fig:eigenmode_varslip} that the first normal stress difference introduced via the instability moves towards the walls as $\alpha$ tends to zero.
+In Fabian Waleffe's treatment of the Newtonian version of this self-sustaining
+process \cite{Waleffe1997}, he found that the feedback on the original rolls
+was provided by the eigenmode of the instability. The eigenmodes of the
+viscoelastic instability is quite different to that of the Newtonian
+instability. Although the components of the instability are large at the walls,
+the velocity is less important for the instability of the purely elastic fluid
+than the first normal stress difference. We find that $N_{1}$ is large away
+from the walls, another encouraging sign for a viscoelastic self-sustaining
+process (\ref{fig:eigenmode_visco}).
 
 \begin{figure}
 %    \showthe\columnwidth %use this to determine size of figures.
     \centering
-    \includegraphics[width=\textwidth]{./figures/evaldiverg_varslip}
-    \caption{Growth rate of an eigenvalue at $k_x=0.01$ as $\alpha$ the slip parameter, is reduced. The growth rate assymtotes to the no-slip condition.}
+    \includegraphics[width=\textwidth]{./figures/eigenmode_visco}
+    \caption{
+	Eigenmodes of the first normal stress difference of the viscoelastic
+	instability at $\Wi = 2.0$, $\Rey = 0.02$, $\beta=0.1$, amp=0.02 and
+	$k_x = 0.01$.
+    }
+    \label{fig:eigenmode_visco}
+\end{figure}
+
+When we completely remove slip at the walls the instability appears infinitely
+amplified (figure \ref{fig:evaldiverg_varslip}). A possible explanation for
+this is that the instability moves into a region very close to the boundaries
+as we introduce free slip and can no longer be resolved. It is clear from
+figure \ref{fig:eigenmode_varslip} that the first normal stress difference
+introduced via the instability moves towards the walls as $\alpha$ tends to
+zero.
+
+\begin{figure}
+%    \showthe\columnwidth %use this to determine size of figures.
+    \centering
+    \includegraphics[width=\textwidth]{./figures/vara_ev_kx001_Wi2_log}
+    \caption{
+	Growth rate of an eigenvalue at $k_x=0.01$ as $\alpha$ the slip
+	parameter, is reduced. The growth rate assymtotes to the no-slip
+	condition.
+    }
     \label{fig:evaldiverg_varslip}
 \end{figure}
 
@@ -322,17 +518,23 @@ When we completely remove slip at the walls the instability appears infinitely a
 %    \showthe\columnwidth %use this to determine size of figures.
     \centering
     \includegraphics[width=\textwidth]{./figures/eigenmode_varslip}
-    \caption{Eigenmodes of the first normal stress difference at $k_x=0.01$ as $\alpha$ the slip parameter, is reduced. As the slip at the walls is reduced, the first normal stress difference of the instablity becomes more and more localised at the walls.}
+    \caption{
+	Eigenmodes of the first normal stress difference at $k_x=0.01$ as
+	$\alpha$ the slip parameter, is reduced. As the slip at the walls is
+	reduced, the first normal stress difference of the instablity becomes
+	more and more localised at the walls.
+}
     \label{fig:eigenmode_varslip}
 \end{figure}
 
-\section{Discussion}\label{sec:discussion}
+\section{Discussion and conclusion}\label{sec:conclusion}
 
-I do not understand at all how to interpret these results.
-
-\section{Conclusion}\label{sec:conclusion}
-
-We have shown that the velocity profile for the plane Couette viscoelastic self-sustaining process is susceptible to a viscoelastic lift up effect and does become streaky in the purely elastic regime. This streaky base profile is linearly unstable, with a range of wave numbers between about $k_x = 0$ and $k_x = 0.04$. The eigenmodes of this instability are localised in the centre of the channel.
+We have shown that the velocity profile for the plane Couette viscoelastic
+self-sustaining process is susceptible to a viscoelastic lift up effect and
+does become streaky in the purely elastic regime. This streaky base profile is
+linearly unstable, with a range of wave numbers between about $k_x = 0$ and
+$k_x = 0.04$. The eigenmodes of this instability are localised in the centre of
+the channel.
 
 \bibliographystyle{jfm}
 % Note the spaces between the initials

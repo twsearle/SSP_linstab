@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 #   colour map plotter for 2D coherent state finder
 #
-#   Last modified: Wed 12 Mar 15:53:41 2014
+#   Last modified: Fri 25 Apr 12:28:24 2014
 #
 #------------------------------------------------------------------------------
 #TODO check that the axes are the right way up?
@@ -14,7 +14,7 @@ from scipy import fftpack
 import cPickle as pickle
 import ConfigParser
 from matplotlib import pyplot as plt
-from matplotlib import rc
+from matplotlib import rc, rcdefaults
 
 #SETTINGS----------------------------------------
 
@@ -79,6 +79,7 @@ grid_z, grid_y = meshgrid(z_points, y_points)
 #fig_height = 4      
 #fig_size =  [fig_width,fig_height]
 #rc('figure', figsize=fig_size)
+rcdefaults()
 
 plt.figure()
 
@@ -132,7 +133,7 @@ plt.figure()
 extent_=[-0.5*zLength, 0.5*zLength,-1,1]
 plt.imshow(Czz, origin='lower', extent=extent_) 
 plt.colorbar(orientation='horizontal')
-titleString = 'Cxx for Re = {Re}, beta = {beta}, Wi = {Wi}, amp = {amp}'.format(**keyDict)
+titleString = 'Czz for Re = {Re}, beta = {beta}, Wi = {Wi}, amp = {amp}'.format(**keyDict)
 plt.title(titleString)
 plt.savefig(r'Czz_map{0}.pdf'.format(baseFileName[:-7]))
 
