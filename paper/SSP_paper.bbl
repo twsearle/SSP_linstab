@@ -1,0 +1,102 @@
+\begin{thebibliography}{19}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[Byars {\em et~al.\/}(1994)Byars, \"{O}ztekin, Brown \&
+  Mckinley]{Byars1994}
+{\sc Byars, Jeffrey~A., \"{O}ztekin, Alparslan, Brown, Robert~A. \& Mckinley,
+  Gareth~H.} 1994 {Spiral instabilities in the flow of highly elastic fluids
+  between rotating parallel disks}. {\em Journal of Fluid Mechanics\/} {\bf
+  271}, 173.
+
+\bibitem[Chandler \& Kerswell(2013)]{Chandler2013}
+{\sc Chandler, Gary~J. \& Kerswell, Rich~R.} 2013 {Invariant recurrent
+  solutions embedded in a turbulent two-dimensional Kolmogorov flow}. {\em
+  Journal of Fluid Mechanics\/} {\bf 722}, 554--595.
+
+\bibitem[Cvitanovi\'{c}(2013)]{Cvitanovic2013}
+{\sc Cvitanovi\'{c}, Predrag} 2013 {Recurrent flows: the clockwork behind
+  turbulence}. {\em Journal of Fluid Mechanics\/} {\bf 726}~(1990), 1--4.
+
+\bibitem[Ellingsen \& Palm(1975)]{Ellingsen1975}
+{\sc Ellingsen, T. \& Palm, E.} 1975 {Stability of linear flow}. {\em Physics
+  of Fluids\/} {\bf 18}~(4), 487.
+
+\bibitem[Groisman \& Steinberg(2000)]{Groisman2000}
+{\sc Groisman, A. \& Steinberg, V.} 2000 {Elastic turbulence in a polymer
+  solution flow}. {\em Nature\/} {\bf 405}~(6782), 53--5.
+
+\bibitem[Hof {\em et~al.\/}(2004)Hof, van Doorne, Westerweel, Nieuwstadt,
+  Faisst, Eckhardt, Wedin, Kerswell \& Waleffe]{Hof2004}
+{\sc Hof, Bj\"{o}rn, van Doorne, Casimir W~H, Westerweel, Jerry, Nieuwstadt,
+  Frans T~M, Faisst, Holger, Eckhardt, Bruno, Wedin, Hakan, Kerswell, Richard~R
+  \& Waleffe, Fabian} 2004 {Experimental observation of nonlinear traveling
+  waves in turbulent pipe flow.} {\em Science (New York, N.Y.)\/} {\bf
+  305}~(5690), 1594--8.
+
+\bibitem[Kawahara \& Kida(2001)]{Kawahara2001}
+{\sc Kawahara, Genta \& Kida, Shigeo} 2001 {Periodic motion embedded in plane
+  Couette turbulence: regeneration cycle and burst}. {\em Journal of Fluid
+  Mechanics\/} {\bf 449}, 291.
+
+\bibitem[Kreilos \& Eckhardt(2012)]{Kreilos2012}
+{\sc Kreilos, Tobias \& Eckhardt, Bruno} 2012 {Periodic orbits near onset of
+  chaos in plane Couette flow.} {\em Chaos (Woodbury, N.Y.)\/} {\bf 22}~(4),
+  047505.
+
+\bibitem[Landahl(1980)]{Landahl1980}
+{\sc Landahl, MT} 1980 {A note on an algebraic instability of inviscid parallel
+  shear flows}. {\em Journal of Fluid Mechanics\/} {\bf 98}, 243--251.
+
+\bibitem[Larson {\em et~al.\/}(1990)Larson, Shaqfeh \& Muller]{Larson1990}
+{\sc Larson, R.~G., Shaqfeh, Eric S.~G. \& Muller, S.~J.} 1990 {A purely
+  elastic instability in Taylor Couette flow}. {\em Journal of Fluid
+  Mechanics\/} {\bf 218}, 573.
+
+\bibitem[Morozov \& van Saarloos(2007)]{Morozov2007}
+{\sc Morozov, Alexander~N. \& van Saarloos, Wim} 2007 {An introductory essay on
+  subcritical instabilities and the transition to turbulence in visco-elastic
+  parallel shear flows}. {\em Physics Reports\/} {\bf 447}~(3-6), 112--143.
+
+\bibitem[Pan {\em et~al.\/}(2013)Pan, Morozov, Wagner \& Arratia]{Pan2013}
+{\sc Pan, L., Morozov, A., Wagner, C. \& Arratia, P.~E.} 2013 {Nonlinear
+  Elastic Instability in Channel Flows at Low Reynolds Numbers}. {\em Physical
+  Review Letters\/} {\bf 110}~(17), 174502.
+
+\bibitem[Samanta {\em et~al.\/}(2013)Samanta, Dubief, Holzner, Sch\"{a}fer,
+  Morozov, Wagner \& Hof]{Samanta2013}
+{\sc Samanta, Devranjan, Dubief, Yves, Holzner, Markus, Sch\"{a}fer, Christof,
+  Morozov, Alexander~N, Wagner, Christian \& Hof, Bj\"{o}rn} 2013
+  {Elasto-inertial turbulence.} {\em Proceedings of the National Academy of
+  Sciences of the United States of America\/} {\bf 110}~(26), 10557--62.
+
+\bibitem[Stone {\em et~al.\/}(2002)Stone, Waleffe \& Graham]{Stone2002}
+{\sc Stone, Philip, Waleffe, Fabian \& Graham, Michael} 2002 {Toward a
+  Structural Understanding of Turbulent Drag Reduction: Nonlinear Coherent
+  States in Viscoelastic Shear Flows}. {\em Physical Review Letters\/} {\bf
+  89}~(20), 208301.
+
+\bibitem[Stone {\em et~al.\/}(2004)Stone, Roy, Larson, Waleffe \&
+  Graham]{Stone2004}
+{\sc Stone, Philip~A., Roy, Anshuman, Larson, Ronald~G., Waleffe, Fabian \&
+  Graham, Michael~D.} 2004 {Polymer drag reduction in exact coherent structures
+  of plane shear flow}. {\em Physics of Fluids\/} {\bf 16}~(9), 3470.
+
+\bibitem[Sureshkumar {\em et~al.\/}(1997)Sureshkumar, Beris \&
+  Handler]{Sureshkumar1997}
+{\sc Sureshkumar, R., Beris, Antony~N. \& Handler, Robert~A.} 1997 {Direct
+  numerical simulation of the turbulent channel flow of a polymer solution}.
+  {\em Physics of Fluids\/} {\bf 9}~(3), 743.
+
+\bibitem[Waleffe(1997)]{Waleffe1997}
+{\sc Waleffe, Fabian} 1997 {On a self-sustaining process in shear flows}. {\em
+  Physics of Fluids\/} {\bf 9}~(4), 883.
+
+\bibitem[Wedin \& Kerswell(2004)]{Wedin2004}
+{\sc Wedin, H \& Kerswell, RR} 2004 {Exact coherent structures in pipe flow:
+  travelling wave solutions}. {\em Journal of Fluid Mechanics\/} pp. 1--42.
+
+\bibitem[Weissenberg(1947)]{Weissenberg1947}
+{\sc Weissenberg, K} 1947 {A continuum theory of rheological phenomena}. {\em
+  Nature\/} .
+
+\end{thebibliography}

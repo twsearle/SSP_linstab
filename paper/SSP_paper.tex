@@ -1,5 +1,5 @@
 %	paper.tex	Toby Searle
-%	Last modified: Fri 25 Apr 15:43:24 2014
+%	Last modified: Wed 14 May 18:27:29 2014
 %	using jfm template
 
 \NeedsTeXFormat{LaTeX2e}
@@ -15,6 +15,7 @@
 \newcommand{\dt}[1]{\frac{d #1}{d t}} %time deriv
 \newcommand{\dy}[1]{\frac{\partial #1}{\partial y}}
 \newcommand{\me}{\mathrm{e}}
+\newcommand{\xmean}[1]{\overline{#1}^{x}}
 %%%%%%%%%%%%%%%
 
 % See if the author has AMS Euler fonts installed: If they have, attempt
@@ -136,7 +137,7 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem{corollary}{Corollary}
 
-\title[The purely elastic self sustaining process in plane couette flow]{The purely elastic self sustaining process in plane couette flow}
+\title[A purely elastic self sustaining process in plane couette flow]{A purely elastic self sustaining process in plane couette flow}
 
 \author[T. W. Searle and A. N. Morozov]%
 {T. W. Searle$^1$ and A. N. Morozov$^1$%
@@ -173,46 +174,49 @@ for the full list)
 \section{Introduction}\label{sec:intro}
 
 We present a study of a purely elastic analogue of the Newtonian
-self-sustaining process presented by Fabian Waleffe \cite{Waleffe1997}.
+self-sustaining process presented in \cite{Waleffe1997}.
 
 In 1997 Waleffe published a seminal article that demonstrated the existence of
 an exact coherent state that sustains turbulence in Newtonian plane Couette
 fluid flow. This solution consists of a self-sustaining process (SSP) of three
 phases. First the lift-up mechanism (sometimes called shear tilting), first
-studied by Ellingson, Palm and Landahl \cite{Ellingson1970, Landahl1980}
-induced by streamwise rolls moves fluid between the plates. Due to conservation
-of momentum, this creates spanwise streaks in the streamwise velocity. In the
-second phase, these streaks become wavy in the streamwise direction. This is
-due to a linear instability in the streaky profile from a Kelvin-Helmholtz like
-effect as the streaks shear with the rest of the fluid. Finally, the nonlinear
-self-interaction terms from the wavy disturbance regenerate the original
-streamwise rolls.
+studied by \cite{Ellingsen1975, Landahl1980}.  induced by streamwise rolls
+moves fluid between the plates. Due to conservation of momentum, this creates
+spanwise streaks in the streamwise velocity. In the second phase, these streaks
+become wavy in the streamwise direction. This is due to a linear instability in
+the streaky profile from a Kelvin-Helmholtz like effect as the streaks shear
+with the rest of the fluid. Finally, the nonlinear self-interaction terms from
+the wavy disturbance regenerate the original streamwise rolls.
 
 This mechanism has proven very important. Since then, similar structures have
-been found in Newtonian pipe flow, both in numerical simulations \cite{PIPEECS}
-and in experiments \cite{PIPEECSEXP}. The success of these exact solutions has
-fuelled the move towards an understanding of Newtonian turbulence in terms of
-these exact solutions, with the turbulent attactor constructed out of many
-exact solutions which become more densely packed as the Reynold's number
-increases. According to this picture, a turbulent fluid trajectory in phase
-space `pinballs' between these states, spending most of its time very close to
-one of these solutions \cite{NOIDEA}.
+been found in Newtonian pipe flow (both in numerical simulations in
+\cite{Wedin2004} and in experiments in \cite{Hof2004}). The success of these
+exact solutions has fuelled the move towards an understanding of Newtonian
+turbulence in terms of these exact solutions, with the turbulent attactor
+constructed out of many exact solutions which become more densely packed as the
+Reynold's number increases. More recently, recurrent solutions have been
+discovered which give statistics which closely match those of experimental
+turbulent flows (Initially in \cite{Kawahara2001}, with others discovered in
+pipe flows in \cite{Kreilos2012} and two dimensional Kolmogorov flow by
+\cite{Chandler2013}). According to the emerging picture, a turbulent fluid
+trajectory in phase space `pinballs' between these states, spending most of its
+time very close to one of these solutions ( see e.g. \cite{Cvitanovic2013}).
 
 In 1990 Larson, Shaqfeh and Muller provided theoretical and experimental
-evidence of purely elastic instability \cite{Larson1990}. Later, Byars et al.
-\cite{ByarsWHENEVER} found spiral patterns in a low Reynold's number
-plate-plate flow. The mechanism behind this instability is similar to the
-Weissenberg effect \cite{WeissenbergLONGLONGAGO}. These instabilities are part
-of a body of evidence which supports the existence of a different kind of
-turbulence, purely elastic turbulence, where the instabilities are generated
-and sustained by this Normal stress mechanism. Curved streamlines in the fluid
-lead to large normal stresses, which create more curved streamlines. It is this
-feedback which it is supposed will lead to a state of continuous instability.
-We think that this mechanism might provide a viscoelastic analogue of the
-Newtonian SSP.
+evidence of purely elastic instability \cite{Larson1990}. Later,
+\cite{Byars1994} and \cite{Groisman2000} found spiral patterns and
+then full turbulence in a low Reynold's number plate-plate flow. The mechanism
+behind this instability is similar to the Weissenberg effect first observed by
+Karl \cite{Weissenberg1947}. These instabilities are part of a body of evidence
+which supports the existence of a different kind of turbulence, purely elastic
+turbulence, where the instabilities are generated and sustained by this Normal
+stress mechanism. Curved streamlines in the fluid lead to large normal
+stresses, which create more curved streamlines. It is this feedback which it is
+supposed will lead to a state of continuous instability.  We think that this
+mechanism might provide a viscoelastic analogue of the Newtonian SSP.
 
 Studies have already been carried out on a viscoelastic self-sustaining process
-\cite{Stone2004, Stone2002, Sureshkumar1997}. However, these studies were
+( \cite{Stone2004, Stone2002, Sureshkumar1997}). However, these studies were
 concerned with high Reynold's number viscoelastic flows. Primarly they were
 interested in discovering how a small concentration of polymeric fluid can
 bring about a reduction in viscous drag in a fluid. They sought to explain this
@@ -221,32 +225,35 @@ Waleffe's Newtonian self-sustaining process. These studies found that there is
 a minimum Reynold's number below which the SSP solution ceases to exist. We are
 find results which are consistent with this, however, the streak instabilty
 reappears at much lower Reynold's number, in the purely elastic regime. Neither
-the simulations by Sureshkumar \cite{Sureshkumar1997} nor of Stone
-\cite{Stone2004} give any results for $Re~1$. They also introduce an unphysical
-approximation to the equations via a stress diffusion term. It is possible that
-in the purely elastic limit this stress diffusion will remove the large stress
-gradients necessary for instability. The mechanism these papers suggest for the
-effect of the polymeric fluid on the SSP is that of vortex unwinding. The
-polymeric stress opposes the nonlinearities that produce the vortices in the
-third phase of the process. In our study, the polymeric stresses are
-responsible for the production of the vortices. But this mechanism cannot take
-place in the Navier-stokes equation, and must take place in the constituitive
-equation because we are at low Reynold's number.
+the simulations in \cite{Sureshkumar1997} nor in \cite{Stone2004} give any
+results for $Re\sim1$. They also introduce an unphysical approximation to the
+equations via a stress diffusion term. It is possible that in the purely
+elastic limit this stress diffusion will remove the large stress gradients
+necessary for instability. 
 
-In the absence of any clear notions of what might structure purely elastic
-turbulence, we have attempted to construct a viscoelastic analogue of the SSP.
-By analogy of the Weissenberg number with the Reynold's number purely elastic
-fluids might be expected to undergo a transition to turbulence at high
-Weissenberg number. This is strongly suggested by earlier experimental and
-numerical results e.g \cite{MorozovNONLINEARANALYSIS} and
-\cite{taylorCouetteExperiments?}. 
+The above studies find that the addition of a small amount of viscoelastic
+fluid serves to reduce the strength of the Newtonian exact coherent structures.
+The mechanism responsible for the effect of the polymeric fluid on the SSP is
+that of vortex unwinding. The polymeric stress opposes the nonlinearities that
+produce the vortices in the third phase of the process. In our study, the
+polymeric stresses can provide nonlinear terms for the production of vortices
+at very low Reynold's number, but they do so via the nonlinearities in the
+Oldroyd-B equation rather than the Navier-Stokes equation.
+
+We expect chaotic systems to be structured by exact solutions to the equations.
+Given the above results, it seems that these exact solutions cannot be found by
+continuation from their counterparts for Newtonian flows. Instead, we have
+attempted to construct a viscoelastic analogue of the SSP as a means to
+constructing purely elastic exact coherent structures.  The presence of these
+exact coherent structures is strongly suggested by earlier experimental
+(\cite{Pan2013, Samanta2013}) and numerical results (\cite{Morozov2007}?).
 
 We use the Oldroyd-B model for the constituitive equation for the polymeric
 component of the fluid and the full Navier-Stokes equations,
 \begin{align}
-    \Rey \left[ \dt{\mathbf{v}} + \mathbf{v} \cdot \nabla  \mathbf{v} \right] &= - \nabla p + \beta \nabla^{2} \mathbf{v} + \frac{1-\beta}{Wi} \nabla \cdot \mathbf{\tau} \label{eq:Navier-Stokes}\\
+    \Rey \left[ \dt{\mathbf{v}} + \mathbf{v} \cdot \nabla  \mathbf{v} \right] &= - \nabla p + \beta \nabla^{2} \mathbf{v} + (1-\beta)\nabla \cdot \mathbf{\tau} \label{eq:Navier-Stokes}\\
     \nabla \cdot \mathbf{v} &= 0 \label{eq:incompressibility}\\
-    \dot{\tau}/Wi + \overset{\nabla}\tau &= \left(\nabla \mathbf{v}\right)^{T} + \nabla{\mathbf{v}}\label{eq:Oldroyd-B}
+    \tau + Wi\left[\frac{\partial \tau}{\partial t} + \mathbf{v} \cdot \nabla \tau - (\nabla v)^T \tau - \tau (\nabla v) \right] &= \left(\nabla \mathbf{v}\right)^{T} + \nabla{\mathbf{v}}\label{eq:Oldroyd-B} \\
 \end{align}
 where $\Rey$ is the Reynold's number, $\Wi$ is the Weissenberg number, $\nabla$
 is the gradient operator, $\nabla^{2}$ is the Laplacian and $
@@ -260,41 +267,46 @@ streamwise wavenumber $k_x$. Finally we investigate how the eigenvectors which
 correspond to these instabilities will affect the base flow, completing the
 SSP.
 
-At this point it is important to note that we are using the Oldroyd-B fluid and
-so our results have limitations. They include all of the ingredients for the
-normal stress effect believed to be responsible for viscoelastic turbulence.
-However, they do not capture the shear thinning behaviour. It is also well
-known that under extensional flows (when $\lambda \dot{\epsilon} > 1/2$) the
-Oldroyd-B model breaks down. In the self-sustaining process as we have outlined
-it, there ought to be no extensional flows, so this danger turns out to be
-irrelevent (is this actually true?). Support for this point of view can be
-found in the studies mentioned earlier Stone \cite{Stone2004} finds that in
+At this point it is important to note that we are using one of the simplest
+models of a viscoelastic fluid, the Oldroyd-B fluid. They include all of the
+ingredients for the normal stress effect believed to be responsible for
+viscoelastic turbulence.  However, it does not capture the shear thinning
+behaviour. It is also well known that under extensional flows (when $\lambda
+\dot{\epsilon} > 1/2$) the Oldroyd-B model breaks down. In the self-sustaining
+process as we have outlined it, there ought to be no extensional flows, so this
+danger turns out to be irrelevent (is this actually true?). Support for this
+point of view can be found in Stone \cite{Stone2004} where they find that in
 their simulations the polymer extension never exceeds 10\% of the contour
-length (check understanding of this fact).
+length. 
 
-The viscoelastic streamwise vortex system we observe does produce streaks and
-these streaks do become unstable. The instabilities we observe can be wavy in
-the streamwise direction, but tend to have very long wavelengths. The
-instability can only be tracked for Free slip Boundary conditions, suggesting
-that polymer slip at the walls might be important in this system. 
+The viscoelastic streamwise vortex forcing system we use here does produce
+streaks and these streaks do become unstable. The instabilities we observe can
+be wavy in the streamwise direction, but tend to have very long wavelengths.
+The instability that we observe is enough to produce feedback on the original
+rolls of the correct sign and symmetry. The instability can only be tracked for
+free slip boundary conditions, suggesting that the presence or otherwise of
+polymer slip at the walls might be important in this system. 
 
 \section{Streaky profile}\label{sec:streaks}
 
-We would now like to solve the equations for the streaky profile, given the
-streamwise independent rolls. We can safely ignore the pressure gradient, but I
-can't remember why right now.
+For the first step of the self-sustaining process we need to form a streaky
+base profile in the velocity. One way of forming these streaks is to start with large
+fluctuations in the wall-normal stress, $\tau_{yy}$. This stress is then
+advected by the mean shear to give fluctuations in the stress in the streamwise
+direction and therefore a streaky base profile. An alternative is to use
+streamwise independent rolls and their associated pressure gradient. Similar to
+Waleffe \cite{Waleffe1997}, this gives,
 
 \begin{equation}
-\mathit{Re} \left[V(y,z) \frac{\partial U}{\partial y} + W(y,z) \frac{\partial U}{\partial z} \right] &= \beta \nabla^{2}_{2} U + \left(1-\beta \right) \left(\frac{\partial T_{xy}}{\partial y} + \frac{\partial T_{xz}}{\partial z} \right)
+    \mathit{Re} \left[ V(y,z) \frac{\partial U}{\partial y} + W(y,z) \frac{\partial U}{\partial z} \right] = \beta \nabla^{2}_{2} U + \left(1-\beta \right) \left(\frac{\partial T_{xy}}{\partial y} + \frac{\partial T_{xz}}{\partial z} \right) \label{eq:streaks}
 \end{equation}
 
 We use a Chebyshev-Fourier decomposition, with Chebyshev polynomials in the
 wall-normal (y) direction and Fourier modes in the spanwise (z) direction. We
-then solve for the velocity in the streamwise (x) direction, subject to forcing
-in the y and z directions, via a Newton-Raphson iteration of the governing
-Navier-Stokes and Oldroyd-B equations. In order to decompose the system onto
-the computational grid, we take a Fourier and Chebyshev transform of the
-variables,
+then solve for the streamwise velocity and Stresses of the base profile using
+equation \ref{eq:streaks} and the Oldroyd-B equation via a Newton-Raphson
+method. In order to decompose the system onto the computational grid, we take a
+Fourier and Chebyshev transform of the variables,
 
 \begin{equation}
     \check{G}(y,z) = \sum_{n=-N}^{N} \sum_{m=0}^{M-1} G_{m,n} \me^{i n \gamma z} T_{m}(y) \label{eq:decomp}
@@ -303,28 +315,25 @@ where $g$ stands for any of the base profile variables
 ($U,V,W,\boldsymbol{\tau}_{ij}$) in the problem and $T_{m}(y)$ is the
 \textit{m}th Chebyshev polynomial of the first kind.
 
-Given that the base profile is independent of the streamise direction and time,
-we reduce the Navier-Stokes and Oldroyd-B equations and then solve them using a
-simple Newton-Rhaphson iteration for the base Streamwise velocity $U$. The
-system is driven by the standard no-slip boundary conditions on the streamwise
-velocity at the walls,
-\begin{align}
-    U(\pm 1) = 1 \\
-\end{align}
+The system is driven by the standard no-slip boundary conditions on the
+streamwise velocity at the walls,
+\begin{equation}
+    U(\pm 1) = 1
+\end{equation}
 and forcing terms introduced via fixing of the wall-normal and spanwise base
 profile velocities,
 \begin{align}
     V(y,z) &= V_0 \hat{v}(y) cos(\gamma z) \\
-    W(y,z) &= \frac{V_0}{\gamma} \dy{\hat{v}} sin(\gamma z) 
+    W(y,z) &= -\frac{V_0}{\gamma} \dy{\hat{v}} \sin(\gamma z) 
 \end{align}
 Where,
 \begin{equation}
     \hat{v}(y) = \frac{\cos(py)}{\cos(p)} - \frac{\cosh(\gamma y)}{cosh(\gamma)} 
 \end {equation}
-$p$ is given by solutions to $p\tan p + \gamma \tanh \gamma = 0$ and governs
+$p$ is given by solutions to $p\tan p + \gamma \tanh \gamma = 0$ and controls
 the number of rolls in the wall-normal direction. These velocities are a guess
 for the rolls derived from the lowest order eigenmode of the operator
-$\nabla^{4}$, precisely the same rolls used in \cite{Waleffe97}. This provides
+$\nabla^{4}$, precisely the same rolls used in \cite{Waleffe1997}. This provides
 us with the streaky profile shown below.
 
 After using the above Newton-Rhaphson method we obtain a streaky profile in the
@@ -332,7 +341,7 @@ fluid. At high $\Rey$ we find streaks in the streamwise velocity similar to
 those in \cite{Waleffe1997}. However, as we decrease the Reynold's number for
 constant and large Weissenberg number, we find that the streaks in the
 streamwise velocity become less pronounced. This can be explained by
-considering that at low Reynold's number the fluid has a higher inertia, so it
+considering that at low Reynold's number the fluid has a lower inertia, so it
 is more difficult for the lift up effect to produce streaks in the streamwise
 velocity. 
 
@@ -473,14 +482,15 @@ rate of the no-slip system tends to infinity as $\alpha \rightarrow 0$ (figure
 \section{Nonlinear feedback on the rolls}\label{sec:nonlinear_feedback}
 
 In Fabian Waleffe's treatment of the Newtonian version of this self-sustaining
-process \cite{Waleffe1997}, he found that the feedback on the original rolls
-was provided by the eigenmode of the instability. The eigenmodes of the
-viscoelastic instability is quite different to that of the Newtonian
-instability. Although the components of the instability are large at the walls,
-the velocity is less important for the instability of the purely elastic fluid
-than the first normal stress difference. We find that $N_{1}$ is large away
-from the walls, another encouraging sign for a viscoelastic self-sustaining
-process (\ref{fig:eigenmode_visco}).
+process \cite{Waleffe1997}, he found that the self-interaction terms due to the
+eigenvector of the instability give feedback on the original rolls. Although
+not conclusive, this is good evidence that the cycle might be closed. The
+eigenvector of the viscoelastic instability is quite different to that of the
+Newtonian instability. Although the components of the instability are large at
+the walls, the velocity is less important for the instability of the purely
+elastic fluid than the first normal stress difference. We find that $N_{1}$ is
+large away from the walls, another encouraging sign for a viscoelastic
+self-sustaining process (\ref{fig:eigenmode_visco}). 
 
 \begin{figure}
 %    \showthe\columnwidth %use this to determine size of figures.
@@ -493,6 +503,57 @@ process (\ref{fig:eigenmode_visco}).
     }
     \label{fig:eigenmode_visco}
 \end{figure}
+
+A schematic analysis for the nonlinear feedback similar to that performed by
+Waleffe \cite{Waleffe1997} requires solving for the rolls due to forcing from the
+nonlinear terms in the Oldroyd-B equation as well as the Newtonian nonlinear terms,
+
+\begin{equation}
+    \nabla^{4}_{2} \xmean{\Psi}  = \mathit{Re} \xmean{(\mathbf{v} \cdot \nabla)
+    \nabla^{2} \Psi} - \left(1-\beta \right) \left(\xmean{\frac{\partial^{2}
+    T_{yy}}{\partial y \partial z}} - \xmean{\frac{\partial^{2}
+    T_{zz}}{\partial y \partial z}} + \xmean{\frac{\partial^{2}
+    T_{yz}}{\partial z \partial z}} - \xmean{\frac{\partial^{2}
+    T_{yz}}{\partial y \partial y}} \right)
+\end{equation}
+
+\begin{align}
+\xmean{T_{yz}} =& Wi \left[ -\xmean{(\mathbf{v} \cdot \nabla) \tau_{yz}} -
+\xmean{\frac{\partial u}{\partial x}\tau_{yz}} + \xmean{\frac{\partial
+v}{\partial x} \tau_{xy}} \right. \\
+& \phantom{Wi } \left. + \xmean{\frac{\partial v}{\partial z} \tau_{zz}} +
+\xmean{\frac{\partial w}{\partial x} \tau_{xy}} + \xmean{\frac{\partial
+w}{\partial y} \tau_{yy}} \right] \\
+\xmean{T_{yy}} =& -Wi(\xmean{\mathbf{v}\cdot \nabla) \tau_{yy}} + 2Wi\left[
+\xmean{\frac{\partial v}{\partial x}\tau_{xy}} + \xmean{\frac{\partial
+v}{\partial y} \tau_{yy}} + \xmean{\frac{\partial v}{\partial z} \tau_{yz}}
+\right] \\
+\xmean{T_{zz}} =& -Wi\xmean{(\mathbf{v}\cdot \nabla) \tau_{zz}} + 2Wi\left[
+\xmean{\frac{\partial w}{\partial x}\tau_{xz}} + \xmean{\frac{\partial
+w}{\partial y} \tau_{yz}} + \xmean{\frac{\partial w}{\partial z} \tau_{zz}}
+\right] \\
+V = \frac{\partial \Psi}{\partial z}
+\end{align}
+
+\begin{figure}
+%    \showthe\columnwidth %use this to determine size of figures.
+    \centering
+    \includegraphics[width=\textwidth]{./figures/nonlin_forcing}
+    \caption{
+	In blue the original amplitude of the rolls in the wall normal
+	direction. Solid line is the real part, dashed is the imaginary part.
+	In red the rolls obtained via nonlinear feedback from the viscoelastic
+	instability at $\Wi = 2.0$, $\Rey = 0.01$, $\beta=0.1$, amp=0.02 and
+	$k_x = 0.001$. Dot-dashed is the real part and dashed is the imaginary
+	part.
+    }
+    \label{fig:eigenmode_visco}
+\end{figure}
+
+Presumably, the no slip instability will have large gradients in the velocities
+and stresses at the walls as well as those in the bulk. Nevertheless, the shape
+of the rolls is largly independent of the forcing, and so we don't expect any
+change to the nonlinear feedback.
 
 When we completely remove slip at the walls the instability appears infinitely
 amplified (figure \ref{fig:evaldiverg_varslip}). A possible explanation for
@@ -527,6 +588,7 @@ zero.
     \label{fig:eigenmode_varslip}
 \end{figure}
 
+
 \section{Discussion and conclusion}\label{sec:conclusion}
 
 We have shown that the velocity profile for the plane Couette viscoelastic
@@ -536,6 +598,18 @@ linearly unstable, with a range of wave numbers between about $k_x = 0$ and
 $k_x = 0.04$. The eigenmodes of this instability are localised in the centre of
 the channel.
 
+
+%\begin{align}
+%    Re \left[ \frac{\partial \mathbf{v}}{\partial t} + \mathbf{v} \cdot \nabla  \mathbf{v} \right] &= - \nabla p + \beta \nabla^{2} \mathbf{v} + \frac{1-\beta}{Wi} \nabla \cdot \mathbf{\tau} \\
+%    \nabla \cdot \mathbf{v} &= 0 \\
+%    \dot{\tau}/Wi + \overset{\nabla}\tau &= \left(\nabla \mathbf{v}\right)^{T} + \nabla{\mathbf{v}}
+%\end{align}
+
+%\begin{equation}
+%\beta \nabla^{2}_{2} \overline{V}^{x}  = - \mathit{Re} \overline{(\mathbf{v} \cdot \nabla) v}^{x} + \frac{\partial p}{\partial y} - \left(1-\beta \right) \left(\overline{\frac{\partial T_{yy}}{\partial y}}^{x} + \overline{\frac{\partial T_{yz}}{\partial z}}^{x} \right)
+%\end{equation}
+
+\pagebreak
 \bibliographystyle{jfm}
 % Note the spaces between the initials
 

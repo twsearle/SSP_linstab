@@ -55,15 +55,25 @@ print inFileName1
 splitString = inFileName1.split('-')
 N1=int(splitString[3][1:])
 M1=int(splitString[4][1:]) 
+if splitString[7][2:] == '1e':
+    Wi1=float(splitString[7][2:]+'-'+splitString[8])
+else:
+    Wi1=float(splitString[7][2:])
 print N1 
 print M1
+print Wi1
 
 print inFileName2
 splitString = inFileName2.split('-')
 N2=int(splitString[3][1:])
 M2=int(splitString[4][1:]) 
+if splitString[7][2:] == '1e':
+    Wi2=float(splitString[7][2:]+splitString[8])
+else:
+    Wi2=float(splitString[7][2:])
 print N2 
 print M2
+print Wi2
 
 #baseFileName = '-k{k}-N{N}-M{M}-Re{Re}-b{b}-Wi{Wi}-amp{amp}.pickle'.format(
 #                    k=k, N=N1, M=M1, Re=Re, b=beta, Wi=Weiss, amp=Amp)
@@ -98,7 +108,7 @@ def Cheb_to_real_transform(vec, y_points, N, M) :
 #vecLen = (2*N+1)*M
 #Psi = pickle.load(open(inFileName, 'r'))
 
-numYs = 50
+numYs = 100
 
 y_points = zeros(numYs, dtype='d')
 for yIndx in range(numYs):
@@ -112,6 +122,7 @@ options1 = {'du': du, 'dv': dv, 'dw':dw, 'dcxx': dcxx, 'dcyy': dcyy,
             'dczz':dczz, 'dcxy':dcxy, 'dcxz':dcxz, 'dcyz': dcyz}
 options2 = {'du': du2, 'dv': dv2, 'dw':dw2, 'dcxx': dcxx2, 'dcyy': dcyy2, 'dczz':
             dczz2, 'dcxy': dcxy2, 'dcxz':dcxz2, 'dcyz': dcyz2}
+stresses = ['dcxx', 'dcyy', 'dczz', 'dcxy', 'dcxz', 'dcyz']
 
 #make plots prettier:
 inches_per_Lx = 1.4
@@ -144,6 +155,10 @@ for comp in options1:
                                     M1)
         var2 = Cheb_to_real_transform(var2[(N2+n)*M2: (N2+n+1)*M2], y_points,
                                       N2, M2)
+        if comp in stresses:
+            print comp
+            var = (1./Wi1)*var
+            var2= (1./Wi2)*var2
 
         # apply scaling 
 
@@ -152,6 +167,11 @@ for comp in options1:
         plt.figure()
         ax1 = plt.subplot(111)
         titleString = args.title+' {comp}  n = {mode} mode'.format(comp=comp, mode=n)
+
+        if comp in stresses:
+            scomp = 'dt' + comp[2:]
+            titleString = args.title+' {comp}  n = {mode} mode'.format(comp=scomp, mode=n)
+
         plt.title(titleString)
         plt.plot(y_points, real(var), 'b-')
         plt.plot(y_points, imag(var), 'r-')
@@ -160,6 +180,8 @@ for comp in options1:
         ax1.axhline(linewidth=.5, linestyle='-', color='k')
         ax1.axvline(linewidth=.5, linestyle='-', color='k')
         #ax1.legend(["real file1", "imag file1", "real file1", "imag file2"])
+        plt.xlabel('y')
+        #plt.ylabel(comp)
 
         plt.savefig('pertb_n{n}-{comp}-{pf}.pdf'.format(n=n, comp=comp,
                                                         pf='comparison' +
@@ -189,8 +211,12 @@ for n in range(0,2):
     ax1.axhline(linewidth=.5, linestyle='-', color='k')
     ax1.axvline(linewidth=.5, linestyle='-', color='k')
     #ax1.legend(["real file1", "imag file1", "real file1", "imag file2"])
+    plt.xlabel('y')
+    plt.ylabel('N1')
+
     plt.savefig('pertb_n{n}-{comp}-{pf}.pdf'.format(n=n, comp='N1',
                                                     pf= 'comparison'+baseFileName[:-7] ))
+
     plt.close()
 
 #savetxt('test.dat', vstack((real(PSIr1), imag(PSIr1))).T)
