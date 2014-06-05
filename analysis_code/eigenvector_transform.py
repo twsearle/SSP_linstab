@@ -260,6 +260,35 @@ def mk_diff_z():
     del n, i
     return MDZ
 
+def save_csv_for_paraview((xVec, yVec, zVec), filename):
+
+    Nst = 50
+    xspace = 4.*pi/(Nst)
+    yspace = 2./(Nst-1)
+    zspace = 8./(Nst-1)
+
+    xPoints = r_[0 : 4.*pi : xspace] 
+    yPoints = r_[-1 : 1 : yspace]
+    zPoints = r_[-4 : 4 : zspace]
+
+    fp = open(filename, 'w')
+    fp.write('x,    y,   z,   u,   v,   w\n')
+    for xIndx in range(xDataPts):
+        for yIndx in range(yDataPts):
+            for zIndx in range(2*zDataPts):
+                fp.write('{0:10.5f}, '.format(xPoints[xIndx]))
+                fp.write('{0:10.5f}, '.format(yPoints[yIndx]))
+                fp.write('{0:10.5f}, '.format(zPoints[zIndx]))
+                fp.write('{0:10.5f}, '.format(xVec[xIndx, yIndx, zIndx]))
+                fp.write('{0:10.5f}, '.format(yVec[xIndx, yIndx, zIndx]))
+                fp.write('{0:10.5f}'.format(zVec[xIndx, yIndx, zIndx]))
+                fp.write('\n')
+        fp.flush()
+    del xIndx, yIndx, zIndx
+
+    fp.close()
+
+
 
 #MAIN
 
@@ -308,6 +337,11 @@ if not args.dim2:
     dcxz = c_to_3Dreal(dcxz)
     print 'dcyz'
     dcyz = c_to_3Dreal(dcyz)
+
+    save_csv_for_paraview((du,dv,dw), outFilename[:-7]+'.txt')
+
+    outVortFilename = 'vorticity-evec{0}.txt'.format(baseFileName[:-7])
+    save_csv_for_paraview((dOmegaX, dOmegaY, dOmegaZ), outVortFilename)
 
     pickle.dump((du,dv,dw,dcxx,dcyy,dczz,dcxy,dcxz,dcyz), open(outFilename, 'w'))
 
@@ -361,5 +395,5 @@ if args.dim2:
     outFilename = 'real-evec2D{0}'.format(baseFileName)
     pickle.dump((du,dv,dw,dcxx,dcyy,dczz,dcxy,dcxz,dcyz), open(outFilename, 'w'))
 
-    #pickle.dump((dOmegaX, dOmegaY, dOmegaZ),
-    #            open('vorticity-evec2D{0}'.format(baseFileName), 'w'))
+    pickle.dump((dOmegaX, dOmegaY, dOmegaZ),
+                open('vorticity-evec2D{0}'.format(baseFileName), 'w'))
